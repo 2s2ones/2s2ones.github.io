@@ -2,136 +2,93 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>2s2ones | Developer</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2s2ones Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
---bg:#040404;
---card:#0c0c0c;
+--bg:#050505;
+--card:#0e0e0e;
 --red:#ff0033;
---text:#eaeaea;
+--text:#e5e5e5;
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 
 body{
 margin:0;
-font-family:system-ui,Segoe UI,Arial;
-background:radial-gradient(circle at top,#200000,#040404 70%);
+font-family:Segoe UI,Arial;
+background:radial-gradient(circle at top,#200000,#050505 70%);
 color:var(--text);
 overflow-x:hidden;
 }
 
-/* animated background */
-canvas{
-position:fixed;
-top:0;left:0;
-z-index:-1;
+.banner{
+width:100%;
+max-height:240px;
+object-fit:cover;
 }
-
-/* global */
-h1,h2,h3{color:var(--red)}
-a{color:var(--red);text-decoration:none}
 
 section{
 max-width:1200px;
 margin:auto;
-padding:70px 20px;
+padding:80px 20px;
 }
 
 .card{
-background:linear-gradient(145deg,#090909,#111);
+background:linear-gradient(145deg,#0a0a0a,#131313);
 border:1px solid #300000;
 border-radius:18px;
 padding:25px;
-margin-bottom:25px;
-box-shadow:0 0 20px rgba(255,0,0,0.08);
-transition:0.4s;
+margin-bottom:30px;
+box-shadow:0 0 25px rgba(255,0,0,0.15);
+transition:.4s;
 }
 
 .card:hover{
-transform:translateY(-6px) scale(1.01);
-box-shadow:0 0 40px rgba(255,0,0,0.25);
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 0 45px rgba(255,0,0,.35);
 }
 
-.flex{display:flex;gap:25px;flex-wrap:wrap}
+.flex{
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+h1,h2,h3{
+color:var(--red);
+}
+
 .center{text-align:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-
-.banner{
-width:100%;
-max-height:230px;
-object-fit:cover;
-}
 
 .gif{
 max-width:100%;
 border-radius:12px;
-box-shadow:0 0 20px rgba(255,0,0,0.3);
+box-shadow:0 0 25px rgba(255,0,0,.4);
 }
 
-nav{
-position:sticky;
-top:0;
-z-index:10;
-background:#040404cc;
-backdrop-filter:blur(6px);
-border-bottom:1px solid #300000;
-}
-
-nav ul{
-display:flex;
-flex-wrap:wrap;
-list-style:none;
-justify-content:center;
-gap:18px;
-padding:12px;
-margin:0;
-}
-
-nav a{font-weight:700}
-
-.badges img{margin:5px}
+.badge-row img{margin:6px}
 
 table{
 width:100%;
 border-collapse:collapse;
-font-size:14px;
 }
 
 th,td{
-border:1px solid #300000;
+border:1px solid #400000;
 padding:10px;
 }
 
-th{background:#180000}
+th{background:#200000}
 
-input,textarea,button{
-width:100%;
-background:#090909;
-border:1px solid #300000;
-color:white;
-padding:10px;
-border-radius:8px;
-}
-
-button{
-background:var(--red);
-border:none;
-font-weight:bold;
-cursor:pointer;
-}
-
-footer{margin-top:80px}
-
-@media(max-width:768px){
-.flex{flex-direction:column}
-.banner{max-height:140px}
-}
-
-/* scroll reveal */
 .reveal{
 opacity:0;
 transform:translateY(40px);
@@ -141,65 +98,115 @@ transition:1s;
 opacity:1;
 transform:none;
 }
+
+@media(max-width:768px){
+.flex{flex-direction:column}
+.banner{max-height:150px}
+}
+
+footer{margin-top:100px}
 </style>
 </head>
 <body>
 
-<canvas id="bg"></canvas>
+<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,50:660000,100:000000&height=240&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
 
-<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,50:660000,100:000000&height=220&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff">
-
-<nav>
-<ul>
-<li><a href="#about">About</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#services">Services</a></li>
-<li><a href="#timeline">Timeline</a></li>
-<li><a href="#fun">Fun</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-</nav>
-
-<section id="about" class="flex reveal">
+<section class="flex reveal">
 <div>
 <h1>👋 Hi, I'm 2s2ones</h1>
 <b>Node.js & Java Developer</b><br>
 🤖 Bot Builder • 🧩 Minecraft Plugin Engineer
+
 <p>
-I build automation systems, bots, Minecraft plugins, backend logic, and server magic.
+I build automation systems, Discord bots, and powerful Minecraft plugins that keep servers alive.
 </p>
 </div>
 
 <div class="center">
-<img class="gif" src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="240"><br><br>
-<img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="200">
+<img class="gif" src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="260"><br><br>
+<img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="230">
 </div>
 </section>
 
-<section id="skills" class="reveal">
-<h2>🧠 Skills</h2>
+<section class="reveal">
+<div class="card center">
+<h2>WELCOME</h2>
+<p>Welcome to my profile. Here you can find plugins, mods, bots, experiments and secret projects.</p>
+<p>
+🚀 Explore my repos<br>
+🧩 Discover plugins<br>
+🤖 See my bots in action
+</p>
+</div>
+</section>
+
+<section class="reveal">
+<h2>PROFILE</h2>
+<div class="card">
+<pre>
+Username: 2s2ones
+Role: Developer
+Languages: Java and Node.js
+Node.js Specialty: Minecraft & Discord bots
+Java Specialty: Minecraft plugins
+</pre>
+</div>
+</section>
+
+<section class="reveal">
+<h2>TECH STACK</h2>
+<div class="card center badge-row">
+<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red">
+<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red">
+<img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord&logoColor=red">
+<img src="https://img.shields.io/badge/Minecraft-black?style=for-the-badge&logo=minecraft&logoColor=red">
+<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=red">
+</div>
+</section>
+
+<section class="reveal">
+<h2>ORGANIZATIONS</h2>
+
 <div class="grid">
-<div class="card">Discord Bot Architecture</div>
-<div class="card">Minecraft Server Internals</div>
-<div class="card">Java Plugin Engineering</div>
-<div class="card">Node.js APIs</div>
-<div class="card">Automation Systems</div>
-<div class="card">Security / Anti-cheat</div>
-<div class="card">Databases</div>
-<div class="card">Linux Servers</div>
+<div class="card">
+<h3>🧩 2sPlugins</h3>
+Java Minecraft plugins & server utilities.
+</div>
+
+<div class="card">
+<h3>🤖 2sBots</h3>
+Discord bots, AI systems, automation services.
+</div>
+
+<div class="card">
+<h3>🛠 2sDevelopments</h3>
+Main development studio for large projects.
+</div>
 </div>
 </section>
 
-<section id="projects" class="reveal">
-<h2>🚀 Projects</h2>
+<section class="reveal">
+<h2>WHAT I BUILD</h2>
+
+<div class="grid">
+<div class="card">Discord moderation bots</div>
+<div class="card">AI chat bots</div>
+<div class="card">Minecraft ↔ Discord bridges</div>
+<div class="card">Premium systems</div>
+<div class="card">Anti-cheat helpers</div>
+<div class="card">Velocity plugins</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2>PROJECTS</h2>
 
 <div class="card">
 <h3>Minecraft Bots</h3>
 <table>
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td>Kit Bot</td><td>Auto kits</td></tr>
-<tr><td>Chat Bot</td><td>Commands</td></tr>
+<tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
+<tr><td>Chat Bot</td><td>Custom command bot</td></tr>
 <tr><td>Custom Bot</td><td>Server logic</td></tr>
 </table>
 </div>
@@ -208,113 +215,59 @@ I build automation systems, bots, Minecraft plugins, backend logic, and server m
 <h3>Discord Bots</h3>
 <table>
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td>Premium Bot</td><td>MEE6+</td></tr>
-<tr><td>AI Bot</td><td>Assistant</td></tr>
+<tr><td>Premium Bot</td><td>MEE6+ features</td></tr>
+<tr><td>AI Bot</td><td>AI assistant</td></tr>
 <tr><td>MC Bridge</td><td>Realtime sync</td></tr>
+<tr><td>Test Bot</td><td>Testing platform</td></tr>
 </table>
 </div>
 </section>
 
-<section id="services" class="reveal">
-<h2>🛠 Services</h2>
-<div class="grid">
-<div class="card">Custom Discord Bots</div>
-<div class="card">Minecraft Plugin Development</div>
-<div class="card">Server Optimization</div>
-<div class="card">Automation Systems</div>
-<div class="card">API Development</div>
-<div class="card">Security & Anti-cheat</div>
+<section class="reveal center">
+<img class="gif" src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif" width="70%">
+</section>
+
+<section class="reveal">
+<h2>DEBUG FACTS</h2>
+<div class="card">
+<ul>
+<li>Everyone hates Java because it's hard</li>
+<li>Coffee is required</li>
+<li>If it works in production → panic</li>
+<li>Logs > emotions</li>
+<li>Sleep is optional</li>
+</ul>
 </div>
 </section>
 
-<section id="timeline" class="reveal">
-<h2>📜 Developer Timeline</h2>
-<div class="card">💡 Started coding</div>
-<div class="card">🤖 First Discord bot</div>
-<div class="card">🧩 First Minecraft plugin</div>
-<div class="card">🚀 Organizations created</div>
-<div class="card">⚙ Large scale systems</div>
-</section>
-
-<section id="fun" class="reveal">
-<h2>😂 Fun Zone</h2>
-
-<div class="grid">
-<div class="card center">
-<img class="gif" src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif">
-<p>When code works</p>
-</div>
-
-<div class="card center">
-<img class="gif" src="https://media.giphy.com/media/l0HlQ7LRalZbQJx5S/giphy.gif">
-<p>Deploying to production</p>
-</div>
-
-<div class="card center">
-<img class="gif" src="https://media.tenor.com/himbGmuY4cgAAAAM/turtle-friends.gif">
-<p>Debugging speed</p>
-</div>
-</div>
-</section>
-
-<section id="contact" class="reveal">
-<h2>📬 Contact</h2>
+<section class="reveal">
+<h2>COMING SOON</h2>
 
 <div class="card">
-<form>
-<input placeholder="Name"><br><br>
-<input placeholder="Email"><br><br>
-<textarea placeholder="Message"></textarea><br><br>
-<button type="button">Send (demo)</button>
-</form>
+<ul>
+<li>Public plugins</li>
+<li>Bot project</li>
+<li>Quality of life systems</li>
+<li>Open source tools</li>
+<li>Support channel</li>
+</ul>
 </div>
 
-<p>GitHub: <a href="https://github.com/2s2ones" target="_blank">github.com/2s2ones</a></p>
+<div class="center">
+<img class="gif" src="https://media.giphy.com/media/l0HlQ7LRalZbQJx5S/giphy.gif" width="80%">
+</div>
 </section>
 
-<footer class="center">
-<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,40:000000,100:000000&height=240&section=footer&text=THANKS%20FOR%20VISITING&fontSize=30&fontColor=ffffff">
+<section class="reveal center">
+<h2>🚧 Building...</h2>
+<img class="gif" src="https://media.tenor.com/himbGmuY4cgAAAAM/turtle-friends.gif" width="40%">
+</section>
+
+<footer>
+<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,30:660000,60:000000,100:000000&height=260&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=30&fontColor=ffffff&animation=twinkling">
 </footer>
 
 <script>
-/* particles */
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
-let w,h,particles=[];
-
-function resize(){
-w=canvas.width=window.innerWidth;
-h=canvas.height=window.innerHeight;
-}
-window.onresize=resize;
-resize();
-
-for(let i=0;i<120;i++){
-particles.push({
-x:Math.random()*w,
-y:Math.random()*h,
-vx:(Math.random()-0.5)*0.4,
-vy:(Math.random()-0.5)*0.4,
-r:Math.random()*2+1
-});
-}
-
-function draw(){
-ctx.clearRect(0,0,w,h);
-ctx.fillStyle="rgba(255,0,0,0.5)";
-particles.forEach(p=>{
-p.x+=p.vx;p.y+=p.vy;
-if(p.x<0||p.x>w)p.vx*=-1;
-if(p.y<0||p.y>h)p.vy*=-1;
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fill();
-});
-requestAnimationFrame(draw);
-}
-draw();
-
-/* scroll reveal */
 const reveals=document.querySelectorAll(".reveal");
 function reveal(){
 reveals.forEach(el=>{
