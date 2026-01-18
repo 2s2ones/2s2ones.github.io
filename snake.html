@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Snake Ultimate</title>
+<title>Snake Ultimate PC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
 body{
+  margin:0;
   background:black;
   color:white;
   font-family:Segoe UI,Arial;
   overflow:hidden;
 }
-
 canvas{display:block}
 
 /* Rain */
@@ -27,37 +26,42 @@ canvas{display:block}
 .glass{
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
   border:1px solid rgba(255,255,255,0.2);
   box-shadow:0 0 25px rgba(255,0,0,.25);
   border-radius:14px;
-  padding:12px;
+  padding:14px;
 }
 
-#ui{
+button,select,input{
+  background:#140000;
+  color:white;
+  border:1px solid #ff0033;
+  border-radius:8px;
+  padding:6px 10px;
+  margin:4px;
+}
+
+#menu,#lobby,#info{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.panel{
+  width:420px;
+}
+
+.hidden{display:none}
+
+#uiTop{
   position:fixed;
   top:10px;
   left:10px;
   right:10px;
   display:flex;
   justify-content:space-between;
-  gap:10px;
-}
-
-button{
-  background:#150000;
-  color:#fff;
-  border:1px solid #ff0033;
-  padding:6px 12px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-#gameWrap{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
 }
 
 #hud{
@@ -66,79 +70,107 @@ button{
   left:10px;
 }
 
-#mobileControls{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  display:grid;
-  grid-template-columns:60px 60px 60px;
-  grid-template-rows:60px 60px 60px;
-  gap:5px;
+#gameWrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
-
-.ctrl{
-  background:rgba(255,0,0,0.25);
-  border:1px solid red;
-  border-radius:10px;
-  font-size:18px;
-}
-
-#chat{
-  position:fixed;
-  right:10px;
-  top:80px;
-  width:220px;
-  height:260px;
-  display:none;
-}
-
 </style>
 </head>
 <body>
 
 <canvas id="rain"></canvas>
 
-<div id="ui">
-  <div class="glass">
+<!-- Info screen -->
+<div id="info">
+  <div class="glass panel">
+    <h2>🐍 Snake Ultimate</h2>
+    <p>
+Controls:<br>
+Player 1: Arrow keys<br>
+Player 2: WASD<br><br>
+
+Modes:
+Classic, No-Walls, Speed, Practice, Battle Royale, Teams<br><br>
+
+Multiplayer:
+Create or join rooms (up to 10 players).<br>
+Auto fallback to local if server offline.
+    </p>
+    <button onclick="openMenu()">Continue</button>
+  </div>
+</div>
+
+<!-- Main Menu -->
+<div id="menu" class="hidden">
+  <div class="glass panel">
+    <h2>Main Menu</h2>
+
     Mode:
     <select id="modeSel">
       <option>Classic</option>
       <option>No-walls</option>
       <option>Speed</option>
       <option>Practice</option>
-    </select>
-    <button onclick="togglePause()">Pause</button>
-    <button onclick="toggleFull()">Fullscreen</button>
-  </div>
+      <option>Battle Royale</option>
+      <option>Teams</option>
+    </select><br>
 
-  <div class="glass">
-    Server: <span id="serverStatus">Offline (Local)</span>
+    <button onclick="startLocal()">Local Game</button>
+    <button onclick="openLobby()">Multiplayer</button>
+    <button onclick="toggleFull()">Fullscreen</button>
   </div>
 </div>
 
-<div id="gameWrap">
+<!-- Lobby -->
+<div id="lobby" class="hidden">
+  <div class="glass panel">
+    <h2>Multiplayer Lobby</h2>
+
+    Name:<br>
+    <input id="playerName" value="Player"><br>
+
+    Room code:<br>
+    <input id="roomCode"><br>
+
+    <button onclick="createRoom()">Create</button>
+    <button onclick="joinRoom()">Join</button>
+
+    <p id="serverStatus">Server: Offline</p>
+
+    <button onclick="backMenu()">Back</button>
+  </div>
+</div>
+
+<!-- Game UI -->
+<div id="uiTop" class="hidden">
+  <div class="glass">
+    Mode: <span id="modeName"></span>
+    <button onclick="togglePause()">Pause</button>
+  </div>
+  <div class="glass">
+    Server: <span id="serverText">Offline (Local)</span>
+  </div>
+</div>
+
+<div id="gameWrap" class="hidden">
   <canvas id="game" width="600" height="600"></canvas>
 </div>
 
-<div id="hud" class="glass">
-Score: <span id="score">0</span><br>
-Time: <span id="time">0</span>s
-</div>
-
-<div id="mobileControls">
-  <div></div><button class="ctrl" onclick="setDir(0,-1)">⬆</button><div></div>
-  <button class="ctrl" onclick="setDir(-1,0)">⬅</button>
-  <button class="ctrl" onclick="setDir(0,0)">⏺</button>
-  <button class="ctrl" onclick="setDir(1,0)">➡</button>
-  <div></div><button class="ctrl" onclick="setDir(0,1)">⬇</button><div></div>
+<div id="hud" class="glass hidden">
+  Score: <span id="score">0</span><br>
+  Time: <span id="time">0</span>s
 </div>
 
 <script>
-/* ---------- Rain ---------- */
+/* ---------------- Rain ---------------- */
 const rain=document.getElementById("rain"),rctx=rain.getContext("2d");
 function resizeRain(){rain.width=innerWidth;rain.height=innerHeight}
 resizeRain();addEventListener("resize",resizeRain);
-const drops=Array.from({length:400},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,v:4+Math.random()*5,l:10+Math.random()*20}));
+
+const drops=Array.from({length:400},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,v:4+Math.random()*6,l:10+Math.random()*20}));
+
 function rainLoop(){
   rctx.clearRect(0,0,rain.width,rain.height);
   rctx.strokeStyle="rgba(255,0,0,0.4)";
@@ -154,17 +186,60 @@ function rainLoop(){
 }
 rainLoop();
 
-/* ---------- Game ---------- */
+/* ---------------- UI ---------------- */
+function openMenu(){
+  info.style.display="none";
+  menu.style.display="flex";
+}
+function openLobby(){
+  menu.style.display="none";
+  lobby.style.display="flex";
+  connectServer();
+}
+function backMenu(){
+  lobby.style.display="none";
+  menu.style.display="flex";
+}
+
+function toggleFull(){
+  if(!document.fullscreenElement)document.body.requestFullscreen();
+  else document.exitFullscreen();
+}
+
+/* ---------------- Game ---------------- */
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d");
 const grid=20;
-let snake=[{x:10,y:10}],snake2=[{x:20,y:20}];
-let dir={x:1,y:0},dir2={x:-1,y:0};
-let food={x:15,y:15};
-let score=0,time=0;
-let paused=false;
-let multiplayerLocal=true;
+let snake, snake2, dir, dir2, food;
+let score=0,time=0,paused=false;
+let mode="Classic";
+let multiplayer=false;
 
-function setDir(x,y){if(x||y)dir={x,y}}
+function startLocal(){
+  mode=modeSel.value;
+  startGame();
+}
+
+function startGame(){
+  menu.style.display="none";
+  lobby.style.display="none";
+  gameWrap.style.display="flex";
+  uiTop.classList.remove("hidden");
+  hud.classList.remove("hidden");
+
+  document.getElementById("modeName").innerText=mode;
+
+  snake=[{x:10,y:10}];
+  snake2=[{x:20,y:20}];
+  dir={x:1,y:0};
+  dir2={x:-1,y:0};
+  food=randomFood();
+  score=0;
+  time=0;
+}
+
+function randomFood(){
+  return {x:Math.random()*29|0,y:Math.random()*29|0};
+}
 
 document.addEventListener("keydown",e=>{
   if(e.key==="ArrowUp")dir={x:0,y:-1};
@@ -176,44 +251,45 @@ document.addEventListener("keydown",e=>{
   if(e.key==="s")dir2={x:0,y:1};
   if(e.key==="a")dir2={x:-1,y:0};
   if(e.key==="d")dir2={x:1,y:0};
+
+  if(e.key==="Escape")togglePause();
 });
 
 function togglePause(){paused=!paused}
-function toggleFull(){
-  if(!document.fullscreenElement)document.body.requestFullscreen();
-  else document.exitFullscreen();
-}
 
-function drawCell(x,y,color){
+function drawCell(x,y,c){
   ctx.shadowBlur=10;
-  ctx.shadowColor=color;
-  ctx.fillStyle=color;
+  ctx.shadowColor=c;
+  ctx.fillStyle=c;
   ctx.fillRect(x*grid,y*grid,grid-1,grid-1);
 }
 
 function update(){
   if(paused) return;
 
-  const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
-  snake.unshift(head);
-  if(head.x===food.x && head.y===food.y){
-    score++;
-    food={x:Math.random()*29|0,y:Math.random()*29|0};
-  }else snake.pop();
+  const speed = mode==="Speed"?2:1;
 
-  if(multiplayerLocal){
-    const h2={x:snake2[0].x+dir2.x,y:snake2[0].y+dir2.y};
-    snake2.unshift(h2);snake2.pop();
+  for(let s=0;s<speed;s++){
+    const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+    snake.unshift(head);
+
+    if(head.x===food.x && head.y===food.y){
+      score++;
+      food=randomFood();
+    }else snake.pop();
+
+    if(mode!=="No-walls"){
+      if(head.x<0||head.y<0||head.x>=30||head.y>=30) resetGame();
+    }
   }
 
-  // walls
-  if(head.x<0||head.y<0||head.x>=30||head.y>=30) reset();
+  // second player
+  const h2={x:snake2[0].x+dir2.x,y:snake2[0].y+dir2.y};
+  snake2.unshift(h2);snake2.pop();
 }
 
-function reset(){
-  snake=[{x:10,y:10}];
-  snake2=[{x:20,y:20}];
-  score=0;
+function resetGame(){
+  startGame();
 }
 
 function draw(){
@@ -225,21 +301,49 @@ function draw(){
   ctx.strokeRect(0,0,600,600);
 
   snake.forEach(p=>drawCell(p.x,p.y,"#ff0033"));
-  if(multiplayerLocal) snake2.forEach(p=>drawCell(p.x,p.y,"#00c6ff"));
+  snake2.forEach(p=>drawCell(p.x,p.y,"#00c6ff"));
 
   drawCell(food.x,food.y,"#00ff00");
 }
 
-setInterval(()=>{if(!paused){update();draw();}},120);
-setInterval(()=>{if(!paused){time++;document.getElementById("time").innerText=time}},1000);
-setInterval(()=>document.getElementById("score").innerText=score,100);
+setInterval(()=>{update();draw();},120);
+setInterval(()=>{if(!paused){time++;scoreEl.innerText=score;timeEl.innerText=time}},1000);
 
-/* ---------- Multiplayer placeholder ---------- */
+const scoreEl=document.getElementById("score");
+const timeEl=document.getElementById("time");
+
+/* ---------------- Multiplayer ---------------- */
+let socket=null;
+
 function connectServer(){
-  // will use your WebSocket later
-  document.getElementById("serverStatus").innerText="Offline (Local)";
+  try{
+    socket=new WebSocket("wss://2s2onesgithubio-production.up.railway.app");
+    socket.onopen=()=>{
+      serverStatus.innerText="Server: Online";
+      serverText.innerText="Online";
+    };
+    socket.onerror=offline;
+    socket.onclose=offline;
+  }catch{offline()}
 }
-connectServer();
+
+function offline(){
+  serverStatus.innerText="Server: Offline (Local)";
+  serverText.innerText="Offline (Local)";
+}
+
+function createRoom(){
+  multiplayer=true;
+  socket.send(JSON.stringify({type:"create",name:playerName.value}));
+  startGame();
+}
+
+function joinRoom(){
+  multiplayer=true;
+  socket.send(JSON.stringify({type:"join",room:roomCode.value,name:playerName.value}));
+  startGame();
+}
+
 </script>
 
 </body>
