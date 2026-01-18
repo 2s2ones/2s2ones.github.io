@@ -2,26 +2,51 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>2s2ones Developer</title>
+<title>2s2ones – Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
---bg:#050505;
---card:#0e0e0e;
---red:#ff0033;
---text:#e5e5e5;
+--bg:#060606;
+--red:#ff1a1a;
+--glass:rgba(20,20,20,.65);
+--border:rgba(255,0,0,.25);
+--text:#e6e6e6;
 }
 
 *{box-sizing:border-box}
 
 body{
 margin:0;
-font-family:Segoe UI,Arial;
-background:radial-gradient(circle at top,#200000,#050505 70%);
+font-family:system-ui,Segoe UI,Arial;
+background:
+radial-gradient(circle at 20% 20%,#200000,transparent 40%),
+radial-gradient(circle at 80% 80%,#120000,transparent 40%),
+#050505;
 color:var(--text);
 overflow-x:hidden;
 }
+
+/* 3D floating shapes */
+.shape{
+position:fixed;
+border-radius:50%;
+filter:blur(2px);
+opacity:.25;
+animation:float 18s infinite linear;
+z-index:-1;
+}
+
+.shape.red{background:#ff0000}
+.shape.dark{background:#400000}
+
+@keyframes float{
+0%{transform:translateY(0) rotate(0deg)}
+50%{transform:translateY(-120px) rotate(180deg)}
+100%{transform:translateY(0) rotate(360deg)}
+}
+
+/* layout */
 
 .banner{
 width:100%;
@@ -32,54 +57,55 @@ object-fit:cover;
 section{
 max-width:1200px;
 margin:auto;
-padding:80px 20px;
+padding:90px 20px;
 }
 
-.card{
-background:linear-gradient(145deg,#0a0a0a,#131313);
-border:1px solid #300000;
-border-radius:18px;
-padding:25px;
-margin-bottom:30px;
-box-shadow:0 0 25px rgba(255,0,0,0.15);
+h1,h2,h3{color:var(--red)}
+
+.glass{
+background:var(--glass);
+backdrop-filter:blur(10px);
+border:1px solid var(--border);
+border-radius:22px;
+padding:30px;
+box-shadow:
+0 0 40px rgba(255,0,0,.12),
+inset 0 0 20px rgba(255,0,0,.05);
 transition:.4s;
 }
 
-.card:hover{
-transform:translateY(-8px) scale(1.02);
-box-shadow:0 0 45px rgba(255,0,0,.35);
+.glass:hover{
+transform:translateY(-8px) scale(1.01);
+box-shadow:
+0 0 70px rgba(255,0,0,.35),
+inset 0 0 25px rgba(255,0,0,.1);
 }
 
 .flex{
 display:flex;
-gap:30px;
+gap:40px;
 flex-wrap:wrap;
 align-items:center;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-h1,h2,h3{
-color:var(--red);
 }
 
 .center{text-align:center}
 
 .gif{
 max-width:100%;
-border-radius:12px;
-box-shadow:0 0 25px rgba(255,0,0,.4);
+border-radius:14px;
+box-shadow:0 0 35px rgba(255,0,0,.45);
 }
 
-.badge-row img{margin:6px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
 
 table{
 width:100%;
 border-collapse:collapse;
+margin-top:15px;
 }
 
 th,td{
@@ -87,13 +113,14 @@ border:1px solid #400000;
 padding:10px;
 }
 
-th{background:#200000}
+th{background:#180000}
 
 .reveal{
 opacity:0;
-transform:translateY(40px);
+transform:translateY(60px) scale(.96);
 transition:1s;
 }
+
 .reveal.active{
 opacity:1;
 transform:none;
@@ -102,17 +129,31 @@ transform:none;
 @media(max-width:768px){
 .flex{flex-direction:column}
 .banner{max-height:150px}
+section{padding:60px 15px}
 }
 
-footer{margin-top:100px}
+/* subtle scanlines */
+body:after{
+content:"";
+position:fixed;
+inset:0;
+background:linear-gradient(transparent 95%,rgba(255,0,0,.03) 96%);
+background-size:100% 4px;
+pointer-events:none;
+}
 </style>
 </head>
 <body>
 
+<!-- floating shapes -->
+<div class="shape red" style="width:180px;height:180px;top:10%;left:5%"></div>
+<div class="shape dark" style="width:260px;height:260px;top:60%;left:80%"></div>
+<div class="shape red" style="width:120px;height:120px;top:75%;left:10%"></div>
+
 <img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,50:660000,100:000000&height=240&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
 
 <section class="flex reveal">
-<div>
+<div class="glass">
 <h1>👋 Hi, I'm 2s2ones</h1>
 <b>Node.js & Java Developer</b><br>
 🤖 Bot Builder • 🧩 Minecraft Plugin Engineer
@@ -129,33 +170,34 @@ I build automation systems, Discord bots, and powerful Minecraft plugins that ke
 </section>
 
 <section class="reveal">
-<div class="card center">
+<div class="glass center">
 <h2>WELCOME</h2>
-<p>Welcome to my profile. Here you can find plugins, mods, bots, experiments and secret projects.</p>
+<p>Welcome to the 2s2ones profile. Here you will find plugins, mods, bots, experiments and secret test projects.</p>
+
 <p>
-🚀 Explore my repos<br>
+🚀 Explore my repositories<br>
 🧩 Discover plugins<br>
-🤖 See my bots in action
+🤖 Watch bots evolve
 </p>
 </div>
 </section>
 
 <section class="reveal">
+<div class="glass">
 <h2>PROFILE</h2>
-<div class="card">
 <pre>
 Username: 2s2ones
 Role: Developer
 Languages: Java and Node.js
 Node.js Specialty: Minecraft & Discord bots
-Java Specialty: Minecraft plugins
+Java Specialty: Minecraft server plugins
 </pre>
 </div>
 </section>
 
 <section class="reveal">
+<div class="glass center">
 <h2>TECH STACK</h2>
-<div class="card center badge-row">
 <img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red">
 <img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red">
 <img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord&logoColor=red">
@@ -166,59 +208,62 @@ Java Specialty: Minecraft plugins
 
 <section class="reveal">
 <h2>ORGANIZATIONS</h2>
-
 <div class="grid">
-<div class="card">
+<div class="glass">
 <h3>🧩 2sPlugins</h3>
-Java Minecraft plugins & server utilities.
+High-performance Minecraft plugins & mechanics in Java.
 </div>
 
-<div class="card">
+<div class="glass">
 <h3>🤖 2sBots</h3>
-Discord bots, AI systems, automation services.
+Discord bots, Minecraft bots, AI systems & automation services.
 </div>
 
-<div class="card">
-<h3>🛠 2sDevelopments</h3>
-Main development studio for large projects.
+<div class="glass">
+<h3>🛠️ 2sDevelopments</h3>
+Main studio for large scale projects & shared systems.
 </div>
 </div>
 </section>
 
 <section class="reveal">
 <h2>WHAT I BUILD</h2>
-
 <div class="grid">
-<div class="card">Discord moderation bots</div>
-<div class="card">AI chat bots</div>
-<div class="card">Minecraft ↔ Discord bridges</div>
-<div class="card">Premium systems</div>
-<div class="card">Anti-cheat helpers</div>
-<div class="card">Velocity plugins</div>
+<div class="glass">Discord moderation bots</div>
+<div class="glass">AI chat bots</div>
+<div class="glass">Premium systems</div>
+<div class="glass">Automation & logging</div>
+<div class="glass">Minecraft ↔ Discord bridges</div>
+<div class="glass">Velocity plugins</div>
+<div class="glass">Anti-cheat helpers</div>
+<div class="glass">Random & test plugins</div>
 </div>
 </section>
 
 <section class="reveal">
 <h2>PROJECTS</h2>
 
-<div class="card">
+<div class="glass">
 <h3>Minecraft Bots</h3>
 <table>
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
 <tr><td>Chat Bot</td><td>Custom command bot</td></tr>
-<tr><td>Custom Bot</td><td>Server logic</td></tr>
+<tr><td>Custom Bot</td><td>Server specific logic</td></tr>
 </table>
 </div>
 
-<div class="card">
+<br>
+
+<div class="glass">
 <h3>Discord Bots</h3>
 <table>
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td>Premium Bot</td><td>MEE6+ features</td></tr>
+<tr><td>Premium Bot</td><td>MEE6 style but advanced</td></tr>
 <tr><td>AI Bot</td><td>AI assistant</td></tr>
-<tr><td>MC Bridge</td><td>Realtime sync</td></tr>
-<tr><td>Test Bot</td><td>Testing platform</td></tr>
+<tr><td>MC Bridge</td><td>Realtime server sync</td></tr>
+<tr><td>Custom Bot</td><td>Public use bot</td></tr>
+<tr><td>Test Bot</td><td>Experimental bot</td></tr>
 </table>
 </div>
 </section>
@@ -228,8 +273,8 @@ Main development studio for large projects.
 </section>
 
 <section class="reveal">
+<div class="glass">
 <h2>DEBUG FACTS</h2>
-<div class="card">
 <ul>
 <li>Everyone hates Java because it's hard</li>
 <li>Coffee is required</li>
@@ -241,14 +286,13 @@ Main development studio for large projects.
 </section>
 
 <section class="reveal">
+<div class="glass">
 <h2>COMING SOON</h2>
-
-<div class="card">
 <ul>
-<li>Public plugins</li>
+<li>Public plugin releases</li>
 <li>Bot project</li>
-<li>Quality of life systems</li>
-<li>Open source tools</li>
+<li>Quality of life tools</li>
+<li>Open-source utilities</li>
 <li>Support channel</li>
 </ul>
 </div>
@@ -259,7 +303,7 @@ Main development studio for large projects.
 </section>
 
 <section class="reveal center">
-<h2>🚧 Building...</h2>
+<h2>🚧 Building…</h2>
 <img class="gif" src="https://media.tenor.com/himbGmuY4cgAAAAM/turtle-friends.gif" width="40%">
 </section>
 
@@ -268,17 +312,16 @@ Main development studio for large projects.
 </footer>
 
 <script>
-const reveals=document.querySelectorAll(".reveal");
-function reveal(){
-reveals.forEach(el=>{
-const top=el.getBoundingClientRect().top;
-if(top<window.innerHeight-80){
-el.classList.add("active");
+const items=document.querySelectorAll(".reveal");
+function show(){
+items.forEach(i=>{
+if(i.getBoundingClientRect().top < window.innerHeight-80){
+i.classList.add("active");
 }
 });
 }
-window.addEventListener("scroll",reveal);
-reveal();
+window.addEventListener("scroll",show);
+show();
 </script>
 
 </body>
