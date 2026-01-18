@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mini Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family:Arial;
+}
+canvas{position:fixed;inset:0;z-index:0;}
+
+#content{position:relative;z-index:2;padding:30px;}
+
+.glass{
+  background:rgba(10,10,10,.75);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,0,0,.4);
+  border-radius:15px;
+  padding:25px;
+  margin:20px auto;
+  max-width:700px;
+  box-shadow:0 0 30px rgba(255,0,0,.25);
+}
+
+h1,h2{color:#ff3333;text-align:center}
+
+.game{
+  border:1px solid #ff3333;
+  padding:15px;
+  margin:10px 0;
+  cursor:pointer;
+  transition:.2s;
+}
+.game:hover{background:#220000}
+
+.btn{
+  background:#ff0000;
+  border:none;
+  color:white;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<canvas id="rain"></canvas>
+
+<div id="content">
+
+<div class="glass">
+<h1>🎮 Mini Games</h1>
+</div>
+
+<div class="glass">
+
+<div class="game" onclick="location.href='snake.html'">
+🐍 Snake Game
+</div>
+
+<div class="game" onclick="alert('Geometry Dash coming soon')">
+🟥 Geometry Dash (Coming soon)
+</div>
+
+<div class="game" onclick="alert('More games soon')">
+👾 Mystery Game (Coming soon)
+</div>
+
+</div>
+
+<div class="glass">
+<h2>Coming Soon</h2>
+<ul>
+<li>Geometry Dash Clone</li>
+<li>Platform Runner</li>
+<li>PvP Arena</li>
+<li>Multiplayer Snake</li>
+</ul>
+</div>
+
+<div class="glass" style="text-align:center">
+<button class="btn" onclick="location.href='index.html'">⬅ Back</button>
+</div>
+
+</div>
+
+<script>
+const c=document.getElementById("rain"),ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();onresize=resize;
+
+let drops=[...Array(250)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,s:4+Math.random()*4,l:10+Math.random()*15}));
+
+function draw(){
+ ctx.clearRect(0,0,c.width,c.height);
+ ctx.strokeStyle="rgba(255,0,0,.45)";
+ drops.forEach(d=>{
+  ctx.beginPath();
+  ctx.moveTo(d.x,d.y);
+  ctx.lineTo(d.x,d.y+d.l);
+  ctx.stroke();
+  d.y+=d.s;
+  if(d.y>c.height){d.y=-20;d.x=Math.random()*c.width;}
+ });
+ requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
