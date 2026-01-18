@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snake Game – 2s2ones</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+
+body{
+  background:black;
+  color:white;
+  overflow:hidden;
+}
+
+canvas#rain{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
+
+#ui{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+.glass{
+  background:rgba(10,10,10,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,0,0,0.45);
+  border-radius:16px;
+  box-shadow:0 0 35px rgba(255,0,0,0.25);
+  padding:20px;
+  margin:10px;
+  text-align:center;
+}
+
+#game{
+  background:black;
+  border:2px solid red;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:60px 60px 60px;
+  gap:8px;
+  margin-top:15px;
+}
+
+.controls button{
+  background:linear-gradient(135deg,#ff0000,#400000);
+  border:none;
+  color:white;
+  padding:12px;
+  border-radius:8px;
+  font-size:18px;
+}
+
+button:active{transform:scale(0.95)}
+</style>
+</head>
+<body>
+
+<canvas id="rain"></canvas>
+
+<div id="ui">
+
+<div class="glass">
+  <h2>🐍 Snake Game</h2>
+  <p>Score: <span id="score">0</span></p>
+</div>
+
+<canvas id="game" width="320" height="320"></canvas>
+
+<div class="glass">
+  <p>Keyboard or Touch controls</p>
+
+  <div class="controls">
+    <div></div>
+    <button onclick="setDir(0,-1)">▲</button>
+    <div></div>
+    <button onclick="setDir(-1,0)">◀</button>
+    <button onclick="setDir(0,1)">▼</button>
+    <button onclick="setDir(1,0)">▶</button>
+  </div>
+</div>
+
+<div class="glass">
+  <button onclick="location.href='game.html'">⬅ Back to Menu</button>
+</div>
+
+</div>
+
+<script>
+/* -------- RAIN -------- */
+const rainCanvas=document.getElementById("rain");
+const rctx=rainCanvas.getContext("2d");
+
+function resizeRain(){
+  rainCanvas.width=innerWidth;
+  rainCanvas.height=innerHeight;
+}
+resizeRain();
+addEventListener("resize",resizeRain);
+
+let drops=Array.from({length:200},()=>({
+  x:Math.random()*innerWidth,
+  y:Math.random()*innerHeight,
+  l:10+Math.random()*20,
+  s:4+Math.random()*4
+}));
+
+function rain(){
+  rctx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
+  rctx.strokeStyle="rgba(255,0,0,0.45)";
+  drops.forEach(d=>{
+    rctx.beginPath();
+    rctx.moveTo(d.x,d.y);
+    rctx.lineTo(d.x,d.y+d.l);
+    rctx.stroke();
+    d.y+=d.s;
+    if(d.y>rainCanvas.height){
+      d.y=-20;
+      d.x=Math.random()*rainCanvas.width;
+    }
+  });
+  requestAnimationFrame(rain);
+}
+rain();
+
+/* -------- SNAKE GAME -------- */
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+const size=16;
+let snake=[{x:10,y:10}];
+let dir={x:1,y:0};
+let food=randomFood();
+let score=0;
+
+function randomFood(){
+  return {
+    x:Math.floor(Math.random()*20),
+    y:Math.floor(Math.random()*20)
+  };
+}
+
+function setDir(x,y){
+  dir={x,y};
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowUp") setDir(0,-1);
+  if(e.key==="ArrowDown") setDir(0,1);
+  if(e.key==="ArrowLeft") setDir(-1,0);
+  if(e.key==="ArrowRight") setDir(1,0);
+});
+
+function update(){
+  const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+
+  if(head.x<0||head.y<0||head.x>=20||head.y>=20||snake.some(s=>s.x===head.x&&s.y===head.y)){
+    reset();
+    return;
+  }
+
+  snake.unshift(head);
+
+  if(head.x===food.x && head.y===food.y){
+    score++;
+    document.getElementById("score").textContent=score;
+    food=randomFood();
+  }else{
+    snake.pop();
+  }
+}
+
+function draw(){
+  ctx.fillStyle="black";
+  ctx.fillRect(0,0,320,320);
+
+  ctx.fillStyle="red";
+  snake.forEach(s=>{
+    ctx.fillRect(s.x*size,s.y*size,size-1,size-1);
+  });
+
+  ctx.fillStyle="white";
+  ctx.fillRect(food.x*size,food.y*size,size-1,size-1);
+}
+
+function reset(){
+  snake=[{x:10,y:10}];
+  dir={x:1,y:0};
+  score=0;
+  document.getElementById("score").textContent=score;
+  food=randomFood();
+}
+
+function loop(){
+  update();
+  draw();
+}
+setInterval(loop,120);
+</script>
+
+</body>
+</html>
