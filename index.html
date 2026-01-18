@@ -3,241 +3,247 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>2s2ones Developer Profile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2s2ones – Developer OS</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#050505;color:#e5e5e5;font-family:Segoe UI,Arial,sans-serif;overflow-x:hidden}
-
-#rain{position:fixed;top:0;left:0;z-index:0;pointer-events:none}
-
-.container{position:relative;z-index:2;max-width:1200px;margin:auto;padding:40px 16px 200px}
-
-.section{margin:40px 0;padding:28px;border-radius:14px;background:rgba(20,20,20,.85);
-border:1px solid rgba(255,0,60,.15);box-shadow:0 0 20px rgba(255,0,60,.05);
-backdrop-filter:blur(8px);transition:.3s}
-
-.section:hover{transform:translateY(-4px);box-shadow:0 0 30px rgba(255,0,60,.18)}
-
-h1,h2,h3{color:#ff2244;margin-bottom:10px}
-p{line-height:1.6;opacity:.9}
-
-.hero{text-align:center;padding:80px 20px 60px}
-.hero h1{font-size:42px;letter-spacing:2px}
-
-.subtitle{color:#aaa;margin-top:12px;font-size:18px}
-
-.glitch{animation:glitch 3s infinite}
-@keyframes glitch{
-0%{text-shadow:0 0 2px red}
-20%{text-shadow:-2px 0 red}
-40%{text-shadow:2px 0 #ff0055}
-60%{text-shadow:-1px 0 #ff0033}
-80%{text-shadow:1px 0 red}
-100%{text-shadow:0 0 2px red}
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    background: #050008;
+    overflow-x: hidden;
 }
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-
-.card{background:rgba(15,15,15,.9);border:1px solid rgba(255,0,60,.2);
-padding:16px;border-radius:12px;transition:.3s}
-
-.card:hover{transform:scale(1.02)}
-
-.footer{text-align:center;margin-top:120px;color:#666}
-
-@media(max-width:768px){
-.hero h1{font-size:30px}
-.section{padding:20px}
+canvas#rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
-.cursor{position:fixed;width:14px;height:14px;border-radius:50%;
-background:rgba(255,0,60,.6);pointer-events:none;z-index:999;
-transform:translate(-50%,-50%);mix-blend-mode:screen}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
 
-/* Games */
-canvas.game{background:#000;border:1px solid #ff2244;display:block;margin:auto}
-.game-title{text-align:center;color:#ff2244;margin-bottom:10px}
+.center { text-align: center; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 20px;
+    vertical-align: top;
+}
+
+h1, h2, h3 {
+    margin-top: 30px;
+}
+
+.badges img {
+    margin: 6px;
+}
+
+.section {
+    margin: 50px 0;
+}
+
+.codebox {
+    background: #0e001a;
+    padding: 15px;
+    border-radius: 10px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    border: 1px solid #6a00ff;
+}
+
+.list {
+    line-height: 1.7;
+}
+
+a {
+    color: #00c6ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    margin-bottom: 60px;
+}
 </style>
 </head>
+
 <body>
 
 <canvas id="rain"></canvas>
-<div class="cursor" id="cursor"></div>
 
 <div class="container">
 
-<div class="hero">
-<h1 class="glitch">2s2ones</h1>
-<div class="subtitle">Node.js & Java Developer • Bots • Minecraft Plugins</div>
+<div class="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=220&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
 </div>
 
-<div class="section"><h2>Welcome</h2><p>Developer OS interface loaded.</p></div>
-<div class="section"><h2>About Me</h2><p>I build automation systems, Discord bots, and Minecraft plugins.</p></div>
+<table>
+<tr>
+<td width="55%">
 
-<div class="section"><h2>Main Focus</h2>
-<div class="grid">
-<div class="card">Node.js Systems</div>
-<div class="card">Java Plugins</div>
-<div class="card">Discord Automation</div>
-<div class="card">Minecraft Networks</div>
-</div></div>
+<h1>👋 Hi, I'm <b>2s2ones</b></h1>
 
-<div class="section"><h2>Languages</h2><p>Java • JavaScript • SQL • Bash</p></div>
-<div class="section"><h2>Tools</h2><p>Linux, Git, Docker, IntelliJ, VS Code</p></div>
-<div class="section"><h2>Organizations</h2><p>2sPlugins • 2sBots • 2sDevelopments</p></div>
+<b>Node.js & Java Developer</b><br>
+🤖 Bot Builder • 🧩 Minecraft Plugin Engineer
 
-<div class="section"><h2>Live System Status</h2>
-<div class="grid">
-<div class="card">Time: <span id="time"></span></div>
-<div class="card">Session: <span id="session"></span>s</div>
-<div class="card">Device: <span id="device"></span></div>
-<div class="card">Resolution: <span id="res"></span></div>
-<div class="card">Battery: <span id="battery"></span></div>
-<div class="card">Network: <span id="network"></span></div>
-</div></div>
+<p>
+I build automation systems, Discord bots,<br>
+and powerful Minecraft plugins that keep servers alive.
+</p>
 
-<!-- Auto generate many info sections -->
+</td>
+<td width="45%" class="center">
+
+<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="260"><br><br>
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="230">
+
+</td>
+</tr>
+</table>
+
+<div class="center section">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=WELCOME&fontSize=24&fontColor=ffffff">
+<br><br>
+<img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile%21;Check+out+my+projects;Bots+plugins+and+mods&center=true&size=22&color=000000&pause=1200">
+
+<p>
+welcome to the 2s2ones profile, here you can find a lot of stuff like plugins, mods, bots and more<br>
+you can even see test stuff and experiments only
+<br><br>
+🚀 explore the secret of my repo<br>
+🧩 Discover all my plugins<br>
+🤖 see what my bots do!
+</p>
+</div>
+
+<div class="center section">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=PROFILE&fontSize=24&fontColor=ffffff">
+</div>
+
+<div class="codebox">
+Username: 2s2ones
+Role: Developer
+Languages: Java and Node.js
+nodejs Specialty: minecraft and discord bots
+java Specialty: making minecraft server plugins
+</div>
+
+<div class="center section">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=70&section=header&text=TECH%20STACK&fontSize=24&fontColor=ffffff">
+</div>
+
+<div class="center badges">
+<img src="https://img.shields.io/badge/Node.js-6a00ff?style=for-the-badge&logo=node.js&logoColor=white">
+<img src="https://img.shields.io/badge/Java-ff0055?style=for-the-badge&logo=openjdk&logoColor=white">
+<img src="https://img.shields.io/badge/Discord.js-00c6ff?style=for-the-badge&logo=discord&logoColor=white">
+<img src="https://img.shields.io/badge/Bukkit, Paper and Velocity-6a00ff?style=for-the-badge&logo=minecraft&logoColor=white">
+<img src="https://img.shields.io/badge/Git-ff0055?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/Linux-00c6ff?style=for-the-badge&logo=linux&logoColor=white">
+</div>
+
+<div class="center section">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00c6ff,100:6a00ff&height=70&section=header&text=WHAT%20I%20BUILD&fontSize=24&fontColor=ffffff">
+</div>
+
+<h2>🤖 Bots</h2>
+<div class="list">
+Discord moderation bots<br>
+AI chat bots<br>
+Premium systems<br>
+Automation & logging<br>
+Minecraft ↔ Discord bridges
+</div>
+
+<h2>🧩 Minecraft Plugins</h2>
+<div class="list">
+Bukkit & Paper plugins<br>
+Velocity plugins<br>
+Quality of life plugins<br>
+Anarchy essentials<br>
+Anti-cheat helpers<br>
+Custom plugins<br>
+Random & test plugins
+</div>
+
+<div class="center section">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=DEBUG%20FACTS&fontSize=24&fontColor=ffffff">
+</div>
+
+<ul class="list">
+<li>everyone hate java cuz is hard</li>
+<li>coffee always needed</li>
+<li>If it works in production → panic</li>
+<li>Logs > emotions</li>
+<li>Sleep is always an option</li>
+</ul>
+
+<div class="center section">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,30:ff0055,60:00c6ff,100:000000&height=260&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=30&fontColor=ffffff&animation=twinkling">
+</div>
+
+</div>
+
 <script>
-for(let i=1;i<=40;i++){
-document.write(`<div class="section"><h2>System Module ${i}</h2><p>Information block ${i}. Runtime operational.</p></div>`);
+const canvas = document.getElementById("rain");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
-</script>
+resize();
+window.addEventListener("resize", resize);
 
-<div class="section">
-<h2>Mobile Device Mode</h2>
-<p id="mobileStatus">Detecting...</p>
-</div>
+let drops = [];
 
-<!-- Games -->
-<div class="section">
-<h2 class="game-title">Snake Game</h2>
-<canvas id="snake" class="game" width="300" height="300"></canvas>
-<p style="text-align:center">Tap / Arrow keys</p>
-</div>
-
-<div class="section">
-<h2 class="game-title">Runner (Geometry-Dash style)</h2>
-<canvas id="runner" class="game" width="300" height="150"></canvas>
-<p style="text-align:center">Tap / Space to jump</p>
-</div>
-
-<div class="footer">System end. Thanks for visiting.</div>
-</div>
-
-<script>
-/* Device */
-const isMobile=/Mobi|Android/i.test(navigator.userAgent);
-document.getElementById("mobileStatus").innerText=isMobile?"Mobile features enabled":"Desktop mode";
-
-/* Cursor */
-if(!isMobile){
-const cursor=document.getElementById("cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
-});
-}else document.getElementById("cursor").style.display="none";
-
-/* Rain */
-const canvas=document.getElementById("rain"),ctx=canvas.getContext("2d");
-const chars="01#@$%&*";const fontSize=14;let columns,drops;
-function resize(){
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-columns=Math.floor(canvas.width/fontSize);
-drops=new Array(columns).fill(1);
-}
-resize();window.addEventListener("resize",resize);
-function drawRain(){
-ctx.fillStyle="rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="#ff0033";
-ctx.font=fontSize+"px monospace";
-for(let i=0;i<drops.length;i++){
-const t=chars[Math.random()*chars.length|0];
-ctx.fillText(t,i*fontSize,drops[i]*fontSize);
-if(drops[i]*fontSize>canvas.height&&Math.random()>0.97)drops[i]=0;
-drops[i]++;
-}}
-setInterval(drawRain,50);
-
-/* Stats */
-let start=Date.now();
-setInterval(()=>{
-time.innerText=new Date().toLocaleTimeString();
-session.innerText=Math.floor((Date.now()-start)/1000);
-res.innerText=innerWidth+"x"+innerHeight;
-},500);
-device.innerText=isMobile?"Mobile":"Desktop";
-network.innerText=navigator.connection?navigator.connection.effectiveType:"Unknown";
-if(navigator.getBattery)navigator.getBattery().then(b=>{
-function u(){battery.innerText=Math.round(b.level*100)+"%"}u();b.onlevelchange=u;
-}); else battery.innerText="N/A";
-
-/* Phone tilt */
-if(isMobile&&window.DeviceOrientationEvent){
-addEventListener("deviceorientation",e=>{
-container.style.transform=`translate(${e.gamma/10}px,${e.beta/10}px)`;
-});
+for (let i = 0; i < 300; i++) {
+    drops.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        l: Math.random() * 1,
+        xs: -4 + Math.random() * 4,
+        ys: 10 + Math.random() * 10
+    });
 }
 
-/* Title glitch */
-function glitchTitle(){
-const h=document.querySelector(".hero h1");
-h.style.transform="translateX(-2px)";
-setTimeout(()=>h.style.transform="translateX(2px)",80);
-setTimeout(()=>h.style.transform="translateX(0)",160);
-}
-setInterval(glitchTitle,5000+Math.random()*5000);
+function drawRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "rgba(0,198,255,0.4)";
+    ctx.lineWidth = 1;
 
-/* Snake */
-const s=document.getElementById("snake"),sctx=s.getContext("2d");
-let snake=[[5,5]],dir=[1,0],food=[10,10];
-function drawSnake(){
-sctx.fillStyle="#000";sctx.fillRect(0,0,300,300);
-sctx.fillStyle="#ff2244";
-snake.forEach(p=>sctx.fillRect(p[0]*15,p[1]*15,14,14));
-sctx.fillStyle="#0f0";
-sctx.fillRect(food[0]*15,food[1]*15,14,14);
-}
-function moveSnake(){
-const head=[snake[0][0]+dir[0],snake[0][1]+dir[1]];
-if(head[0]<0||head[1]<0||head[0]>19||head[1]>19||snake.some(p=>p[0]==head[0]&&p[1]==head[1])){
-snake=[[5,5]];dir=[1,0];return;
-}
-snake.unshift(head);
-if(head[0]==food[0]&&head[1]==food[1])food=[Math.random()*20|0,Math.random()*20|0];
-else snake.pop();
-drawSnake();
-}
-setInterval(moveSnake,150);
-addEventListener("keydown",e=>{
-if(e.key=="ArrowUp")dir=[0,-1];
-if(e.key=="ArrowDown")dir=[0,1];
-if(e.key=="ArrowLeft")dir=[-1,0];
-if(e.key=="ArrowRight")dir=[1,0];
-});
+    for (let d of drops) {
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x + d.l * d.xs, d.y + d.l * d.ys);
+        ctx.stroke();
 
-/* Runner */
-const r=document.getElementById("runner"),rctx=r.getContext("2d");
-let playerY=110,vel=0,obsX=300;
-function drawRunner(){
-rctx.fillStyle="#000";rctx.fillRect(0,0,300,150);
-rctx.fillStyle="#ff2244";rctx.fillRect(30,playerY,20,20);
-rctx.fillStyle="#fff";rctx.fillRect(obsX,120,20,30);
+        d.x += d.xs;
+        d.y += d.ys;
+
+        if (d.x > canvas.width || d.y > canvas.height) {
+            d.x = Math.random() * canvas.width;
+            d.y = -20;
+        }
+    }
+
+    requestAnimationFrame(drawRain);
 }
-function updateRunner(){
-vel+=1;playerY+=vel;
-if(playerY>110){playerY=110;vel=0}
-obsX-=5;if(obsX<0)obsX=300;
-if(obsX<50&&obsX>30&&playerY>90)obsX=300;
-drawRunner();
-}
-setInterval(updateRunner,50);
-addEventListener("keydown",e=>{if(e.code=="Space"&&playerY==110)vel=-15});
-r.addEventListener("touchstart",()=>{if(playerY==110)vel=-15});
+
+drawRain();
 </script>
 
 </body>
