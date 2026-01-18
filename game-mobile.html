@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mini Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{margin:0;background:black;color:white;font-family:Arial}
+canvas{position:fixed;inset:0;z-index:0}
+#content{position:relative;z-index:2;padding:15px}
+
+.glass{
+ background:rgba(10,10,10,.75);
+ backdrop-filter:blur(14px);
+ border:1px solid rgba(255,0,0,.4);
+ border-radius:14px;
+ padding:18px;
+ margin:15px 0;
+ box-shadow:0 0 25px rgba(255,0,0,.25);
+}
+
+h1,h2{text-align:center;color:#ff3333}
+
+.game{
+ border:1px solid #ff3333;
+ padding:12px;
+ margin:8px 0;
+}
+
+.btn{
+ background:#ff0000;
+ border:none;
+ color:white;
+ padding:10px;
+ width:100%;
+ border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="rain"></canvas>
+
+<div id="content">
+
+<div class="glass"><h1>🎮 Mini Games</h1></div>
+
+<div class="glass">
+
+<div class="game" onclick="location.href='snake.html'">🐍 Snake Game</div>
+<div class="game" onclick="alert('Coming soon')">🟥 Geometry Dash</div>
+<div class="game" onclick="alert('Coming soon')">👾 Mystery Game</div>
+
+</div>
+
+<div class="glass">
+<h2>Coming Soon</h2>
+<ul>
+<li>Geometry Dash</li>
+<li>Runner</li>
+<li>PvP</li>
+<li>Multiplayer</li>
+</ul>
+</div>
+
+<div class="glass">
+<button class="btn" onclick="location.href='index-mobile.html'">⬅ Back</button>
+</div>
+
+</div>
+
+<script>
+const c=document.getElementById("rain"),ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();onresize=resize;
+
+let drops=[...Array(180)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,s:4+Math.random()*4,l:10+Math.random()*15}));
+
+function draw(){
+ ctx.clearRect(0,0,c.width,c.height);
+ ctx.strokeStyle="rgba(255,0,0,.45)";
+ drops.forEach(d=>{
+  ctx.beginPath();
+  ctx.moveTo(d.x,d.y);
+  ctx.lineTo(d.x,d.y+d.l);
+  ctx.stroke();
+  d.y+=d.s;
+  if(d.y>c.height){d.y=-20;d.x=Math.random()*c.width;}
+ });
+ requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
