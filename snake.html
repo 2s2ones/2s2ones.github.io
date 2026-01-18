@@ -1,214 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Snake Game – 2s2ones</title>
-
+<title>Snake Game</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+html,body{margin:0;height:100%;background:black;font-family:Arial;color:white;overflow:hidden}
 
-body{
-  background:black;
-  color:white;
-  overflow:hidden;
-}
+canvas{position:fixed;top:0;left:0}
 
-canvas#rain{
-  position:fixed;
-  inset:0;
-  z-index:0;
-}
-
-#ui{
-  position:relative;
-  z-index:2;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:100vh;
-}
+#game{z-index:2}
 
 .glass{
-  background:rgba(10,10,10,0.75);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,0,0,0.45);
-  border-radius:16px;
-  box-shadow:0 0 35px rgba(255,0,0,0.25);
-  padding:20px;
-  margin:10px;
-  text-align:center;
+position:fixed;
+top:20px;left:50%;
+transform:translateX(-50%);
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.25);
+border-radius:16px;
+padding:15px 25px;
+box-shadow:0 0 25px rgba(255,0,0,.4);
+z-index:5;
+display:flex;
+gap:10px;
+align-items:center;
 }
 
-#game{
-  background:black;
-  border:2px solid red;
+button{
+background:rgba(255,0,0,.2);
+border:1px solid red;
+color:white;
+padding:8px 14px;
+border-radius:10px;
+cursor:pointer;
 }
 
-.controls{
-  display:grid;
-  grid-template-columns:60px 60px 60px;
-  gap:8px;
-  margin-top:15px;
+#info{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.25);
+border-radius:16px;
+padding:12px 20px;
+box-shadow:0 0 20px rgba(255,0,0,.4);
+z-index:5;
 }
-
-.controls button{
-  background:linear-gradient(135deg,#ff0000,#400000);
-  border:none;
-  color:white;
-  padding:12px;
-  border-radius:8px;
-  font-size:18px;
-}
-
-button:active{transform:scale(0.95)}
 </style>
 </head>
 <body>
 
 <canvas id="rain"></canvas>
-
-<div id="ui">
-
-<div class="glass">
-  <h2>🐍 Snake Game</h2>
-  <p>Score: <span id="score">0</span></p>
-</div>
-
-<canvas id="game" width="320" height="320"></canvas>
+<canvas id="game" width="600" height="600"></canvas>
 
 <div class="glass">
-  <p>Keyboard or Touch controls</p>
-
-  <div class="controls">
-    <div></div>
-    <button onclick="setDir(0,-1)">▲</button>
-    <div></div>
-    <button onclick="setDir(-1,0)">◀</button>
-    <button onclick="setDir(0,1)">▼</button>
-    <button onclick="setDir(1,0)">▶</button>
-  </div>
+<b>Snake Game</b>
+<select id="mode">
+<option value="classic">Classic</option>
+<option value="speed">Speed</option>
+<option value="multi">Multiplayer</option>
+</select>
+<button onclick="startGame()">Start</button>
+<button onclick="fullscreen()">Fullscreen</button>
 </div>
 
-<div class="glass">
-  <button onclick="location.href='game.html'">⬅ Back to Menu</button>
-</div>
-
+<div id="info">
+Player 1: Arrow keys<br>
+Player 2: WASD (multiplayer)
 </div>
 
 <script>
-/* -------- RAIN -------- */
-const rainCanvas=document.getElementById("rain");
-const rctx=rainCanvas.getContext("2d");
-
-function resizeRain(){
-  rainCanvas.width=innerWidth;
-  rainCanvas.height=innerHeight;
-}
-resizeRain();
-addEventListener("resize",resizeRain);
-
-let drops=Array.from({length:200},()=>({
-  x:Math.random()*innerWidth,
-  y:Math.random()*innerHeight,
-  l:10+Math.random()*20,
-  s:4+Math.random()*4
-}));
-
-function rain(){
-  rctx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
-  rctx.strokeStyle="rgba(255,0,0,0.45)";
-  drops.forEach(d=>{
-    rctx.beginPath();
-    rctx.moveTo(d.x,d.y);
-    rctx.lineTo(d.x,d.y+d.l);
-    rctx.stroke();
-    d.y+=d.s;
-    if(d.y>rainCanvas.height){
-      d.y=-20;
-      d.x=Math.random()*rainCanvas.width;
-    }
-  });
-  requestAnimationFrame(rain);
-}
-rain();
-
-/* -------- SNAKE GAME -------- */
-const canvas=document.getElementById("game");
-const ctx=canvas.getContext("2d");
-
-const size=16;
-let snake=[{x:10,y:10}];
-let dir={x:1,y:0};
-let food=randomFood();
-let score=0;
-
-function randomFood(){
-  return {
-    x:Math.floor(Math.random()*20),
-    y:Math.floor(Math.random()*20)
-  };
-}
-
-function setDir(x,y){
-  dir={x,y};
-}
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="ArrowUp") setDir(0,-1);
-  if(e.key==="ArrowDown") setDir(0,1);
-  if(e.key==="ArrowLeft") setDir(-1,0);
-  if(e.key==="ArrowRight") setDir(1,0);
+/* ---------- Rain ---------- */
+const rain=document.getElementById("rain"),rctx=rain.getContext("2d");
+function resize(){rain.width=innerWidth;rain.height=innerHeight}
+resize();onresize=resize;
+let drops=[...Array(400)].map(()=>({x:Math.random()*rain.width,y:Math.random()*rain.height,s:6+Math.random()*8}));
+function rainDraw(){
+rctx.clearRect(0,0,rain.width,rain.height);
+rctx.strokeStyle="rgba(255,0,0,.5)";
+drops.forEach(d=>{
+rctx.beginPath();
+rctx.moveTo(d.x,d.y);
+rctx.lineTo(d.x,d.y+12);
+rctx.stroke();
+d.y+=d.s;
+if(d.y>rain.height)d.y=-10;
 });
+requestAnimationFrame(rainDraw);
+}
+rainDraw();
 
-function update(){
-  const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+/* ---------- Game ---------- */
+const c=document.getElementById("game"),ctx=c.getContext("2d");
+const size=20;
+let snakes,food,dx1,dy1,dx2,dy2,mode,speed,run=false;
 
-  if(head.x<0||head.y<0||head.x>=20||head.y>=20||snake.some(s=>s.x===head.x&&s.y===head.y)){
-    reset();
-    return;
-  }
+function reset(){
+snakes=[
+[{x:200,y:200}],
+[{x:380,y:380}]
+];
+dx1=1;dy1=0;dx2=-1;dy2=0;
+food={x:300,y:300};
+}
 
-  snake.unshift(head);
-
-  if(head.x===food.x && head.y===food.y){
-    score++;
-    document.getElementById("score").textContent=score;
-    food=randomFood();
-  }else{
-    snake.pop();
-  }
+function startGame(){
+mode=document.getElementById("mode").value;
+speed=mode==="speed"?50:100;
+reset();
+run=true;
+loop();
 }
 
 function draw(){
-  ctx.fillStyle="black";
-  ctx.fillRect(0,0,320,320);
+ctx.fillStyle="black";
+ctx.fillRect(0,0,600,600);
 
-  ctx.fillStyle="red";
-  snake.forEach(s=>{
-    ctx.fillRect(s.x*size,s.y*size,size-1,size-1);
-  });
+ctx.fillStyle="lime";
+ctx.fillRect(food.x,food.y,size,size);
 
-  ctx.fillStyle="white";
-  ctx.fillRect(food.x*size,food.y*size,size-1,size-1);
+snakes.forEach((s,i)=>{
+ctx.fillStyle=i? "cyan":"red";
+s.forEach(p=>ctx.fillRect(p.x,p.y,size,size));
+});
 }
 
-function reset(){
-  snake=[{x:10,y:10}];
-  dir={x:1,y:0};
-  score=0;
-  document.getElementById("score").textContent=score;
-  food=randomFood();
+function move(){
+if(!run)return;
+moveSnake(0,dx1,dy1);
+if(mode==="multi")moveSnake(1,dx2,dy2);
+}
+
+function moveSnake(id,dx,dy){
+let s=snakes[id];
+let head={x:s[0].x+dx*size,y:s[0].y+dy*size};
+s.unshift(head);
+if(head.x===food.x&&head.y===food.y){
+food={x:Math.floor(Math.random()*30)*20,y:Math.floor(Math.random()*30)*20};
+}else s.pop();
 }
 
 function loop(){
-  update();
-  draw();
+if(!run)return;
+move();
+draw();
+setTimeout(loop,speed);
 }
-setInterval(loop,120);
-</script>
 
+document.addEventListener("keydown",e=>{
+if(e.key==="ArrowUp"){dx1=0;dy1=-1}
+if(e.key==="ArrowDown"){dx1=0;dy1=1}
+if(e.key==="ArrowLeft"){dx1=-1;dy1=0}
+if(e.key==="ArrowRight"){dx1=1;dy1=0}
+
+if(e.key==="w"){dx2=0;dy2=-1}
+if(e.key==="s"){dx2=0;dy2=1}
+if(e.key==="a"){dx2=-1;dy2=0}
+if(e.key==="d"){dx2=1;dy2=0}
+});
+
+function fullscreen(){
+document.documentElement.requestFullscreen();
+}
+</script>
 </body>
 </html>
