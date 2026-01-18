@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +32,6 @@ canvas{
 }
 
 #rain{z-index:-3}
-#sakura{z-index:-2}
 
 .container{
   max-width:1200px;
@@ -70,7 +68,6 @@ hr{border:1px solid rgba(255,255,255,0.2)}
 <body>
 
 <canvas id="rain"></canvas>
-<canvas id="sakura"></canvas>
 
 <div class="container">
 
@@ -151,163 +148,74 @@ java Specialty: making minecraft server plugins</pre>
 </div>
 
 <div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0033,50:111111,100:000000&height=70&section=header&text=ORGANIZATIONS&fontSize=24&fontColor=ffffff&animation=fadeIn">
-</div>
-
-<div class="glass">
-<p>I run and maintain multiple development organizations for different projects and platforms.</p>
-
-<h3>🧩 2sPlugins — Minecraft Plugins</h3>
-<p>High-performance plugins, server utilities, and custom mechanics built in Java.</p>
-<a href="https://github.com/2sPlugins"><img src="https://img.shields.io/badge/Visit-2sPlugins-ff0033?style=for-the-badge&logo=github&logoColor=white"></a>
-
-<h3>🤖 2sBots — Discord & Minecraft Bots</h3>
-<p>Discord bots, Minecraft bots, AI systems, and automation services built with Node.js.</p>
-<a href="https://github.com/2sBots"><img src="https://img.shields.io/badge/Visit-2sBots-ff0055?style=for-the-badge&logo=github&logoColor=white"></a>
-
-<h3>🛠️ 2sDevelopments — Main Studio</h3>
-<p>Central organization for large projects, shared systems, and long-term development.</p>
-<a href="https://github.com/2sDevelopments"><img src="https://img.shields.io/badge/Visit-2sDevelopments-00c6ff?style=for-the-badge&logo=github&logoColor=white"></a>
-</div>
-
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00c6ff,100:6a00ff&height=70&section=header&text=WHAT%20I%20BUILD&fontSize=24&fontColor=ffffff">
-</div>
-
-<div class="glass">
-<h2>🤖 Bots</h2>
-<ul>
-<li>Discord moderation bots</li>
-<li>AI chat bots</li>
-<li>premium systems</li>
-<li>Automation & logging</li>
-<li>Minecraft ↔ Discord bridges</li>
-</ul>
-
-<h2>🧩 Minecraft Plugins</h2>
-<ul>
-<li>Bukkit & Paper plugins</li>
-<li>Velocity plugins</li>
-<li>quality of life plugins</li>
-<li>anarchy esentials</li>
-<li>Anti-cheat helpers</li>
-<li>Custom plugins</li>
-<li>Random & test plugins</li>
-</ul>
-</div>
-
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=70&section=header&text=PROJECTS&fontSize=24&fontColor=ffffff">
-</div>
-
-<div class="glass">
-<h3>🤖 Minecraft Bots</h3>
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Description</th></tr>
-<tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
-<tr><td>Chat Bot</td><td>Custom command bot</td></tr>
-<tr><td>Custom Bot</td><td>Server-specific logic</td></tr>
-</table>
-
-<h3>🛜 Discord Bots</h3>
-<table border="1" cellpadding="6">
-<tr><th>Name</th><th>Description</th></tr>
-<tr><td>Premium Bot</td><td>Like MEE6 but with features on top</td></tr>
-<tr><td>AI Bot</td><td>AI assistant</td></tr>
-<tr><td>MC Bridge</td><td>Realtime server sync</td></tr>
-<tr><td>Custom bot</td><td>making bot for public use</td></tr>
-<tr><td>Test bot</td><td>for testing uses</td></tr>
-</table>
-</div>
-
-<div class="center">
-<img src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif" width="70%">
-</div>
-
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=DEBUG%20FACTS&fontSize=24&fontColor=ffffff">
-</div>
-
-<div class="glass">
-<ul>
-<li>everyone hate java cuz is hard</li>
-<li>coffee always needed</li>
-<li>If it works in production -> panic</li>
-<li>Logs > emotions</li>
-<li>Sleep is always an option</li>
-</ul>
-</div>
-
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00c6ff,100:6a00ff&height=70&section=header&text=COMING%20SOON&fontSize=24&fontColor=ffffff">
-</div>
-
-<div class="glass center">
-<img src="https://media.giphy.com/media/l0HlQ7LRalZbQJx5S/giphy.gif" width="85%">
-
-<ul>
-<li>Public plugin releases</li>
-<li>Bot preject</li>
-<li>Quality of life needs</li>
-<li>Open-source tools</li>
-<li>Real chanell for help</li>
-<li>and more plugin for sure</li>
-</ul>
-</div>
-
-<h2 class="center">🚧 Coming soon...</h2>
-
-<div class="center">
-<img src="https://media.tenor.com/himbGmuY4cgAAAAM/turtle-friends.gif" width="40%">
-</div>
-
-<div class="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,30:ff0055,60:00c6ff,100:000000&height=260&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=30&fontColor=ffffff&animation=twinkling">
 </div>
 
 </div>
 
 <script>
+/* ===== MOBILE DETECTION & REDIRECT ===== */
+
+function redirectMobile(){
+  const isMobile =
+    /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent) ||
+    window.innerWidth < 800;
+
+  if(isMobile){
+    window.location.href = "index-mobile.html";
+  }
+}
+
+redirectMobile();
+
+// extra: detect phone movement / orientation
+window.addEventListener("deviceorientation", function(){
+  redirectMobile();
+},{once:true});
+
+
+/* ===== RAIN EFFECT ===== */
+
 const rain=document.getElementById("rain");
-const sakura=document.getElementById("sakura");
-const rctx=rain.getContext("2d");
-const sctx=sakura.getContext("2d");
+const ctx=rain.getContext("2d");
 
 function resize(){
-  rain.width=sakura.width=window.innerWidth;
-  rain.height=sakura.height=window.innerHeight;
+  rain.width=window.innerWidth;
+  rain.height=window.innerHeight;
 }
-resize(); window.onresize=resize;
+resize();
+window.onresize=resize;
 
-let drops=[...Array(500)].map(()=>({x:Math.random()*rain.width,y:Math.random()*rain.height,s:8+Math.random()*12,l:10+Math.random()*20}));
-let petals=[...Array(120)].map(()=>({x:Math.random()*sakura.width,y:Math.random()*sakura.height,r:2+Math.random()*3,s:0.5+Math.random()*1.5}));
+let drops=[];
+for(let i=0;i<500;i++){
+  drops.push({
+    x:Math.random()*rain.width,
+    y:Math.random()*rain.height,
+    s:8+Math.random()*12,
+    l:10+Math.random()*20
+  });
+}
 
-function draw(){
-  rctx.clearRect(0,0,rain.width,rain.height);
-  rctx.strokeStyle="rgba(255,80,80,0.8)";
-  drops.forEach(d=>{
-    rctx.beginPath();
-    rctx.moveTo(d.x,d.y);
-    rctx.lineTo(d.x,d.y+d.l);
-    rctx.stroke();
+function drawRain(){
+  ctx.clearRect(0,0,rain.width,rain.height);
+  ctx.strokeStyle="rgba(255,80,80,0.85)";
+  ctx.lineWidth=1;
+
+  for(let d of drops){
+    ctx.beginPath();
+    ctx.moveTo(d.x,d.y);
+    ctx.lineTo(d.x,d.y+d.l);
+    ctx.stroke();
     d.y+=d.s;
-    if(d.y>rain.height){d.y=-20;d.x=Math.random()*rain.width;}
-  });
-
-  sctx.clearRect(0,0,sakura.width,sakura.height);
-  petals.forEach(p=>{
-    sctx.fillStyle="rgba(255,180,200,0.9)";
-    sctx.beginPath();
-    sctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    sctx.fill();
-    p.y+=p.s;
-    p.x+=Math.sin(p.y*0.01)*0.5;
-    if(p.y>sakura.height){p.y=-10;p.x=Math.random()*sakura.width;}
-  });
-
-  requestAnimationFrame(draw);
+    if(d.y>rain.height){
+      d.y=-20;
+      d.x=Math.random()*rain.width;
+    }
+  }
+  requestAnimationFrame(drawRain);
 }
-draw();
+
+drawRain();
 </script>
 
 </body>
