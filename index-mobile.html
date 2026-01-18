@@ -2,285 +2,230 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>2s2ones Developer (Mobile)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2s2ones Developer</title>
 
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#000;color:#eee;font-family:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+
+body{
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+}
 
 canvas{
   position:fixed;
   inset:0;
-  z-index:-1;
-  pointer-events:none;
+  z-index:0;
 }
 
-.container{padding:14px}
-
-.center{text-align:center}
-
-.banner{
-  margin:22px 0 14px;
-  padding:12px;
-  text-align:center;
-  background:linear-gradient(90deg,#000,#220000,#000);
-  border:1px solid #aa0000;
-  border-radius:14px;
-  box-shadow:0 0 16px rgba(255,0,0,.3);
-  color:#fff;
-  font-weight:bold;
-  letter-spacing:1px;
-  font-size:15px;
+#content{
+  position:relative;
+  z-index:2;
+  padding:30px 15px;
 }
 
 .glass{
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:14px;
-  padding:16px;
-  margin:14px 0;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-
-pre{
-  background:#050505;
-  border:1px solid #550000;
-  padding:12px;
-  border-radius:10px;
-  color:#ccc;
-  font-size:13px;
-  overflow:auto;
-}
-
-.badges img{margin:4px}
-
-.org{
-  border:1px solid #550000;
-  border-radius:12px;
-  padding:12px;
-  margin:10px 0;
-}
-
-a{color:#ff4444;text-decoration:none}
-
-.minigame{
-  margin:35px 0;
-  padding:18px;
-  border:2px solid #ff0000;
+  background:rgba(10,10,10,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,0,0,0.45);
   border-radius:16px;
-  text-align:center;
-  background:linear-gradient(135deg,#000,#180000);
-  box-shadow:0 0 20px rgba(255,0,0,.4);
+  box-shadow:0 0 35px rgba(255,0,0,0.25);
+  padding:25px;
+  margin:30px auto;
+  max-width:1100px;
 }
 
-.minigame button{
-  margin-top:12px;
-  padding:10px 22px;
-  background:#ff0000;
-  color:white;
+.center{text-align:center}
+
+h1,h2,h3{color:#ff3333;margin-bottom:10px}
+
+.badges img{margin:5px}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+td,th{
+  border:1px solid #333;
+  padding:8px;
+}
+
+.btn{
+  background:linear-gradient(135deg,#ff0000,#400000);
   border:none;
-  border-radius:8px;
-  font-size:15px;
+  color:white;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:10px;
 }
-
-img{max-width:100%}
 </style>
 </head>
 <body>
 
 <canvas id="rain"></canvas>
 
-<div class="container">
+<div id="content">
 
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0000,50:550000,100:000000&height=180&section=header&text=2s2ones%20Developer&fontSize=30&fontColor=ffffff&animation=fadeIn">
+<div class="glass center">
+  <h1>2s2ones Developer</h1>
+  <p><b>Node.js & Java Developer</b></p>
+  <p>🤖 Bot Builder • 🧩 Minecraft Plugin Engineer</p>
 </div>
 
 <div class="glass center">
-<h2>👋 Hi, I'm 2s2ones</h2>
-<b>Node.js & Java Developer</b><br>
-🤖 Bot Builder • 🧩 Minecraft Plugin Engineer
-
-<p>
-Automation systems, Discord bots,<br>
-and powerful Minecraft plugins.
-</p>
-
-<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="200"><br><br>
-<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="180">
+  <h2>WELCOME</h2>
+  <p>Welcome to my profile.</p>
+  <p>Bots • Plugins • Mods • Experiments</p>
 </div>
-
-<div class="banner">WELCOME</div>
-
-<div class="glass center">
-<img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile!;Bots+plugins+and+mods&center=true&size=18&color=ff0000">
-
-<p>
-Plugins, mods, bots, experiments and test projects.
-</p>
-
-🚀 Explore repos<br>
-🧩 Discover plugins<br>
-🤖 See bots
-</div>
-
-<div class="banner">PROFILE</div>
 
 <div class="glass">
-<pre>Username: 2s2ones
+<pre>
+Username: 2s2ones
 Role: Developer
-Languages: Java & Node.js
-Node.js: bots
-Java: plugins</pre>
+Languages: Java and Node.js
+Node.js Specialty: Minecraft & Discord bots
+Java Specialty: Minecraft server plugins
+</pre>
 </div>
 
-<div class="banner">TECH STACK</div>
-
-<div class="glass center badges">
-<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red">
-<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red">
-<img src="https://img.shields.io/badge/Discord-black?style=for-the-badge&logo=discord&logoColor=red">
-<img src="https://img.shields.io/badge/Minecraft-black?style=for-the-badge&logo=minecraft&logoColor=red">
-<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=red">
+<div class="glass center">
+<h2>TECH STACK</h2>
+<div class="badges">
+<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js">
+<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk">
+<img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord">
+<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux">
 </div>
-
-<div class="banner">ORGANIZATIONS</div>
+</div>
 
 <div class="glass">
-
-<div class="org">
-🧩 <b>2sPlugins</b><br>
-<a href="https://github.com/2sPlugins">Visit</a>
-</div>
-
-<div class="org">
-🤖 <b>2sBots</b><br>
-<a href="https://github.com/2sBots">Visit</a>
-</div>
-
-<div class="org">
-🛠 <b>2sDevelopments</b><br>
-<a href="https://github.com/2sDevelopments">Visit</a>
-</div>
-
-</div>
-
-<div class="banner">WHAT I BUILD</div>
-
-<div class="glass">
-<b>Bots</b>
+<h2>Organizations</h2>
 <ul>
-<li>Moderation</li>
-<li>AI bots</li>
+<li>2sPlugins — Minecraft Plugins</li>
+<li>2sBots — Discord & Minecraft Bots</li>
+<li>2sDevelopments — Main Studio</li>
+</ul>
+</div>
+
+<div class="glass">
+<h2>Projects</h2>
+
+<h3>Minecraft Bots</h3>
+<table>
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
+<tr><td>Chat Bot</td><td>Custom command bot</td></tr>
+<tr><td>Custom Bot</td><td>Server logic</td></tr>
+</table>
+
+<h3>Discord Bots</h3>
+<table>
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>Premium Bot</td><td>MEE6 style system</td></tr>
+<tr><td>AI Bot</td><td>Assistant</td></tr>
+<tr><td>MC Bridge</td><td>Realtime sync</td></tr>
+<tr><td>Test Bot</td><td>Testing</td></tr>
+</table>
+</div>
+
+<div class="glass">
+<h2>What I Build</h2>
+
+<h3>Bots</h3>
+<ul>
+<li>Discord moderation bots</li>
+<li>AI chat bots</li>
 <li>Premium systems</li>
-<li>Automation</li>
-<li>MC bridges</li>
+<li>Automation & logging</li>
+<li>Minecraft ↔ Discord bridges</li>
 </ul>
 
-<b>Minecraft Plugins</b>
+<h3>Minecraft Plugins</h3>
 <ul>
-<li>Bukkit & Paper</li>
-<li>Velocity</li>
-<li>QoL</li>
-<li>Anarchy</li>
-<li>Anti-cheat</li>
-<li>Custom</li>
+<li>Bukkit & Paper plugins</li>
+<li>Velocity plugins</li>
+<li>Quality of life plugins</li>
+<li>Anarchy essentials</li>
+<li>Anti-cheat helpers</li>
+<li>Custom plugins</li>
+<li>Random & test plugins</li>
 </ul>
 </div>
-
-<div class="banner">PROJECTS</div>
 
 <div class="glass">
-<b>Minecraft Bots</b>
+<h2>Debug Facts</h2>
 <ul>
-<li>Kit Bot</li>
-<li>Chat Bot</li>
-<li>Custom Bot</li>
-</ul>
-
-<b>Discord Bots</b>
-<ul>
-<li>Premium Bot</li>
-<li>AI Bot</li>
-<li>MC Bridge</li>
-<li>Custom Bot</li>
-<li>Test Bot</li>
+<li>Everyone hates Java because it's hard</li>
+<li>Coffee always needed</li>
+<li>If it works in production → panic</li>
+<li>Logs > emotions</li>
+<li>Sleep is optional</li>
 </ul>
 </div>
 
-<div class="banner">DEBUG FACTS</div>
+<div class="glass center">
+<h2>Mini Games</h2>
+<p>Play secret mini games</p>
+<button class="btn" onclick="location.href='game.html'">Open Game Menu</button>
+</div>
 
 <div class="glass">
+<h2>Coming Soon</h2>
 <ul>
-<li>Java is pain</li>
-<li>Coffee required</li>
-<li>Prod = panic</li>
-<li>Logs > feelings</li>
-<li>Sleep optional</li>
+<li>Public plugin releases</li>
+<li>Bot projects</li>
+<li>Open-source tools</li>
+<li>Community help channel</li>
+<li>More plugins</li>
 </ul>
 </div>
 
-<div class="banner">COMING SOON</div>
-
-<div class="glass">
-<ul>
-<li>Public plugins</li>
-<li>Bot releases</li>
-<li>QoL tools</li>
-<li>Open source</li>
-<li>Help channel</li>
-</ul>
-</div>
-
-<div class="minigame">
-<h3>🎮 Secret Mini Game</h3>
-<p>Mobile version</p>
-<button onclick="openGame()">Enter</button>
-</div>
-
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0000,30:550000,60:222222,100:000000&height=200&section=footer&text=THANKS&fontSize=24&fontColor=ffffff">
+<div class="glass center">
+<h2>THANKS FOR ENTERING MY WORLD</h2>
 </div>
 
 </div>
 
 <script>
-/* Rain (lighter for mobile) */
-const rain=document.getElementById("rain");
-const ctx=rain.getContext("2d");
+const canvas=document.getElementById("rain");
+const ctx=canvas.getContext("2d");
 
 function resize(){
-  rain.width=innerWidth;
-  rain.height=innerHeight;
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
 }
 resize();
 addEventListener("resize",resize);
 
-let drops=[];
-for(let i=0;i<220;i++){
-  drops.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:5+Math.random()*6,l:8+Math.random()*14});
-}
+let drops=Array.from({length:260},()=>({
+  x:Math.random()*innerWidth,
+  y:Math.random()*innerHeight,
+  l:10+Math.random()*20,
+  s:4+Math.random()*4
+}));
 
 function draw(){
-  ctx.clearRect(0,0,rain.width,rain.height);
-  ctx.strokeStyle="rgba(255,0,0,.7)";
-  for(const d of drops){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle="rgba(255,0,0,0.45)";
+  drops.forEach(d=>{
     ctx.beginPath();
     ctx.moveTo(d.x,d.y);
     ctx.lineTo(d.x,d.y+d.l);
     ctx.stroke();
     d.y+=d.s;
-    if(d.y>innerHeight){d.y=-20;d.x=Math.random()*innerWidth;}
-  }
+    if(d.y>canvas.height){
+      d.y=-20;
+      d.x=Math.random()*canvas.width;
+    }
+  });
   requestAnimationFrame(draw);
 }
 draw();
-
-function openGame(){
-  location.href="game-mobile.html";
-}
 </script>
 
 </body>
