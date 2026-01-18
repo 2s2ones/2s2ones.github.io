@@ -4,169 +4,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2s2ones – Developer</title>
+<title>2s2ones – Developer OS</title>
 
 <style>
-/* =====================
-   GLOBAL RESET
-===================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#050505;color:#e5e5e5;font-family:Segoe UI,Arial,sans-serif;overflow-x:hidden}
+
+#rain{position:fixed;top:0;left:0;z-index:0;pointer-events:none}
+
+.container{position:relative;z-index:2;max-width:1200px;margin:auto;padding:40px 16px 200px}
+
+.section{margin:40px 0;padding:28px;border-radius:14px;background:rgba(20,20,20,.85);
+border:1px solid rgba(255,0,60,.15);box-shadow:0 0 20px rgba(255,0,60,.05);
+backdrop-filter:blur(8px);transition:.3s}
+
+.section:hover{transform:translateY(-4px);box-shadow:0 0 30px rgba(255,0,60,.18)}
+
+h1,h2,h3{color:#ff2244;margin-bottom:10px}
+p{line-height:1.6;opacity:.9}
+
+.hero{text-align:center;padding:80px 20px 60px}
+.hero h1{font-size:42px;letter-spacing:2px}
+
+.subtitle{color:#aaa;margin-top:12px;font-size:18px}
+
+.glitch{animation:glitch 3s infinite}
+@keyframes glitch{
+0%{text-shadow:0 0 2px red}
+20%{text-shadow:-2px 0 red}
+40%{text-shadow:2px 0 #ff0055}
+60%{text-shadow:-1px 0 #ff0033}
+80%{text-shadow:1px 0 red}
+100%{text-shadow:0 0 2px red}
 }
 
-html, body {
-  background: #050505;
-  color: #e5e5e5;
-  font-family: "Segoe UI", Arial, sans-serif;
-  overflow-x: hidden;
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+
+.card{background:rgba(15,15,15,.9);border:1px solid rgba(255,0,60,.2);
+padding:16px;border-radius:12px;transition:.3s}
+
+.card:hover{transform:scale(1.02)}
+
+.footer{text-align:center;margin-top:120px;color:#666}
+
+@media(max-width:768px){
+.hero h1{font-size:30px}
+.section{padding:20px}
 }
 
-/* =====================
-   RED RAIN CANVAS
-===================== */
-#rain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  pointer-events: none;
-}
+.cursor{position:fixed;width:14px;height:14px;border-radius:50%;
+background:rgba(255,0,60,.6);pointer-events:none;z-index:999;
+transform:translate(-50%,-50%);mix-blend-mode:screen}
 
-/* =====================
-   LAYOUT
-===================== */
-.container {
-  position: relative;
-  z-index: 2;
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px 16px 200px;
-}
-
-.section {
-  margin: 40px 0;
-  padding: 28px;
-  border-radius: 14px;
-  background: rgba(20, 20, 20, 0.85);
-  border: 1px solid rgba(255, 0, 60, 0.15);
-  box-shadow: 0 0 20px rgba(255,0,60,0.05);
-  backdrop-filter: blur(8px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.section:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 30px rgba(255,0,60,0.18);
-}
-
-h1, h2, h3 {
-  color: #ff2244;
-  margin-bottom: 10px;
-}
-
-p {
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-/* =====================
-   HERO
-===================== */
-.hero {
-  text-align: center;
-  padding: 80px 20px 60px;
-}
-
-.hero h1 {
-  font-size: 42px;
-  letter-spacing: 2px;
-}
-
-.subtitle {
-  color: #aaa;
-  margin-top: 12px;
-  font-size: 18px;
-}
-
-.glitch {
-  position: relative;
-  color: #ff2244;
-  animation: glitch 3s infinite;
-}
-
-@keyframes glitch {
-  0% { text-shadow: 0 0 2px red; }
-  20% { text-shadow: -2px 0 red; }
-  40% { text-shadow: 2px 0 #ff0055; }
-  60% { text-shadow: -1px 0 #ff0033; }
-  80% { text-shadow: 1px 0 red; }
-  100% { text-shadow: 0 0 2px red; }
-}
-
-/* =====================
-   GRID
-===================== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-/* =====================
-   SMALL INFO CARDS
-===================== */
-.card {
-  background: rgba(15,15,15,0.9);
-  border: 1px solid rgba(255,0,60,0.2);
-  padding: 16px;
-  border-radius: 12px;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.02);
-}
-
-/* =====================
-   FOOTER PLACEHOLDER
-===================== */
-.footer {
-  text-align: center;
-  margin-top: 120px;
-  color: #666;
-}
-
-/* =====================
-   MOBILE
-===================== */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 30px;
-  }
-  .section {
-    padding: 20px;
-  }
-}
-
-/* =====================
-   CURSOR GLOW
-===================== */
-.cursor {
-  position: fixed;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: rgba(255,0,60,0.6);
-  pointer-events: none;
-  z-index: 999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: screen;
-}
+/* Games */
+canvas.game{background:#000;border:1px solid #ff2244;display:block;margin:auto}
+.game-title{text-align:center;color:#ff2244;margin-bottom:10px}
 </style>
 </head>
-
 <body>
 
 <canvas id="rain"></canvas>
@@ -174,110 +68,27 @@ p {
 
 <div class="container">
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1 class="glitch">2s2ones</h1>
-    <div class="subtitle">Node.js & Java Developer • Bots • Minecraft Plugins</div>
-  </div>
+<div class="hero">
+<h1 class="glitch">2s2ones</h1>
+<div class="subtitle">Node.js & Java Developer • Bots • Minecraft Plugins</div>
+</div>
 
-  <!-- SECTION 1 -->
-  <div class="section">
-    <h2>Welcome</h2>
-    <p>Welcome to my developer space. This website is a living system – real-time data, projects, tools, experiments and hidden features.</p>
-  </div>
+<div class="section"><h2>Welcome</h2><p>Developer OS interface loaded.</p></div>
+<div class="section"><h2>About Me</h2><p>I build automation systems, Discord bots, and Minecraft plugins.</p></div>
 
-  <!-- SECTION 2 -->
-  <div class="section">
-    <h2>About Me</h2>
-    <p>I build automation systems, Discord bots, and Minecraft plugins that power communities and servers.</p>
-  </div>
+<div class="section"><h2>Main Focus</h2>
+<div class="grid">
+<div class="card">Node.js Systems</div>
+<div class="card">Java Plugins</div>
+<div class="card">Discord Automation</div>
+<div class="card">Minecraft Networks</div>
+</div></div>
 
-  <!-- SECTION 3 -->
-  <div class="section">
-    <h2>Main Focus</h2>
-    <div class="grid">
-      <div class="card">Node.js Systems</div>
-      <div class="card">Java Plugins</div>
-      <div class="card">Discord Automation</div>
-      <div class="card">Minecraft Networks</div>
-    </div>
-  </div>
+<div class="section"><h2>Languages</h2><p>Java • JavaScript • SQL • Bash</p></div>
+<div class="section"><h2>Tools</h2><p>Linux, Git, Docker, IntelliJ, VS Code</p></div>
+<div class="section"><h2>Organizations</h2><p>2sPlugins • 2sBots • 2sDevelopments</p></div>
 
-  <!-- SECTION 4 -->
-  <div class="section">
-    <h2>Languages</h2>
-    <p>Java • JavaScript • SQL • Bash</p>
-  </div>
-
-  <!-- SECTION 5 -->
-  <div class="section">
-    <h2>Tools</h2>
-    <p>Linux, Git, Docker, IntelliJ, VS Code, PaperMC, Velocity</p>
-  </div>
-
-  <!-- SECTION 6 -->
-  <div class="section">
-    <h2>Organizations</h2>
-    <p>2sPlugins • 2sBots • 2sDevelopments</p>
-  </div>
-
-  <!-- SECTION 7 -->
-  <div class="section">
-    <h2>Philosophy</h2>
-    <p>Logs before emotions. Automation before repetition. Stability before features.</p>
-  </div>
-
-  <!-- SECTION 8 -->
-  <div class="section">
-    <h2>Current Status</h2>
-    <p>Building systems. Improving performance. Breaking things to rebuild them better.</p>
-  </div>
-
-  <!-- SECTION 9 -->
-  <div class="section">
-    <h2>Bot Systems</h2>
-    <p>Moderation, AI chat, economy, sync bridges, analytics.</p>
-  </div>
-
-  <!-- SECTION 10 -->
-  <div class="section">
-    <h2>Minecraft Plugins</h2>
-    <p>QoL, anti-cheat helpers, server tools, custom mechanics.</p>
-  </div>
-
-  <!-- SECTION 11 -->
-  <div class="section">
-    <h2>Development Style</h2>
-    <p>Clean code. Modular systems. Fail-safe logic.</p>
-  </div>
-
-  <!-- SECTION 12 -->
-  <div class="section">
-    <h2>Testing</h2>
-    <p>Private builds. Stress tests. Real server environments.</p>
-  </div>
-
-  <!-- SECTION 13 -->
-  <div class="section">
-    <h2>Automation</h2>
-    <p>CI scripts, auto deployment, monitoring bots.</p>
-  </div>
-
-  <!-- SECTION 14 -->
-  <div class="section">
-    <h2>Security</h2>
-    <p>Permission layers, sandboxing, logging, abuse prevention.</p>
-  </div>
-
-  <!-- SECTION 15 -->
-  <div class="section">
-    <h2>Fun Facts</h2>
-    <p>Coffee required. Java feared. Bugs respected.</p>
-  </div>
-
-<!-- REALTIME DASHBOARD -->
-<div class="section">
-<h2>Live System Status</h2>
+<div class="section"><h2>Live System Status</h2>
 <div class="grid">
 <div class="card">Time: <span id="time"></span></div>
 <div class="card">Session: <span id="session"></span>s</div>
@@ -285,201 +96,148 @@ p {
 <div class="card">Resolution: <span id="res"></span></div>
 <div class="card">Battery: <span id="battery"></span></div>
 <div class="card">Network: <span id="network"></span></div>
-</div>
-</div>
+</div></div>
 
-<!-- EXPERIENCE -->
-<div class="section"><h2>Experience</h2><p>Years of building production bots and plugins.</p></div>
-<div class="section"><h2>Infrastructure</h2><p>Self-hosted systems, Linux servers, monitoring.</p></div>
-<div class="section"><h2>Databases</h2><p>MongoDB, MySQL, Redis.</p></div>
-<div class="section"><h2>Networking</h2><p>Packet analysis, proxy chains, velocity setups.</p></div>
-<div class="section"><h2>APIs</h2><p>REST systems, webhooks, rate-limiting.</p></div>
-<div class="section"><h2>Monitoring</h2><p>Metrics, alerts, crash reports.</p></div>
-<div class="section"><h2>Scaling</h2><p>Load balancing, shard systems.</p></div>
-<div class="section"><h2>Optimization</h2><p>Memory tuning, async processing.</p></div>
-<div class="section"><h2>Error Handling</h2><p>Fail-safe logic layers.</p></div>
-<div class="section"><h2>Permissions</h2><p>Role-based security.</p></div>
-<div class="section"><h2>Bot Economy</h2><p>Virtual currency engines.</p></div>
-<div class="section"><h2>AI Bots</h2><p>Context aware chat systems.</p></div>
-<div class="section"><h2>MC Bridges</h2><p>Discord ↔ Minecraft sync.</p></div>
-<div class="section"><h2>Custom Engines</h2><p>Event-driven systems.</p></div>
-<div class="section"><h2>Code Quality</h2><p>Linting, testing, modular design.</p></div>
-<div class="section"><h2>Release Pipeline</h2><p>CI/CD automation.</p></div>
-<div class="section"><h2>Security Logs</h2><p>Audit tracking.</p></div>
-<div class="section"><h2>Admin Panels</h2><p>Custom dashboards.</p></div>
-<div class="section"><h2>Memory Profiling</h2><p>Heap analysis.</p></div>
-<div class="section"><h2>Thread Control</h2><p>Async pools.</p></div>
-<div class="section"><h2>Latency</h2><p>Ping monitoring.</p></div>
-<div class="section"><h2>Packet Systems</h2><p>Protocol analysis.</p></div>
-<div class="section"><h2>Crash Recovery</h2><p>Auto restart logic.</p></div>
-<div class="section"><h2>Anti-Abuse</h2><p>Flood protection.</p></div>
-<div class="section"><h2>Command Engines</h2><p>Dynamic parsers.</p></div>
-<div class="section"><h2>Permission Sync</h2><p>Cross-platform roles.</p></div>
-<div class="section"><h2>Dev Environments</h2><p>Docker builds.</p></div>
-<div class="section"><h2>Remote Console</h2><p>Live commands.</p></div>
-<div class="section"><h2>Bot Clustering</h2><p>Shard management.</p></div>
-<div class="section"><h2>Plugin APIs</h2><p>Extensible systems.</p></div>
-<div class="section"><h2>Custom Launchers</h2><p>Auto update.</p></div>
-<div class="section"><h2>Encryption</h2><p>Token protection.</p></div>
-<div class="section"><h2>Webhook Systems</h2><p>Event broadcasting.</p></div>
-<div class="section"><h2>Telemetry</h2><p>Usage data.</p></div>
-<div class="section"><h2>Sandboxing</h2><p>Isolation layers.</p></div>
-<div class="section"><h2>Stress Testing</h2><p>Load generators.</p></div>
-<div class="section"><h2>Automation Scripts</h2><p>Bash + Node.js tools.</p></div>
+<!-- Auto generate many info sections -->
+<script>
+for(let i=1;i<=40;i++){
+document.write(`<div class="section"><h2>System Module ${i}</h2><p>Information block ${i}. Runtime operational.</p></div>`);
+}
+</script>
 
-<!-- PHONE FEATURES -->
 <div class="section">
 <h2>Mobile Device Mode</h2>
 <p id="mobileStatus">Detecting...</p>
 </div>
 
-<!-- SYSTEM MESSAGE -->
+<!-- Games -->
 <div class="section">
-<h2>System Message</h2>
-<p>End of information layer. Mini-games will load below in Part 3.</p>
+<h2 class="game-title">Snake Game</h2>
+<canvas id="snake" class="game" width="300" height="300"></canvas>
+<p style="text-align:center">Tap / Arrow keys</p>
 </div>
 
-  <div class="footer">
-    More systems loading soon...
-  </div>
+<div class="section">
+<h2 class="game-title">Runner (Geometry-Dash style)</h2>
+<canvas id="runner" class="game" width="300" height="150"></canvas>
+<p style="text-align:center">Tap / Space to jump</p>
+</div>
 
+<div class="footer">System end. Thanks for visiting.</div>
 </div>
 
 <script>
-/* =====================
-   CURSOR
-===================== */
-const cursor = document.getElementById("cursor");
-document.addEventListener("mousemove", e => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
+/* Device */
+const isMobile=/Mobi|Android/i.test(navigator.userAgent);
+document.getElementById("mobileStatus").innerText=isMobile?"Mobile features enabled":"Desktop mode";
+
+/* Cursor */
+if(!isMobile){
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
 });
+}else document.getElementById("cursor").style.display="none";
 
-/* =====================
-   RED RAIN EFFECT
-===================== */
-const canvas = document.getElementById("rain");
-const ctx = canvas.getContext("2d");
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+/* Rain */
+const canvas=document.getElementById("rain"),ctx=canvas.getContext("2d");
+const chars="01#@$%&*";const fontSize=14;let columns,drops;
+function resize(){
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+columns=Math.floor(canvas.width/fontSize);
+drops=new Array(columns).fill(1);
 }
-resize();
-window.addEventListener("resize", resize);
+resize();window.addEventListener("resize",resize);
+function drawRain(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#ff0033";
+ctx.font=fontSize+"px monospace";
+for(let i=0;i<drops.length;i++){
+const t=chars[Math.random()*chars.length|0];
+ctx.fillText(t,i*fontSize,drops[i]*fontSize);
+if(drops[i]*fontSize>canvas.height&&Math.random()>0.97)drops[i]=0;
+drops[i]++;
+}}
+setInterval(drawRain,50);
 
-const chars = "01#@$%&*";
-const fontSize = 14;
-let columns = Math.floor(canvas.width / fontSize);
-let drops = new Array(columns).fill(1);
+/* Stats */
+let start=Date.now();
+setInterval(()=>{
+time.innerText=new Date().toLocaleTimeString();
+session.innerText=Math.floor((Date.now()-start)/1000);
+res.innerText=innerWidth+"x"+innerHeight;
+},500);
+device.innerText=isMobile?"Mobile":"Desktop";
+network.innerText=navigator.connection?navigator.connection.effectiveType:"Unknown";
+if(navigator.getBattery)navigator.getBattery().then(b=>{
+function u(){battery.innerText=Math.round(b.level*100)+"%"}u();b.onlevelchange=u;
+}); else battery.innerText="N/A";
 
-function drawRain() {
-  ctx.fillStyle = "rgba(0,0,0,0.05)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  ctx.fillStyle = "#ff0033";
-  ctx.font = fontSize + "px monospace";
-
-  for(let i=0;i<drops.length;i++){
-    const text = chars[Math.floor(Math.random()*chars.length)];
-    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-
-    if(drops[i]*fontSize > canvas.height && Math.random() > 0.97){
-      drops[i] = 0;
-    }
-    drops[i]++;
-  }
-}
-
-setInterval(drawRain, 50);
-
-/* =====================
-   REAL TIME SYSTEMS
-===================== */
-
-let startTime = Date.now();
-
-setInterval(() => {
-  document.getElementById("time").innerText = new Date().toLocaleTimeString();
-  document.getElementById("session").innerText = Math.floor((Date.now() - startTime)/1000);
-  document.getElementById("res").innerText = window.innerWidth + "x" + window.innerHeight;
-}, 500);
-
-document.getElementById("device").innerText =
-  /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
-
-document.getElementById("network").innerText =
-  navigator.connection ? navigator.connection.effectiveType : "Unknown";
-
-/* Battery */
-if(navigator.getBattery){
-  navigator.getBattery().then(b => {
-    function update(){
-      document.getElementById("battery").innerText = Math.round(b.level*100) + "%";
-    }
-    update();
-    b.addEventListener("levelchange", update);
-  });
-}else{
-  document.getElementById("battery").innerText = "N/A";
-}
-
-/* =====================
-   PHONE FEATURES
-===================== */
-
-const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-document.getElementById("mobileStatus").innerText = isMobile ? "Mobile features enabled" : "Desktop mode";
-
-if(isMobile && window.DeviceOrientationEvent){
-  window.addEventListener("deviceorientation", e=>{
-    const tiltX = e.gamma/10;
-    const tiltY = e.beta/10;
-    document.querySelector(".container").style.transform =
-      `rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
-  });
-}
-
-/* =====================
-   SCROLL ANIMATION
-===================== */
-
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.style.opacity = 1;
-      e.target.style.transform = "translateY(0)";
-    }
-  });
-},{threshold:0.2});
-
-document.querySelectorAll(".section").forEach(sec=>{
-  sec.style.opacity = 0;
-  sec.style.transform = "translateY(40px)";
-  observer.observe(sec);
+/* Phone tilt */
+if(isMobile&&window.DeviceOrientationEvent){
+addEventListener("deviceorientation",e=>{
+container.style.transform=`translate(${e.gamma/10}px,${e.beta/10}px)`;
 });
+}
 
-/* =====================
-   RANDOM GLITCH IMPROVE
-===================== */
-
+/* Title glitch */
 function glitchTitle(){
-  const hero = document.querySelector(".hero h1");
-  hero.style.transform = "translateX(-2px)";
-  setTimeout(()=>hero.style.transform="translateX(2px)",80);
-  setTimeout(()=>hero.style.transform="translateX(0)",160);
+const h=document.querySelector(".hero h1");
+h.style.transform="translateX(-2px)";
+setTimeout(()=>h.style.transform="translateX(2px)",80);
+setTimeout(()=>h.style.transform="translateX(0)",160);
 }
+setInterval(glitchTitle,5000+Math.random()*5000);
 
-setInterval(glitchTitle, Math.random()*6000+4000);
+/* Snake */
+const s=document.getElementById("snake"),sctx=s.getContext("2d");
+let snake=[[5,5]],dir=[1,0],food=[10,10];
+function drawSnake(){
+sctx.fillStyle="#000";sctx.fillRect(0,0,300,300);
+sctx.fillStyle="#ff2244";
+snake.forEach(p=>sctx.fillRect(p[0]*15,p[1]*15,14,14));
+sctx.fillStyle="#0f0";
+sctx.fillRect(food[0]*15,food[1]*15,14,14);
+}
+function moveSnake(){
+const head=[snake[0][0]+dir[0],snake[0][1]+dir[1]];
+if(head[0]<0||head[1]<0||head[0]>19||head[1]>19||snake.some(p=>p[0]==head[0]&&p[1]==head[1])){
+snake=[[5,5]];dir=[1,0];return;
+}
+snake.unshift(head);
+if(head[0]==food[0]&&head[1]==food[1])food=[Math.random()*20|0,Math.random()*20|0];
+else snake.pop();
+drawSnake();
+}
+setInterval(moveSnake,150);
+addEventListener("keydown",e=>{
+if(e.key=="ArrowUp")dir=[0,-1];
+if(e.key=="ArrowDown")dir=[0,1];
+if(e.key=="ArrowLeft")dir=[-1,0];
+if(e.key=="ArrowRight")dir=[1,0];
+});
 
-/* =====================
-   RANDOM GLITCH
-===================== */
-setInterval(() => {
-  document.body.classList.toggle("glitch");
-  setTimeout(()=>document.body.classList.toggle("glitch"), 200);
-}, Math.random()*6000 + 4000);
-
+/* Runner */
+const r=document.getElementById("runner"),rctx=r.getContext("2d");
+let playerY=110,vel=0,obsX=300;
+function drawRunner(){
+rctx.fillStyle="#000";rctx.fillRect(0,0,300,150);
+rctx.fillStyle="#ff2244";rctx.fillRect(30,playerY,20,20);
+rctx.fillStyle="#fff";rctx.fillRect(obsX,120,20,30);
+}
+function updateRunner(){
+vel+=1;playerY+=vel;
+if(playerY>110){playerY=110;vel=0}
+obsX-=5;if(obsX<0)obsX=300;
+if(obsX<50&&obsX>30&&playerY>90)obsX=300;
+drawRunner();
+}
+setInterval(updateRunner,50);
+addEventListener("keydown",e=>{if(e.code=="Space"&&playerY==110)vel=-15});
+r.addEventListener("touchstart",()=>{if(playerY==110)vel=-15});
 </script>
 
 </body>
