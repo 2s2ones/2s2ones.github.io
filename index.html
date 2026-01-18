@@ -7,13 +7,15 @@
 
 <style>
 *{box-sizing:border-box}
+html,body{margin:0;padding:0}
+
 body{
-  margin:0;
   font-family:Arial,Helvetica,sans-serif;
   color:white;
-  background:linear-gradient(270deg,#000,#3a0000,#000);
+  background:linear-gradient(270deg,#000000,#220000,#000000);
   background-size:400% 400%;
-  animation:bg 15s ease infinite;
+  animation:bg 18s ease infinite;
+  overflow-x:hidden;
 }
 
 @keyframes bg{
@@ -31,7 +33,7 @@ canvas{
   pointer-events:none;
 }
 
-#rain{z-index:-3}
+#rain{z-index:-1}
 
 .container{
   max-width:1200px;
@@ -41,28 +43,48 @@ canvas{
 
 .center{text-align:center}
 
-.glass{
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:15px;
+.banner{
+  background:linear-gradient(90deg,#000,#550000,#000);
+  border:1px solid rgba(255,0,0,0.4);
+  border-radius:18px;
   padding:20px;
   margin:25px 0;
+  box-shadow:0 0 25px rgba(255,0,0,0.25);
+}
+
+.glass{
+  background:rgba(255,255,255,0.07);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:18px;
+  padding:22px;
+  margin:25px 0;
+  box-shadow:0 0 25px rgba(0,0,0,0.6);
 }
 
 table{width:100%}
 td{vertical-align:top}
 
 pre{
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.5);
   padding:15px;
-  border-radius:10px;
+  border-radius:12px;
   overflow:auto;
+  border:1px solid rgba(255,0,0,0.3);
 }
 
-a{color:#00c6ff}
-hr{border:1px solid rgba(255,255,255,0.2)}
+a{color:#ff4b4b;text-decoration:none}
+a:hover{text-decoration:underline}
+
+hr{
+  border:0;
+  height:1px;
+  background:linear-gradient(to right,transparent,#ff0000,transparent);
+  margin:40px 0;
+}
+
+.badge img{margin:4px}
 </style>
 </head>
 <body>
@@ -71,12 +93,12 @@ hr{border:1px solid rgba(255,255,255,0.2)}
 
 <div class="container">
 
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=220&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
+<div class="center banner">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=200&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
 </div>
 
 <div class="glass">
-<table cellspacing="0" cellpadding="0">
+<table>
 <tr>
 <td width="55%">
 
@@ -92,21 +114,19 @@ and powerful Minecraft plugins that keep servers alive.
 
 </td>
 <td width="45%" class="center">
-
-<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="260"><br><br>
-<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="230">
-
+<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="240"><br><br>
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="220">
 </td>
 </tr>
 </table>
 </div>
 
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=WELCOME&fontSize=24&fontColor=ffffff">
+<div class="center banner">
+<h2>WELCOME</h2>
 </div>
 
 <div class="glass center">
-<img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile%21;Check+out+my+projects;Bots+plugins+and+mods&center=true&size=22&color=000000&pause=1200">
+<img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile!;Check+out+my+projects;Bots+plugins+and+mods&center=true&size=22&color=ff4444&pause=1200">
 
 <p>
 welcome to the 2s2ones profile, here you can find a lot of stuff like plugins, mods, bots and more<br>
@@ -118,9 +138,7 @@ you can even see test stuff and experimets only
 </p>
 </div>
 
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=PROFILE&fontSize=24&fontColor=ffffff">
-</div>
+<div class="center banner"><h2>PROFILE</h2></div>
 
 <div class="glass">
 <pre>Username: 2s2ones
@@ -132,83 +150,75 @@ java Specialty: making minecraft server plugins</pre>
 
 <hr>
 
-<h1 class="center">🎉 TECH STACK</h1>
+<div class="center banner"><h2>TECH STACK</h2></div>
 
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=70&section=header&text=TECH%20STACK&fontSize=24&fontColor=ffffff">
+<div class="glass center badge">
+<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red"/>
+<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red"/>
+<img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord&logoColor=red"/>
+<img src="https://img.shields.io/badge/Git-black?style=for-the-badge&logo=git&logoColor=red"/>
+<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=red"/>
 </div>
 
-<div class="glass center">
-<img src="https://img.shields.io/badge/Node.js-6a00ff?style=for-the-badge&logo=node.js&logoColor=white"/>
-<img src="https://img.shields.io/badge/Java-ff0055?style=for-the-badge&logo=openjdk&logoColor=white"/>
-<img src="https://img.shields.io/badge/Discord.js-00c6ff?style=for-the-badge&logo=discord&logoColor=white"/>
-<img src="https://img.shields.io/badge/Bukkit, Paper and Velocity-6a00ff?style=for-the-badge&logo=minecraft&logoColor=white"/>
-<img src="https://img.shields.io/badge/Git-ff0055?style=for-the-badge&logo=git&logoColor=white"/>
-<img src="https://img.shields.io/badge/Linux-00c6ff?style=for-the-badge&logo=linux&logoColor=white"/>
-</div>
-
-<div class="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,30:ff0055,60:00c6ff,100:000000&height=260&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=30&fontColor=ffffff&animation=twinkling">
+<div class="center banner">
+<h2>THANKS FOR ENTERING MY WORLD</h2>
 </div>
 
 </div>
 
 <script>
-/* ===== MOBILE DETECTION & REDIRECT ===== */
+/* ===== SAFARI-SAFE MOBILE DETECTION ===== */
+function isRealMobile(){
+  const ua=navigator.userAgent.toLowerCase();
+  const isMobileUA = /android|iphone|ipod|opera mini|iemobile/.test(ua);
+  const smallScreen = Math.min(window.innerWidth,window.innerHeight) <= 768;
+  return isMobileUA && smallScreen;
+}
 
 function redirectMobile(){
-  const isMobile =
-    /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent) ||
-    window.innerWidth < 800;
-
-  if(isMobile){
-    window.location.href = "index-mobile.html";
+  if(isRealMobile() && !location.href.includes("index-mobile.html")){
+    location.replace("index-mobile.html");
   }
 }
 
 redirectMobile();
-
-// extra: detect phone movement / orientation
-window.addEventListener("deviceorientation", function(){
-  redirectMobile();
-},{once:true});
-
+window.addEventListener("resize",redirectMobile);
+window.addEventListener("orientationchange",redirectMobile);
 
 /* ===== RAIN EFFECT ===== */
-
 const rain=document.getElementById("rain");
 const ctx=rain.getContext("2d");
 
-function resize(){
+function resizeCanvas(){
   rain.width=window.innerWidth;
   rain.height=window.innerHeight;
 }
-resize();
-window.onresize=resize;
+resizeCanvas();
+window.addEventListener("resize",resizeCanvas);
 
 let drops=[];
-for(let i=0;i<500;i++){
+for(let i=0;i<600;i++){
   drops.push({
     x:Math.random()*rain.width,
     y:Math.random()*rain.height,
-    s:8+Math.random()*12,
-    l:10+Math.random()*20
+    speed:6+Math.random()*12,
+    len:12+Math.random()*25
   });
 }
 
 function drawRain(){
   ctx.clearRect(0,0,rain.width,rain.height);
-  ctx.strokeStyle="rgba(255,80,80,0.85)";
+  ctx.strokeStyle="rgba(255,0,0,0.85)";
   ctx.lineWidth=1;
 
-  for(let d of drops){
+  for(const d of drops){
     ctx.beginPath();
     ctx.moveTo(d.x,d.y);
-    ctx.lineTo(d.x,d.y+d.l);
+    ctx.lineTo(d.x,d.y+d.len);
     ctx.stroke();
-    d.y+=d.s;
+    d.y+=d.speed;
     if(d.y>rain.height){
-      d.y=-20;
+      d.y=-30;
       d.x=Math.random()*rain.width;
     }
   }
