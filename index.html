@@ -1,335 +1,342 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>2s2ones – Cyber Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2s2ones – Developer</title>
 
 <style>
-:root{
---bg:#050505;
---red:#ff1a1a;
---glass:rgba(15,15,15,.72);
---border:rgba(255,0,0,.3);
---text:#e6e6e6;
+/* =====================
+   GLOBAL RESET
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family:system-ui,Segoe UI,Arial;
-background:#050505;
-color:var(--text);
-overflow-x:hidden;
+html, body {
+  background: #050505;
+  color: #e5e5e5;
+  font-family: "Segoe UI", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-/* matrix rain */
-canvas#rain{
-position:fixed;
-inset:0;
-z-index:-3;
+/* =====================
+   RED RAIN CANVAS
+===================== */
+#rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* glow */
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at 20% 20%,#300000,transparent 40%),
-radial-gradient(circle at 80% 70%,#120000,transparent 45%);
-z-index:-2;
+/* =====================
+   LAYOUT
+===================== */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 16px 200px;
 }
 
-/* 3D cubes */
-.scene{
-position:fixed;
-inset:0;
-perspective:900px;
-z-index:-1;
-pointer-events:none;
-}
-.cube{
-position:absolute;
-width:80px;height:80px;
-transform-style:preserve-3d;
-animation:spin 20s linear infinite;
-}
-.cube div{
-position:absolute;
-width:80px;height:80px;
-background:rgba(255,0,0,.15);
-border:1px solid rgba(255,0,0,.4);
+.section {
+  margin: 40px 0;
+  padding: 28px;
+  border-radius: 14px;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 0, 60, 0.15);
+  box-shadow: 0 0 20px rgba(255,0,60,0.05);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cube div:nth-child(1){transform:translateZ(40px)}
-.cube div:nth-child(2){transform:rotateY(90deg) translateZ(40px)}
-.cube div:nth-child(3){transform:rotateY(180deg) translateZ(40px)}
-.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(40px)}
-.cube div:nth-child(5){transform:rotateX(90deg) translateZ(40px)}
-.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(40px)}
-
-@keyframes spin{
-from{transform:rotateX(0) rotateY(0)}
-to{transform:rotateX(360deg) rotateY(360deg)}
+.section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(255,0,60,0.18);
 }
 
-/* layout */
-.banner{width:100%;max-height:240px;object-fit:cover}
-section{max-width:1200px;margin:auto;padding:90px 20px}
-h1,h2,h3{color:var(--red)}
-.center{text-align:center}
-
-.flex{display:flex;gap:40px;flex-wrap:wrap;align-items:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
-
-.glass{
-background:var(--glass);
-backdrop-filter:blur(10px);
-border:1px solid var(--border);
-border-radius:20px;
-padding:25px;
-box-shadow:0 0 40px rgba(255,0,0,.15);
-transition:.35s;
-}
-.glass:hover{
-transform:translateY(-8px) scale(1.02);
-box-shadow:0 0 70px rgba(255,0,0,.45);
+h1, h2, h3 {
+  color: #ff2244;
+  margin-bottom: 10px;
 }
 
-.reveal{opacity:0;transform:translateY(60px) scale(.96);transition:1s}
-.reveal.active{opacity:1;transform:none}
-
-.badge{
-display:inline-block;
-border:1px solid var(--red);
-border-radius:999px;
-padding:5px 12px;
-margin:4px;
-font-size:13px;
-background:#140000;
+p {
+  line-height: 1.6;
+  opacity: 0.9;
 }
 
-.status-online{color:#00ff88}
-.status-dev{color:#ffaa00}
-
-#gdGame{
-position:fixed;
-inset:0;
-background:#000;
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
-flex-direction:column;
-color:#0f0;
+/* =====================
+   HERO
+===================== */
+.hero {
+  text-align: center;
+  padding: 80px 20px 60px;
 }
 
-canvas#gd{border:2px solid #0f0}
+.hero h1 {
+  font-size: 42px;
+  letter-spacing: 2px;
+}
 
-@media(max-width:768px){
-.flex{flex-direction:column}
-.banner{max-height:150px}
-section{padding:60px 15px}
+.subtitle {
+  color: #aaa;
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.glitch {
+  position: relative;
+  color: #ff2244;
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 0 0 2px red; }
+  20% { text-shadow: -2px 0 red; }
+  40% { text-shadow: 2px 0 #ff0055; }
+  60% { text-shadow: -1px 0 #ff0033; }
+  80% { text-shadow: 1px 0 red; }
+  100% { text-shadow: 0 0 2px red; }
+}
+
+/* =====================
+   GRID
+===================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* =====================
+   SMALL INFO CARDS
+===================== */
+.card {
+  background: rgba(15,15,15,0.9);
+  border: 1px solid rgba(255,0,60,0.2);
+  padding: 16px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* =====================
+   FOOTER PLACEHOLDER
+===================== */
+.footer {
+  text-align: center;
+  margin-top: 120px;
+  color: #666;
+}
+
+/* =====================
+   MOBILE
+===================== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 30px;
+  }
+  .section {
+    padding: 20px;
+  }
+}
+
+/* =====================
+   CURSOR GLOW
+===================== */
+.cursor {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255,0,60,0.6);
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
 }
 </style>
 </head>
+
 <body>
 
 <canvas id="rain"></canvas>
+<div class="cursor" id="cursor"></div>
 
-<div class="scene" id="scene">
-<div class="cube" style="top:20%;left:10%"><div></div><div></div><div></div><div></div><div></div><div></div></div>
-<div class="cube" style="top:70%;left:75%"><div></div><div></div><div></div><div></div><div></div><div></div></div>
-</div>
+<div class="container">
 
-<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,50:660000,100:000000&height=240&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff">
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="glitch">2s2ones</h1>
+    <div class="subtitle">Node.js & Java Developer • Bots • Minecraft Plugins</div>
+  </div>
 
-<section class="flex reveal">
-<div class="glass">
-<h1>👋 Hi, I'm 2s2ones</h1>
-<b>Node.js & Java Developer</b><br>
-🤖 Bot Builder • 🧩 Minecraft Plugin Engineer
+  <!-- SECTION 1 -->
+  <div class="section">
+    <h2>Welcome</h2>
+    <p>Welcome to my developer space. This website is a living system – real-time data, projects, tools, experiments and hidden features.</p>
+  </div>
 
-<p>Status: <span class="status-dev" id="statusText">Detecting device…</span></p>
-</div>
+  <!-- SECTION 2 -->
+  <div class="section">
+    <h2>About Me</h2>
+    <p>I build automation systems, Discord bots, and Minecraft plugins that power communities and servers.</p>
+  </div>
 
-<div class="glass center">
-<p>Welcome to my cyber space.</p>
-<p>Projects • Bots • Plugins • Systems • Experiments</p>
-</div>
-</section>
+  <!-- SECTION 3 -->
+  <div class="section">
+    <h2>Main Focus</h2>
+    <div class="grid">
+      <div class="card">Node.js Systems</div>
+      <div class="card">Java Plugins</div>
+      <div class="card">Discord Automation</div>
+      <div class="card">Minecraft Networks</div>
+    </div>
+  </div>
 
-<section class="reveal"><div class="glass"><h2>Welcome</h2>
-<p>This website is my digital lab: automation systems, server engineering, bots, AI experiments, performance research and game integrations.</p>
-</div></section>
+  <!-- SECTION 4 -->
+  <div class="section">
+    <h2>Languages</h2>
+    <p>Java • JavaScript • SQL • Bash</p>
+  </div>
 
-<section class="reveal"><h2>Developer Stats</h2>
-<div class="grid">
-<div class="glass">Projects: 47+</div>
-<div class="glass">Bots: 23</div>
-<div class="glass">Plugins: 31</div>
-<div class="glass">Servers: 18</div>
-<div class="glass">LOC: 400k+</div>
-<div class="glass">Coffee: ∞</div>
-</div></section>
+  <!-- SECTION 5 -->
+  <div class="section">
+    <h2>Tools</h2>
+    <p>Linux, Git, Docker, IntelliJ, VS Code, PaperMC, Velocity</p>
+  </div>
 
-<section class="reveal"><h2>Systems I Build</h2>
-<div class="grid">
-<div class="glass">Anti-cheat engines</div>
-<div class="glass">Moderation AI</div>
-<div class="glass">Payment systems</div>
-<div class="glass">Realtime sync bridges</div>
-<div class="glass">Metrics dashboards</div>
-<div class="glass">Bot frameworks</div>
-</div></section>
+  <!-- SECTION 6 -->
+  <div class="section">
+    <h2>Organizations</h2>
+    <p>2sPlugins • 2sBots • 2sDevelopments</p>
+  </div>
 
-<section class="reveal"><h2>Technology</h2>
-<div class="glass center">
-<span class="badge">Java</span><span class="badge">Node.js</span><span class="badge">Discord.js</span>
-<span class="badge">PaperMC</span><span class="badge">Velocity</span><span class="badge">MongoDB</span>
-<span class="badge">Redis</span><span class="badge">Docker</span><span class="badge">Linux</span>
-</div></section>
+  <!-- SECTION 7 -->
+  <div class="section">
+    <h2>Philosophy</h2>
+    <p>Logs before emotions. Automation before repetition. Stability before features.</p>
+  </div>
 
-<section class="reveal"><h2>Philosophy</h2>
-<div class="glass">
-<ul>
-<li>Automation first</li>
-<li>Logs over emotions</li>
-<li>Performance matters</li>
-<li>Stability > features</li>
-<li>Ship fast, harden later</li>
-</ul>
-</div></section>
+  <!-- SECTION 8 -->
+  <div class="section">
+    <h2>Current Status</h2>
+    <p>Building systems. Improving performance. Breaking things to rebuild them better.</p>
+  </div>
 
-<section class="reveal"><h2>Roadmap</h2>
-<div class="glass">
-<ul>
-<li>Public plugin marketplace</li>
-<li>AI moderation platform</li>
-<li>Developer dashboard</li>
-<li>Bot hosting service</li>
-<li>Open source toolkit</li>
-</ul>
-</div></section>
+  <!-- SECTION 9 -->
+  <div class="section">
+    <h2>Bot Systems</h2>
+    <p>Moderation, AI chat, economy, sync bridges, analytics.</p>
+  </div>
 
-<footer>
-<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,30:660000,60:000000,100:000000&height=240&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=28&fontColor=ffffff">
-</footer>
+  <!-- SECTION 10 -->
+  <div class="section">
+    <h2>Minecraft Plugins</h2>
+    <p>QoL, anti-cheat helpers, server tools, custom mechanics.</p>
+  </div>
 
-<!-- GD GAME -->
-<div id="gdGame">
-<h2>⬛ Geometry Dash Mini</h2>
-<p>Tap or Space to jump – ESC to exit</p>
-<canvas id="gd" width="500" height="200"></canvas>
+  <!-- SECTION 11 -->
+  <div class="section">
+    <h2>Development Style</h2>
+    <p>Clean code. Modular systems. Fail-safe logic.</p>
+  </div>
+
+  <!-- SECTION 12 -->
+  <div class="section">
+    <h2>Testing</h2>
+    <p>Private builds. Stress tests. Real server environments.</p>
+  </div>
+
+  <!-- SECTION 13 -->
+  <div class="section">
+    <h2>Automation</h2>
+    <p>CI scripts, auto deployment, monitoring bots.</p>
+  </div>
+
+  <!-- SECTION 14 -->
+  <div class="section">
+    <h2>Security</h2>
+    <p>Permission layers, sandboxing, logging, abuse prevention.</p>
+  </div>
+
+  <!-- SECTION 15 -->
+  <div class="section">
+    <h2>Fun Facts</h2>
+    <p>Coffee required. Java feared. Bugs respected.</p>
+  </div>
+
+  <div class="footer">
+    More systems loading soon...
+  </div>
+
 </div>
 
 <script>
-/* device detect */
-const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-document.getElementById("statusText").innerHTML = isMobile ? 
-"<span class='status-online'>Mobile Mode</span>" : "<span class='status-online'>Desktop Mode</span>";
-
-/* matrix rain improved */
-const canvas=document.getElementById("rain");
-const ctx=canvas.getContext("2d");
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
-resize();onresize=resize;
-
-const chars="01$#@%&*+-<>[]";
-let drops=[];
-function init(){
-drops=[];
-for(let i=0;i<canvas.width/14;i++)drops[i]=Math.random()*canvas.height;
-}
-init();
-
-let glitch=false;
-setInterval(()=>{glitch=true;setTimeout(()=>glitch=false,600)},Math.random()*10000+5000);
-
-function draw(){
-ctx.fillStyle="rgba(0,0,0,.1)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle=glitch?"#fff":"#ff2222";
-ctx.font="14px monospace";
-
-for(let i=0;i<drops.length;i++){
-const t=chars[Math.floor(Math.random()*chars.length)];
-ctx.fillText(t,i*14,drops[i]);
-drops[i]+=14;
-if(drops[i]>canvas.height)drops[i]=0;
-}
-requestAnimationFrame(draw);
-}
-draw();
-
-/* reveal */
-document.querySelectorAll(".reveal").forEach(e=>{
-const o=new IntersectionObserver(x=>{
-if(x[0].isIntersecting)e.classList.add("active")
-});
-o.observe(e);
+/* =====================
+   CURSOR
+===================== */
+const cursor = document.getElementById("cursor");
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
 });
 
-/* phone tilt parallax */
-if(isMobile && window.DeviceOrientationEvent){
-window.addEventListener("deviceorientation",e=>{
-document.getElementById("scene").style.transform=
-`rotateX(${e.beta/6}deg) rotateY(${e.gamma/6}deg)`;
-});
-}else{
-document.addEventListener("mousemove",e=>{
-document.getElementById("scene").style.transform=
-`rotateY(${(e.clientX-innerWidth/2)/80}deg) rotateX(${-(e.clientY-innerHeight/2)/80}deg)`;
-});
+/* =====================
+   RED RAIN EFFECT
+===================== */
+const canvas = document.getElementById("rain");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const chars = "01#@$%&*";
+const fontSize = 14;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = new Array(columns).fill(1);
+
+function drawRain() {
+  ctx.fillStyle = "rgba(0,0,0,0.05)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle = "#ff0033";
+  ctx.font = fontSize + "px monospace";
+
+  for(let i=0;i<drops.length;i++){
+    const text = chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+
+    if(drops[i]*fontSize > canvas.height && Math.random() > 0.97){
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
 }
 
-/* Geometry Dash game */
-const gdGame=document.getElementById("gdGame");
-const gdc=document.getElementById("gd");
-const gctx=gdc.getContext("2d");
+setInterval(drawRain, 50);
 
-let player={x:50,y:150,vy:0};
-let blocks=[{x:500,y:160}];
-let score=0,run=false;
+/* =====================
+   RANDOM GLITCH
+===================== */
+setInterval(() => {
+  document.body.classList.toggle("glitch");
+  setTimeout(()=>document.body.classList.toggle("glitch"), 200);
+}, Math.random()*6000 + 4000);
 
-function jump(){if(player.y>=150)player.vy=-10;}
-
-function loop(){
-if(!run)return;
-gctx.clearRect(0,0,500,200);
-
-player.vy+=0.6;
-player.y+=player.vy;
-if(player.y>150){player.y=150;player.vy=0}
-
-blocks.forEach(b=>{
-b.x-=4;
-gctx.fillRect(b.x,b.y,20,40);
-if(b.x<0){b.x=500;score++}
-if(player.x< b.x+20 && player.x+20>b.x && player.y+20>b.y){
-run=false;
-}
-});
-
-gctx.fillRect(player.x,player.y,20,20);
-gctx.fillText("Score:"+score,10,15);
-
-requestAnimationFrame(loop);
-}
-
-document.addEventListener("keydown",e=>{
-if(e.key==="d"){
-gdGame.style.display="flex";
-run=true;score=0;loop();
-}
-if(e.key==="Escape"){
-gdGame.style.display="none";
-run=false;
-}
-if(e.key===" "||e.key==="ArrowUp")jump();
-});
-gdc.addEventListener("touchstart",jump);
 </script>
 
 </body>
