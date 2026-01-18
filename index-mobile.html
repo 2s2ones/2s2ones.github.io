@@ -2,76 +2,98 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>2s2ones Developer - Mobile</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2s2ones Developer — Mobile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <style>
 *{box-sizing:border-box}
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  font-family:Arial,Helvetica,sans-serif;
-  color:white;
-  background:#000;
-}
+html,body{margin:0;padding:0}
 
 body{
-  background:linear-gradient(180deg,#000000,#1a0000,#000000);
-  background-attachment:fixed;
+  font-family:Arial,Helvetica,sans-serif;
+  color:white;
+  background:linear-gradient(270deg,#000,#220000,#000);
+  background-size:400% 400%;
+  animation:bg 18s ease infinite;
+  overflow-x:hidden;
+}
+
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 canvas{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   pointer-events:none;
+  z-index:-1;
 }
 
-#rain{z-index:-1}
-
 .container{
-  width:100%;
-  padding:12px;
-  text-align:center;
+  padding:14px;
+}
+
+.center{text-align:center}
+
+.banner{
+  background:linear-gradient(90deg,#000,#550000,#000);
+  border:1px solid rgba(255,0,0,.4);
+  border-radius:16px;
+  padding:14px;
+  margin:20px 0;
+  box-shadow:0 0 20px rgba(255,0,0,.25);
 }
 
 .glass{
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:14px;
-  padding:14px;
-  margin:16px 0;
-}
-
-img{max-width:100%;height:auto}
-
-table{width:100%}
-
-td{
-  display:block;
-  width:100%;
-  text-align:center;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:16px;
+  padding:16px;
+  margin:18px 0;
 }
 
 pre{
-  background:rgba(0,0,0,0.5);
-  padding:10px;
-  border-radius:10px;
+  background:rgba(0,0,0,.6);
+  padding:12px;
+  border-radius:12px;
+  border:1px solid rgba(255,0,0,.3);
   overflow:auto;
-  text-align:left;
-  font-size:13px;
 }
 
-ul{text-align:left}
+.badges img{
+  display:block;
+  margin:8px auto;
+  width:90%;
+}
 
-a{color:#00c6ff}
-hr{border:1px solid rgba(255,255,255,0.15)}
+.org-card{
+  border:1px solid rgba(255,0,0,.4);
+  border-radius:14px;
+  padding:14px;
+  margin:12px 0;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+}
+
+ul{
+  padding-left:18px;
+}
+
+a{color:#ff5555}
+
+hr{
+  border:0;
+  height:1px;
+  background:linear-gradient(to right,transparent,#ff0000,transparent);
+  margin:30px 0;
+}
 </style>
 </head>
 <body>
@@ -80,169 +102,180 @@ hr{border:1px solid rgba(255,255,255,0.15)}
 
 <div class="container">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=200&section=header&text=2s2ones%20Developer&fontSize=32&fontColor=ffffff&animation=fadeIn">
+<div class="center banner">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=180&section=header&text=2s2ones%20Developer&fontSize=28&fontColor=ffffff">
+</div>
 
-<div class="glass">
+<div class="glass center">
 <h2>👋 Hi, I'm <b>2s2ones</b></h2>
-
-<b>Node.js & Java Developer</b><br>
-🤖 Bot Builder • 🧩 Minecraft Plugin Engineer
-
-<p>
-I build automation systems, Discord bots,<br>
-and powerful Minecraft plugins that keep servers alive.
-</p>
+<p><b>Node.js & Java Developer</b><br>🤖 Bot Builder • 🧩 Minecraft Plugin Engineer</p>
 
 <img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="220"><br><br>
 <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="200">
+
+<p>I build automation systems, Discord bots, and powerful Minecraft plugins.</p>
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=60&section=header&text=WELCOME&fontSize=22&fontColor=ffffff">
+<div class="banner center"><h2>WELCOME</h2></div>
 
-<div class="glass">
-<img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile%21;Check+out+my+projects;Bots+plugins+and+mods&center=true&size=18&color=000000&pause=1200">
-
+<div class="glass center">
+<img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile!;Check+out+my+projects;Bots+plugins+and+mods&center=true&size=18&color=ff4444">
 <p>
-welcome to the 2s2ones profile, here you can find a lot of stuff like plugins, mods, bots and more<br>
-you can even see test stuff and experimets only
-<br><br>
-🚀 explore the secret of my repo<br>
-🧩 Discover all my plugins<br>
-🤖 see what my bots do!
+Welcome to my profile. You will find plugins, mods, bots, tests and experiments.
 </p>
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=60&section=header&text=PROFILE&fontSize=22&fontColor=ffffff">
+<div class="banner center"><h2>PROFILE</h2></div>
 
 <div class="glass">
 <pre>Username: 2s2ones
 Role: Developer
 Languages: Java and Node.js
-nodejs Specialty: minecraft and discord bots
-java Specialty: making minecraft server plugins</pre>
+Node.js: minecraft & discord bots
+Java: minecraft server plugins</pre>
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=60&section=header&text=TECH%20STACK&fontSize=22&fontColor=ffffff">
+<hr>
 
-<div class="glass">
-Node.js • Java • Discord.js • Bukkit • Git • Linux
+<div class="banner center"><h2>TECH STACK</h2></div>
+
+<div class="glass badges center">
+<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red">
+<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red">
+<img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord&logoColor=red">
+<img src="https://img.shields.io/badge/Bukkit-black?style=for-the-badge&logo=minecraft&logoColor=red">
+<img src="https://img.shields.io/badge/Git-black?style=for-the-badge&logo=git&logoColor=red">
+<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=red">
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0033,50:111111,100:000000&height=60&section=header&text=ORGANIZATIONS&fontSize=22&fontColor=ffffff">
+<div class="banner center"><h2>ORGANIZATIONS</h2></div>
 
 <div class="glass">
-<p>I run and maintain multiple development organizations for different projects and platforms.</p>
 
-<b>2sPlugins</b><br>
-Minecraft plugins in Java<br><br>
-
-<b>2sBots</b><br>
-Discord & Minecraft bots<br><br>
-
-<b>2sDevelopments</b><br>
-Main studio
+<div class="org-card">
+<h3>🧩 2sPlugins</h3>
+<p>Minecraft plugins in Java</p>
+<a href="https://github.com/2sPlugins">github.com/2sPlugins</a>
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00c6ff,100:6a00ff&height=60&section=header&text=WHAT%20I%20BUILD&fontSize=22&fontColor=ffffff">
+<div class="org-card">
+<h3>🤖 2sBots</h3>
+<p>Discord & Minecraft bots</p>
+<a href="https://github.com/2sBots">github.com/2sBots</a>
+</div>
+
+<div class="org-card">
+<h3>🛠 2sDevelopments</h3>
+<p>Main development studio</p>
+<a href="https://github.com/2sDevelopments">github.com/2sDevelopments</a>
+</div>
+
+</div>
+
+<div class="banner center"><h2>WHAT I BUILD</h2></div>
 
 <div class="glass">
-<b>🤖 Bots</b>
+<h3>🤖 Bots</h3>
 <ul>
-<li>Discord moderation bots</li>
+<li>Discord moderation</li>
 <li>AI chat bots</li>
-<li>premium systems</li>
-<li>Automation & logging</li>
-<li>Minecraft ↔ Discord bridges</li>
+<li>Premium systems</li>
+<li>Automation</li>
+<li>MC ↔ Discord bridges</li>
 </ul>
 
-<b>🧩 Minecraft Plugins</b>
+<h3>🧩 Minecraft Plugins</h3>
 <ul>
-<li>Bukkit & Paper plugins</li>
-<li>Velocity plugins</li>
-<li>quality of life plugins</li>
-<li>anarchy esentials</li>
+<li>Bukkit & Paper</li>
+<li>Velocity</li>
+<li>QoL plugins</li>
+<li>Anarchy tools</li>
 <li>Anti-cheat helpers</li>
 <li>Custom plugins</li>
-<li>Random & test plugins</li>
 </ul>
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=60&section=header&text=DEBUG%20FACTS&fontSize=22&fontColor=ffffff">
+<div class="banner center"><h2>PROJECTS</h2></div>
+
+<div class="glass">
+<h3>Minecraft Bots</h3>
+<ul>
+<li>Kit Bot</li>
+<li>Chat Bot</li>
+<li>Custom Bot</li>
+</ul>
+
+<h3>Discord Bots</h3>
+<ul>
+<li>Premium Bot</li>
+<li>AI Bot</li>
+<li>MC Bridge</li>
+<li>Custom Bot</li>
+<li>Test Bot</li>
+</ul>
+</div>
+
+<div class="banner center"><h2>DEBUG FACTS</h2></div>
 
 <div class="glass">
 <ul>
-<li>everyone hate java cuz is hard</li>
-<li>coffee always needed</li>
-<li>If it works in production -> panic</li>
+<li>Everyone hates Java because it's hard</li>
+<li>Coffee is required</li>
+<li>If it works in prod → panic</li>
 <li>Logs > emotions</li>
-<li>Sleep is always an option</li>
+<li>Sleep optional</li>
 </ul>
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00c6ff,100:6a00ff&height=60&section=header&text=COMING%20SOON&fontSize=22&fontColor=ffffff">
+<div class="banner center"><h2>COMING SOON</h2></div>
 
 <div class="glass">
 <ul>
 <li>Public plugin releases</li>
 <li>Bot project</li>
-<li>Quality of life needs</li>
+<li>QoL tools</li>
 <li>Open-source tools</li>
-<li>Real channel for help</li>
-<li>and more plugin for sure</li>
+<li>Help channel</li>
 </ul>
 </div>
 
-<h3>🚧 Coming soon...</h3>
-
-<img src="https://media.tenor.com/himbGmuY4cgAAAAM/turtle-friends.gif" width="40%">
-
-<br><br>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,30:ff0055,60:00c6ff,100:000000&height=200&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=22&fontColor=ffffff&animation=twinkling">
+<div class="center banner">
+<h2>THANKS FOR ENTERING MY WORLD</h2>
+</div>
 
 </div>
 
 <script>
+/* Rain effect (mobile optimized) */
 const rain=document.getElementById("rain");
 const ctx=rain.getContext("2d");
 
 function resize(){
-  rain.width=window.innerWidth;
-  rain.height=window.innerHeight;
+  rain.width=innerWidth;
+  rain.height=innerHeight;
 }
 resize();
-window.onresize=resize;
+addEventListener("resize",resize);
 
 let drops=[];
-for(let i=0;i<350;i++){
-  drops.push({
-    x:Math.random()*rain.width,
-    y:Math.random()*rain.height,
-    l:10+Math.random()*20,
-    s:6+Math.random()*10
-  });
+for(let i=0;i<220;i++){
+  drops.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:4+Math.random()*6,l:8+Math.random()*12});
 }
 
-function drawRain(){
+function draw(){
   ctx.clearRect(0,0,rain.width,rain.height);
-  ctx.strokeStyle="rgba(255,60,60,0.7)";
-  ctx.lineWidth=1;
-
-  for(let d of drops){
+  ctx.strokeStyle="rgba(255,0,0,.7)";
+  for(const d of drops){
     ctx.beginPath();
     ctx.moveTo(d.x,d.y);
     ctx.lineTo(d.x,d.y+d.l);
     ctx.stroke();
     d.y+=d.s;
-    if(d.y>rain.height){
-      d.y=-20;
-      d.x=Math.random()*rain.width;
-    }
+    if(d.y>innerHeight){d.y=-20;d.x=Math.random()*innerWidth;}
   }
-  requestAnimationFrame(drawRain);
+  requestAnimationFrame(draw);
 }
-
-drawRain();
+draw();
 </script>
 
 </body>
