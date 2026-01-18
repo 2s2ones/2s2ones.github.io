@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>2s2ones – Developer</title>
+<title>2s2ones – Cyber Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* ---------------- CORE THEME ---------------- */
 :root{
---bg:#060606;
---red:#ff1a1a;
---glass:rgba(20,20,20,.65);
+--bg:#050505;
+--red:#ff1b1b;
+--glass:rgba(15,15,15,.7);
 --border:rgba(255,0,0,.25);
 --text:#e6e6e6;
 }
@@ -19,21 +20,37 @@
 body{
 margin:0;
 font-family:system-ui,Segoe UI,Arial;
-background:
-radial-gradient(circle at 20% 20%,#200000,transparent 40%),
-radial-gradient(circle at 80% 80%,#120000,transparent 40%),
-#050505;
+background:#050505;
 color:var(--text);
 overflow-x:hidden;
 }
 
-/* 3D floating shapes */
+/* ---------------- MATRIX RAIN ---------------- */
+canvas#matrix{
+position:fixed;
+inset:0;
+z-index:-3;
+opacity:.35;
+}
+
+/* ---------------- GLOW BACKGROUND ---------------- */
+body:before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%,#300000,transparent 35%),
+radial-gradient(circle at 80% 70%,#180000,transparent 40%);
+z-index:-2;
+}
+
+/* ---------------- FLOATING SHAPES ---------------- */
 .shape{
 position:fixed;
 border-radius:50%;
 filter:blur(2px);
 opacity:.25;
-animation:float 18s infinite linear;
+animation:float 20s infinite linear;
 z-index:-1;
 }
 
@@ -42,12 +59,11 @@ z-index:-1;
 
 @keyframes float{
 0%{transform:translateY(0) rotate(0deg)}
-50%{transform:translateY(-120px) rotate(180deg)}
+50%{transform:translateY(-140px) rotate(180deg)}
 100%{transform:translateY(0) rotate(360deg)}
 }
 
-/* layout */
-
+/* ---------------- LAYOUT ---------------- */
 .banner{
 width:100%;
 max-height:240px;
@@ -62,24 +78,7 @@ padding:90px 20px;
 
 h1,h2,h3{color:var(--red)}
 
-.glass{
-background:var(--glass);
-backdrop-filter:blur(10px);
-border:1px solid var(--border);
-border-radius:22px;
-padding:30px;
-box-shadow:
-0 0 40px rgba(255,0,0,.12),
-inset 0 0 20px rgba(255,0,0,.05);
-transition:.4s;
-}
-
-.glass:hover{
-transform:translateY(-8px) scale(1.01);
-box-shadow:
-0 0 70px rgba(255,0,0,.35),
-inset 0 0 25px rgba(255,0,0,.1);
-}
+.center{text-align:center}
 
 .flex{
 display:flex;
@@ -88,240 +87,342 @@ flex-wrap:wrap;
 align-items:center;
 }
 
-.center{text-align:center}
-
-.gif{
-max-width:100%;
-border-radius:14px;
-box-shadow:0 0 35px rgba(255,0,0,.45);
-}
-
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:25px;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:15px;
+.glass{
+background:var(--glass);
+backdrop-filter:blur(10px);
+border:1px solid var(--border);
+border-radius:22px;
+padding:28px;
+box-shadow:0 0 35px rgba(255,0,0,.15);
+transition:.4s;
 }
 
-th,td{
-border:1px solid #400000;
-padding:10px;
+.glass:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 0 65px rgba(255,0,0,.4);
 }
 
-th{background:#180000}
+.gif{
+max-width:100%;
+border-radius:12px;
+box-shadow:0 0 30px rgba(255,0,0,.5);
+}
 
 .reveal{
 opacity:0;
 transform:translateY(60px) scale(.96);
 transition:1s;
 }
-
 .reveal.active{
 opacity:1;
 transform:none;
 }
 
+/* ---------------- TABLES ---------------- */
+table{
+width:100%;
+border-collapse:collapse;
+}
+th,td{
+border:1px solid #400000;
+padding:8px;
+}
+th{background:#180000}
+
+/* ---------------- BADGES ---------------- */
+.badge{
+display:inline-block;
+padding:6px 12px;
+border:1px solid var(--red);
+border-radius:999px;
+margin:4px;
+font-size:13px;
+background:#140000;
+}
+
+/* ---------------- STATUS ---------------- */
+.status-online{color:#00ff88}
+.status-dev{color:#ffaa00}
+.status-offline{color:#ff4444}
+
+/* ---------------- MOUSE TRAIL ---------------- */
+.trail{
+position:fixed;
+width:6px;
+height:6px;
+background:red;
+border-radius:50%;
+pointer-events:none;
+opacity:.6;
+}
+
+/* ---------------- SNAKE GAME ---------------- */
+#snakeGame{
+position:fixed;
+inset:0;
+background:#000;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+flex-direction:column;
+color:#0f0;
+}
+
+canvas#snake{
+border:2px solid #0f0;
+}
+
+/* ---------------- MOBILE ---------------- */
 @media(max-width:768px){
 .flex{flex-direction:column}
 .banner{max-height:150px}
 section{padding:60px 15px}
 }
-
-/* subtle scanlines */
-body:after{
-content:"";
-position:fixed;
-inset:0;
-background:linear-gradient(transparent 95%,rgba(255,0,0,.03) 96%);
-background-size:100% 4px;
-pointer-events:none;
-}
 </style>
 </head>
 <body>
 
-<!-- floating shapes -->
-<div class="shape red" style="width:180px;height:180px;top:10%;left:5%"></div>
-<div class="shape dark" style="width:260px;height:260px;top:60%;left:80%"></div>
-<div class="shape red" style="width:120px;height:120px;top:75%;left:10%"></div>
+<canvas id="matrix"></canvas>
 
-<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,50:660000,100:000000&height=240&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
+<!-- Floating shapes -->
+<div class="shape red" style="width:200px;height:200px;top:10%;left:5%"></div>
+<div class="shape dark" style="width:280px;height:280px;top:65%;left:75%"></div>
+<div class="shape red" style="width:130px;height:130px;top:80%;left:15%"></div>
+
+<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,50:660000,100:000000&height=240&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff">
 
 <section class="flex reveal">
 <div class="glass">
 <h1>👋 Hi, I'm 2s2ones</h1>
 <b>Node.js & Java Developer</b><br>
 🤖 Bot Builder • 🧩 Minecraft Plugin Engineer
+<p>I build automation systems, Discord bots, and powerful Minecraft plugins.</p>
 
-<p>
-I build automation systems, Discord bots, and powerful Minecraft plugins that keep servers alive.
-</p>
+<p>Status: <span class="status-dev">Developing</span></p>
 </div>
 
 <div class="center">
-<img class="gif" src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="260"><br><br>
-<img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="230">
+<img class="gif" src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="240"><br><br>
+<img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="220">
 </div>
 </section>
 
+<!-- MANY INFO SECTIONS -->
 <section class="reveal">
-<div class="glass center">
-<h2>WELCOME</h2>
-<p>Welcome to the 2s2ones profile. Here you will find plugins, mods, bots, experiments and secret test projects.</p>
-
-<p>
-🚀 Explore my repositories<br>
-🧩 Discover plugins<br>
-🤖 Watch bots evolve
-</p>
-</div>
-</section>
-
-<section class="reveal">
-<div class="glass">
-<h2>PROFILE</h2>
-<pre>
-Username: 2s2ones
-Role: Developer
-Languages: Java and Node.js
-Node.js Specialty: Minecraft & Discord bots
-Java Specialty: Minecraft server plugins
-</pre>
-</div>
-</section>
-
-<section class="reveal">
-<div class="glass center">
-<h2>TECH STACK</h2>
-<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red">
-<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red">
-<img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord&logoColor=red">
-<img src="https://img.shields.io/badge/Minecraft-black?style=for-the-badge&logo=minecraft&logoColor=red">
-<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=red">
-</div>
-</section>
-
-<section class="reveal">
-<h2>ORGANIZATIONS</h2>
+<h2>Developer Stats</h2>
 <div class="grid">
-<div class="glass">
-<h3>🧩 2sPlugins</h3>
-High-performance Minecraft plugins & mechanics in Java.
-</div>
-
-<div class="glass">
-<h3>🤖 2sBots</h3>
-Discord bots, Minecraft bots, AI systems & automation services.
-</div>
-
-<div class="glass">
-<h3>🛠️ 2sDevelopments</h3>
-Main studio for large scale projects & shared systems.
-</div>
+<div class="glass">Projects: 47+</div>
+<div class="glass">Bots created: 23</div>
+<div class="glass">Plugins built: 31</div>
+<div class="glass">Lines of code: 400k+</div>
+<div class="glass">Coffee consumed: ∞</div>
+<div class="glass">Servers supported: 18</div>
 </div>
 </section>
 
 <section class="reveal">
-<h2>WHAT I BUILD</h2>
+<h2>Skills Matrix</h2>
 <div class="grid">
-<div class="glass">Discord moderation bots</div>
-<div class="glass">AI chat bots</div>
-<div class="glass">Premium systems</div>
-<div class="glass">Automation & logging</div>
-<div class="glass">Minecraft ↔ Discord bridges</div>
-<div class="glass">Velocity plugins</div>
-<div class="glass">Anti-cheat helpers</div>
-<div class="glass">Random & test plugins</div>
+<div class="glass">Java ★★★★★</div>
+<div class="glass">Node.js ★★★★★</div>
+<div class="glass">Discord API ★★★★★</div>
+<div class="glass">Minecraft Internals ★★★★☆</div>
+<div class="glass">Linux ★★★★☆</div>
+<div class="glass">Security ★★★☆☆</div>
 </div>
 </section>
 
 <section class="reveal">
-<h2>PROJECTS</h2>
-
-<div class="glass">
-<h3>Minecraft Bots</h3>
-<table>
-<tr><th>Name</th><th>Description</th></tr>
-<tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
-<tr><td>Chat Bot</td><td>Custom command bot</td></tr>
-<tr><td>Custom Bot</td><td>Server specific logic</td></tr>
-</table>
+<h2>Workflow</h2>
+<div class="grid">
+<div class="glass">Design system</div>
+<div class="glass">Prototype</div>
+<div class="glass">Develop</div>
+<div class="glass">Test</div>
+<div class="glass">Optimize</div>
+<div class="glass">Deploy</div>
 </div>
-
-<br>
-
-<div class="glass">
-<h3>Discord Bots</h3>
-<table>
-<tr><th>Name</th><th>Description</th></tr>
-<tr><td>Premium Bot</td><td>MEE6 style but advanced</td></tr>
-<tr><td>AI Bot</td><td>AI assistant</td></tr>
-<tr><td>MC Bridge</td><td>Realtime server sync</td></tr>
-<tr><td>Custom Bot</td><td>Public use bot</td></tr>
-<tr><td>Test Bot</td><td>Experimental bot</td></tr>
-</table>
-</div>
-</section>
-
-<section class="reveal center">
-<img class="gif" src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif" width="70%">
 </section>
 
 <section class="reveal">
+<h2>Philosophy</h2>
 <div class="glass">
-<h2>DEBUG FACTS</h2>
 <ul>
-<li>Everyone hates Java because it's hard</li>
-<li>Coffee is required</li>
-<li>If it works in production → panic</li>
-<li>Logs > emotions</li>
-<li>Sleep is optional</li>
+<li>Automation > manual work</li>
+<li>Logs before emotions</li>
+<li>Performance matters</li>
+<li>Clean code survives</li>
+<li>Ship fast, improve later</li>
 </ul>
 </div>
 </section>
 
 <section class="reveal">
+<h2>Services</h2>
+<div class="grid">
+<div class="glass">Custom Discord bots</div>
+<div class="glass">Minecraft plugins</div>
+<div class="glass">Server automation</div>
+<div class="glass">Anti-cheat systems</div>
+<div class="glass">API integrations</div>
+<div class="glass">Infrastructure setup</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2>Technology Badges</h2>
+<div class="glass center">
+<span class="badge">Node.js</span>
+<span class="badge">Java</span>
+<span class="badge">Discord.js</span>
+<span class="badge">PaperMC</span>
+<span class="badge">Velocity</span>
+<span class="badge">MongoDB</span>
+<span class="badge">Redis</span>
+<span class="badge">Docker</span>
+<span class="badge">Linux</span>
+<span class="badge">Git</span>
+</div>
+</section>
+
+<section class="reveal">
+<h2>Roadmap</h2>
 <div class="glass">
-<h2>COMING SOON</h2>
 <ul>
 <li>Public plugin releases</li>
-<li>Bot project</li>
-<li>Quality of life tools</li>
-<li>Open-source utilities</li>
-<li>Support channel</li>
+<li>AI moderation system</li>
+<li>Bot marketplace</li>
+<li>Open source toolkit</li>
+<li>Dev dashboard</li>
 </ul>
-</div>
-
-<div class="center">
-<img class="gif" src="https://media.giphy.com/media/l0HlQ7LRalZbQJx5S/giphy.gif" width="80%">
 </div>
 </section>
 
 <section class="reveal center">
-<h2>🚧 Building…</h2>
-<img class="gif" src="https://media.tenor.com/himbGmuY4cgAAAAM/turtle-friends.gif" width="40%">
+<img class="gif" src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif" width="65%">
 </section>
 
 <footer>
-<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,30:660000,60:000000,100:000000&height=260&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=30&fontColor=ffffff&animation=twinkling">
+<img class="banner" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff0033,30:660000,60:000000,100:000000&height=240&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=28&fontColor=ffffff">
 </footer>
 
+<!-- SNAKE GAME -->
+<div id="snakeGame">
+<h2>🐍 Snake – Press ESC to exit</h2>
+<canvas id="snake" width="400" height="400"></canvas>
+</div>
+
 <script>
+/* -------- MATRIX RAIN -------- */
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+function resize(){
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+}
+resize();window.onresize=resize;
+
+const letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const fontSize=14;
+let columns;
+function resetMatrix(){
+columns=Math.floor(canvas.width/fontSize);
+drops=new Array(columns).fill(1);
+}
+let drops=[];
+resetMatrix();
+
+function drawMatrix(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#ff2222";
+ctx.font=fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+const text=letters[Math.floor(Math.random()*letters.length)];
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+if(drops[i]*fontSize>canvas.height||Math.random()>0.975)drops[i]=0;
+drops[i]++;
+}
+}
+setInterval(drawMatrix,50);
+
+/* -------- REVEAL -------- */
 const items=document.querySelectorAll(".reveal");
 function show(){
 items.forEach(i=>{
-if(i.getBoundingClientRect().top < window.innerHeight-80){
+if(i.getBoundingClientRect().top<window.innerHeight-80){
 i.classList.add("active");
 }
 });
 }
 window.addEventListener("scroll",show);
 show();
+
+/* -------- MOUSE TRAIL -------- */
+document.addEventListener("mousemove",e=>{
+const d=document.createElement("div");
+d.className="trail";
+d.style.left=e.clientX+"px";
+d.style.top=e.clientY+"px";
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),600);
+});
+
+/* -------- SNAKE GAME -------- */
+const game=document.getElementById("snakeGame");
+const sc=document.getElementById("snake");
+const sctx=sc.getContext("2d");
+let snake=[[10,10]],dir=[1,0],food=[15,15];
+
+function drawSnake(){
+sctx.fillStyle="#000";
+sctx.fillRect(0,0,400,400);
+sctx.fillStyle="#0f0";
+snake.forEach(s=>sctx.fillRect(s[0]*20,s[1]*20,18,18));
+sctx.fillStyle="#f00";
+sctx.fillRect(food[0]*20,food[1]*20,18,18);
+}
+
+function step(){
+const head=[snake[0][0]+dir[0],snake[0][1]+dir[1]];
+snake.unshift(head);
+if(head[0]==food[0]&&head[1]==food[1]){
+food=[Math.floor(Math.random()*20),Math.floor(Math.random()*20)];
+}else snake.pop();
+drawSnake();
+}
+
+let loop;
+
+document.addEventListener("keydown",e=>{
+if(e.key==="s"){
+game.style.display="flex";
+loop=setInterval(step,150);
+}
+if(e.key==="Escape"){
+game.style.display="none";
+clearInterval(loop);
+}
+if(e.key==="ArrowUp")dir=[0,-1];
+if(e.key==="ArrowDown")dir=[0,1];
+if(e.key==="ArrowLeft")dir=[-1,0];
+if(e.key==="ArrowRight")dir=[1,0];
+});
+
+/* -------- GLITCH MODE -------- */
+document.addEventListener("keydown",e=>{
+if(e.key==="g"){
+canvas.style.opacity=canvas.style.opacity==".8"?".35":".8";
+}
+});
 </script>
 
 </body>
