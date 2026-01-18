@@ -12,7 +12,7 @@ html,body{margin:0;padding:0}
 body{
   font-family:Arial,Helvetica,sans-serif;
   color:white;
-  background:linear-gradient(270deg,#000000,#220000,#000000);
+  background:linear-gradient(270deg,#000,#220000,#000);
   background-size:400% 400%;
   animation:bg 18s ease infinite;
   overflow-x:hidden;
@@ -26,13 +26,9 @@ body{
 
 canvas{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   pointer-events:none;
 }
-
 #rain{z-index:-1}
 
 .container{
@@ -45,37 +41,41 @@ canvas{
 
 .banner{
   background:linear-gradient(90deg,#000,#550000,#000);
-  border:1px solid rgba(255,0,0,0.4);
+  border:1px solid rgba(255,0,0,.4);
   border-radius:18px;
   padding:20px;
-  margin:25px 0;
-  box-shadow:0 0 25px rgba(255,0,0,0.25);
+  margin:30px 0;
+  box-shadow:0 0 25px rgba(255,0,0,.25);
 }
 
 .glass{
-  background:rgba(255,255,255,0.07);
+  background:rgba(255,255,255,.08);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,.15);
   border-radius:18px;
   padding:22px;
   margin:25px 0;
-  box-shadow:0 0 25px rgba(0,0,0,0.6);
 }
 
 table{width:100%}
 td{vertical-align:top}
 
 pre{
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,.6);
   padding:15px;
   border-radius:12px;
-  overflow:auto;
-  border:1px solid rgba(255,0,0,0.3);
+  border:1px solid rgba(255,0,0,.3);
 }
 
-a{color:#ff4b4b;text-decoration:none}
-a:hover{text-decoration:underline}
+.badges img{margin:5px}
+
+.org-card{
+  border:1px solid rgba(255,0,0,.4);
+  border-radius:14px;
+  padding:15px;
+  margin:15px 0;
+}
 
 hr{
   border:0;
@@ -84,61 +84,82 @@ hr{
   margin:40px 0;
 }
 
-.badge img{margin:4px}
+/* ===== Mobile popup ===== */
+#mobilePrompt{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+#mobilePrompt .box{
+  width:90%;
+  max-width:420px;
+  text-align:center;
+}
+
+button{
+  padding:10px 18px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  margin:5px;
+}
+
+.btn-red{background:#aa0000;color:#fff}
+.btn-dark{background:#111;color:#fff;border:1px solid #555}
 </style>
 </head>
 <body>
 
 <canvas id="rain"></canvas>
 
+<!-- Mobile suggestion popup -->
+<div id="mobilePrompt">
+  <div class="glass box">
+    <h2>📱 Mobile version available</h2>
+    <p>This site has a version optimized for phones.</p>
+    <button class="btn-red" onclick="goMobile()">Go to mobile</button>
+    <button class="btn-dark" onclick="closePrompt()">No thanks</button>
+  </div>
+</div>
+
 <div class="container">
 
 <div class="center banner">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=200&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=220&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
 </div>
 
 <div class="glass">
 <table>
 <tr>
 <td width="55%">
-
 <h1>👋 Hi, I'm <b>2s2ones</b></h1>
-
-<p><b>Node.js & Java Developer</b><br>
-🤖 Bot Builder • 🧩 Minecraft Plugin Engineer</p>
-
-<p>
-I build automation systems, Discord bots,<br>
-and powerful Minecraft plugins that keep servers alive.
-</p>
-
+<p><b>Node.js & Java Developer</b><br>🤖 Bot Builder • 🧩 Minecraft Plugin Engineer</p>
+<p>I build automation systems, Discord bots,<br>and powerful Minecraft plugins that keep servers alive.</p>
 </td>
 <td width="45%" class="center">
-<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="240"><br><br>
+<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="250"><br><br>
 <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="220">
 </td>
 </tr>
 </table>
 </div>
 
-<div class="center banner">
-<h2>WELCOME</h2>
-</div>
+<div class="banner center"><h2>WELCOME</h2></div>
 
 <div class="glass center">
 <img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile!;Check+out+my+projects;Bots+plugins+and+mods&center=true&size=22&color=ff4444&pause=1200">
-
 <p>
 welcome to the 2s2ones profile, here you can find a lot of stuff like plugins, mods, bots and more<br>
 you can even see test stuff and experimets only
-<br><br>
-🚀 explore the secret of my repo<br>
-🧩 Discover all my plugins<br>
-🤖 see what my bots do!
 </p>
 </div>
 
-<div class="center banner"><h2>PROFILE</h2></div>
+<div class="banner center"><h2>PROFILE</h2></div>
 
 <div class="glass">
 <pre>Username: 2s2ones
@@ -150,14 +171,104 @@ java Specialty: making minecraft server plugins</pre>
 
 <hr>
 
-<div class="center banner"><h2>TECH STACK</h2></div>
+<div class="banner center"><h2>TECH STACK</h2></div>
 
-<div class="glass center badge">
-<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red"/>
-<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red"/>
-<img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord&logoColor=red"/>
-<img src="https://img.shields.io/badge/Git-black?style=for-the-badge&logo=git&logoColor=red"/>
-<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=red"/>
+<div class="glass center badges">
+<img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js&logoColor=red">
+<img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk&logoColor=red">
+<img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord&logoColor=red">
+<img src="https://img.shields.io/badge/Bukkit-black?style=for-the-badge&logo=minecraft&logoColor=red">
+<img src="https://img.shields.io/badge/Git-black?style=for-the-badge&logo=git&logoColor=red">
+<img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux&logoColor=red">
+</div>
+
+<div class="banner center"><h2>ORGANIZATIONS</h2></div>
+
+<div class="glass">
+<div class="org-card">
+<h3>🧩 2sPlugins</h3>
+<p>Minecraft plugins in Java.</p>
+<a href="https://github.com/2sPlugins">https://github.com/2sPlugins</a>
+</div>
+
+<div class="org-card">
+<h3>🤖 2sBots</h3>
+<p>Discord & Minecraft bots in Node.js.</p>
+<a href="https://github.com/2sBots">https://github.com/2sBots</a>
+</div>
+
+<div class="org-card">
+<h3>🛠 2sDevelopments</h3>
+<p>Main development studio.</p>
+<a href="https://github.com/2sDevelopments">https://github.com/2sDevelopments</a>
+</div>
+</div>
+
+<div class="banner center"><h2>WHAT I BUILD</h2></div>
+
+<div class="glass">
+<h3>🤖 Bots</h3>
+<ul>
+<li>Discord moderation bots</li>
+<li>AI chat bots</li>
+<li>Premium systems</li>
+<li>Automation & logging</li>
+<li>Minecraft ↔ Discord bridges</li>
+</ul>
+
+<h3>🧩 Minecraft Plugins</h3>
+<ul>
+<li>Bukkit & Paper</li>
+<li>Velocity</li>
+<li>QoL plugins</li>
+<li>Anarchy essentials</li>
+<li>Anti-cheat helpers</li>
+<li>Custom plugins</li>
+</ul>
+</div>
+
+<div class="banner center"><h2>PROJECTS</h2></div>
+
+<div class="glass">
+<h3>Minecraft Bots</h3>
+<ul>
+<li>Kit Bot</li>
+<li>Chat Bot</li>
+<li>Custom Bot</li>
+</ul>
+
+<h3>Discord Bots</h3>
+<ul>
+<li>Premium Bot</li>
+<li>AI Bot</li>
+<li>MC Bridge</li>
+<li>Custom Bot</li>
+<li>Test Bot</li>
+</ul>
+</div>
+
+<div class="banner center"><h2>DEBUG FACTS</h2></div>
+
+<div class="glass">
+<ul>
+<li>everyone hate java cuz is hard</li>
+<li>coffee always needed</li>
+<li>If it works in production → panic</li>
+<li>Logs > emotions</li>
+<li>Sleep is always an option</li>
+</ul>
+</div>
+
+<div class="banner center"><h2>COMING SOON</h2></div>
+
+<div class="glass">
+<ul>
+<li>Public plugin releases</li>
+<li>Bot project</li>
+<li>Quality of life tools</li>
+<li>Open-source tools</li>
+<li>Real help channel</li>
+</ul>
 </div>
 
 <div class="center banner">
@@ -167,65 +278,55 @@ java Specialty: making minecraft server plugins</pre>
 </div>
 
 <script>
-/* ===== SAFARI-SAFE MOBILE DETECTION ===== */
-function isRealMobile(){
-  const ua=navigator.userAgent.toLowerCase();
-  const isMobileUA = /android|iphone|ipod|opera mini|iemobile/.test(ua);
-  const smallScreen = Math.min(window.innerWidth,window.innerHeight) <= 768;
-  return isMobileUA && smallScreen;
+/* Mobile suggestion popup */
+function isMobile(){
+  return /android|iphone|ipod/i.test(navigator.userAgent.toLowerCase());
 }
 
-function redirectMobile(){
-  if(isRealMobile() && !location.href.includes("index-mobile.html")){
-    location.replace("index-mobile.html");
-  }
+function goMobile(){
+  location.href="index-mobile.html";
 }
 
-redirectMobile();
-window.addEventListener("resize",redirectMobile);
-window.addEventListener("orientationchange",redirectMobile);
+function closePrompt(){
+  document.getElementById("mobilePrompt").style.display="none";
+}
 
-/* ===== RAIN EFFECT ===== */
+if(isMobile()){
+  setTimeout(()=>{
+    document.getElementById("mobilePrompt").style.display="flex";
+  },600);
+}
+
+/* Rain effect */
 const rain=document.getElementById("rain");
 const ctx=rain.getContext("2d");
 
-function resizeCanvas(){
-  rain.width=window.innerWidth;
-  rain.height=window.innerHeight;
+function resize(){
+  rain.width=innerWidth;
+  rain.height=innerHeight;
 }
-resizeCanvas();
-window.addEventListener("resize",resizeCanvas);
+resize();
+addEventListener("resize",resize);
 
 let drops=[];
 for(let i=0;i<600;i++){
-  drops.push({
-    x:Math.random()*rain.width,
-    y:Math.random()*rain.height,
-    speed:6+Math.random()*12,
-    len:12+Math.random()*25
-  });
+  drops.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:6+Math.random()*10,l:10+Math.random()*20});
 }
 
-function drawRain(){
+function draw(){
   ctx.clearRect(0,0,rain.width,rain.height);
-  ctx.strokeStyle="rgba(255,0,0,0.85)";
-  ctx.lineWidth=1;
-
+  ctx.strokeStyle="rgba(255,0,0,.85)";
   for(const d of drops){
     ctx.beginPath();
     ctx.moveTo(d.x,d.y);
-    ctx.lineTo(d.x,d.y+d.len);
+    ctx.lineTo(d.x,d.y+d.l);
     ctx.stroke();
-    d.y+=d.speed;
-    if(d.y>rain.height){
-      d.y=-30;
-      d.x=Math.random()*rain.width;
-    }
+    d.y+=d.s;
+    if(d.y>innerHeight){d.y=-20;d.x=Math.random()*innerWidth;}
   }
-  requestAnimationFrame(drawRain);
+  requestAnimationFrame(draw);
 }
-
-drawRain();
+draw();
 </script>
 
 </body>
