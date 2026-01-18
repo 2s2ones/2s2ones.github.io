@@ -12,12 +12,12 @@ body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   color:white;
-  background:linear-gradient(270deg,#000,#300000,#000);
+  background:linear-gradient(270deg,#000,#3a0000,#000);
   background-size:400% 400%;
-  animation:bgMove 15s ease infinite;
+  animation:bg 15s ease infinite;
 }
 
-@keyframes bgMove{
+@keyframes bg{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
@@ -32,40 +32,39 @@ canvas{
   pointer-events:none;
 }
 
-#rain{z-index:-2}
-#sakura{z-index:-1}
+#rain{z-index:-3}
+#sakura{z-index:-2}
 
 .container{
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
   padding:20px;
-  text-align:center;
+}
+
+.center{text-align:center}
+
+.glass{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:15px;
+  padding:20px;
+  margin:25px 0;
 }
 
 table{width:100%}
-td{text-align:left;color:white}
+td{vertical-align:top}
 
 pre{
-  background:#110000;
-  border:1px solid #aa0000;
-  padding:10px;
-  color:#ffcccc;
+  background:rgba(0,0,0,0.4);
+  padding:15px;
+  border-radius:10px;
   overflow:auto;
 }
 
-.section{
-  margin:50px 0;
-}
-
-.info-box{
-  background:rgba(120,0,0,0.3);
-  border:1px solid #ff3333;
-  border-radius:10px;
-  padding:20px;
-  margin:15px 0;
-}
-
 a{color:#00c6ff}
+hr{border:1px solid rgba(255,255,255,0.2)}
 </style>
 </head>
 <body>
@@ -75,13 +74,14 @@ a{color:#00c6ff}
 
 <div class="container">
 
-<p>
+<div class="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,50:ff0055,100:00c6ff&height=220&section=header&text=2s2ones%20Developer&fontSize=36&fontColor=ffffff&animation=fadeIn">
-</p>
+</div>
 
+<div class="glass">
 <table cellspacing="0" cellpadding="0">
 <tr>
-<td width="55%" valign="top">
+<td width="55%">
 
 <h1>👋 Hi, I'm <b>2s2ones</b></h1>
 
@@ -94,7 +94,7 @@ and powerful Minecraft plugins that keep servers alive.
 </p>
 
 </td>
-<td width="45%" align="center" valign="middle">
+<td width="45%" class="center">
 
 <img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="260"><br><br>
 <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="230">
@@ -102,165 +102,212 @@ and powerful Minecraft plugins that keep servers alive.
 </td>
 </tr>
 </table>
+</div>
 
-<div class="section">
+<div class="center">
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=WELCOME&fontSize=24&fontColor=ffffff">
 </div>
 
+<div class="glass center">
+<img src="https://readme-typing-svg.herokuapp.com/?lines=Welcome+to+my+Profile%21;Check+out+my+projects;Bots+plugins+and+mods&center=true&size=22&color=000000&pause=1200">
+
 <p>
 welcome to the 2s2ones profile, here you can find a lot of stuff like plugins, mods, bots and more<br>
-you can even see test stuff and experiments only
+you can even see test stuff and experimets only
 <br><br>
 🚀 explore the secret of my repo<br>
 🧩 Discover all my plugins<br>
 🤖 see what my bots do!
 </p>
+</div>
 
-<div class="section">
+<div class="center">
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=PROFILE&fontSize=24&fontColor=ffffff">
 </div>
 
-<pre>
-Username: 2s2ones
+<div class="glass">
+<pre>Username: 2s2ones
 Role: Developer
 Languages: Java and Node.js
 nodejs Specialty: minecraft and discord bots
-java Specialty: making minecraft server plugins
-</pre>
+java Specialty: making minecraft server plugins</pre>
+</div>
 
-<div class="section">
+<hr>
+
+<h1 class="center">🎉 TECH STACK</h1>
+
+<div class="center">
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=70&section=header&text=TECH%20STACK&fontSize=24&fontColor=ffffff">
 </div>
 
-<p>
-Node.js • Java • Discord.js • Bukkit • Git • Linux
-</p>
+<div class="glass center">
+<img src="https://img.shields.io/badge/Node.js-6a00ff?style=for-the-badge&logo=node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/Java-ff0055?style=for-the-badge&logo=openjdk&logoColor=white"/>
+<img src="https://img.shields.io/badge/Discord.js-00c6ff?style=for-the-badge&logo=discord&logoColor=white"/>
+<img src="https://img.shields.io/badge/Bukkit, Paper and Velocity-6a00ff?style=for-the-badge&logo=minecraft&logoColor=white"/>
+<img src="https://img.shields.io/badge/Git-ff0055?style=for-the-badge&logo=git&logoColor=white"/>
+<img src="https://img.shields.io/badge/Linux-00c6ff?style=for-the-badge&logo=linux&logoColor=white"/>
+</div>
 
-<div class="section">
+<div class="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0033,50:111111,100:000000&height=70&section=header&text=ORGANIZATIONS&fontSize=24&fontColor=ffffff&animation=fadeIn">
+</div>
+
+<div class="glass">
+<p>I run and maintain multiple development organizations for different projects and platforms.</p>
+
+<h3>🧩 2sPlugins — Minecraft Plugins</h3>
+<p>High-performance plugins, server utilities, and custom mechanics built in Java.</p>
+<a href="https://github.com/2sPlugins"><img src="https://img.shields.io/badge/Visit-2sPlugins-ff0033?style=for-the-badge&logo=github&logoColor=white"></a>
+
+<h3>🤖 2sBots — Discord & Minecraft Bots</h3>
+<p>Discord bots, Minecraft bots, AI systems, and automation services built with Node.js.</p>
+<a href="https://github.com/2sBots"><img src="https://img.shields.io/badge/Visit-2sBots-ff0055?style=for-the-badge&logo=github&logoColor=white"></a>
+
+<h3>🛠️ 2sDevelopments — Main Studio</h3>
+<p>Central organization for large projects, shared systems, and long-term development.</p>
+<a href="https://github.com/2sDevelopments"><img src="https://img.shields.io/badge/Visit-2sDevelopments-00c6ff?style=for-the-badge&logo=github&logoColor=white"></a>
+</div>
+
+<div class="center">
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00c6ff,100:6a00ff&height=70&section=header&text=WHAT%20I%20BUILD&fontSize=24&fontColor=ffffff">
 </div>
 
-<p>Bots, Minecraft plugins, automation systems, AI bots, server tools.</p>
+<div class="glass">
+<h2>🤖 Bots</h2>
+<ul>
+<li>Discord moderation bots</li>
+<li>AI chat bots</li>
+<li>premium systems</li>
+<li>Automation & logging</li>
+<li>Minecraft ↔ Discord bridges</li>
+</ul>
 
-<div class="section">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=70&section=header&text=DEBUG%20FACTS&fontSize=24&fontColor=ffffff">
+<h2>🧩 Minecraft Plugins</h2>
+<ul>
+<li>Bukkit & Paper plugins</li>
+<li>Velocity plugins</li>
+<li>quality of life plugins</li>
+<li>anarchy esentials</li>
+<li>Anti-cheat helpers</li>
+<li>Custom plugins</li>
+<li>Random & test plugins</li>
+</ul>
 </div>
 
+<div class="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:ff0055,100:00c6ff&height=70&section=header&text=PROJECTS&fontSize=24&fontColor=ffffff">
+</div>
+
+<div class="glass">
+<h3>🤖 Minecraft Bots</h3>
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
+<tr><td>Chat Bot</td><td>Custom command bot</td></tr>
+<tr><td>Custom Bot</td><td>Server-specific logic</td></tr>
+</table>
+
+<h3>🛜 Discord Bots</h3>
+<table border="1" cellpadding="6">
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>Premium Bot</td><td>Like MEE6 but with features on top</td></tr>
+<tr><td>AI Bot</td><td>AI assistant</td></tr>
+<tr><td>MC Bridge</td><td>Realtime server sync</td></tr>
+<tr><td>Custom bot</td><td>making bot for public use</td></tr>
+<tr><td>Test bot</td><td>for testing uses</td></tr>
+</table>
+</div>
+
+<div class="center">
+<img src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif" width="70%">
+</div>
+
+<div class="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6a00ff,100:ff0055&height=70&section=header&text=DEBUG%20FACTS&fontSize=24&fontColor=ffffff">
+</div>
+
+<div class="glass">
 <ul>
 <li>everyone hate java cuz is hard</li>
 <li>coffee always needed</li>
-<li>If it works in production → panic</li>
+<li>If it works in production -> panic</li>
 <li>Logs > emotions</li>
 <li>Sleep is always an option</li>
 </ul>
-
-<!-- NEW INFO SECTIONS -->
-
-<div class="section">
-<h2>ℹ️ Development Philosophy</h2>
-<div class="info-box">Clean code, performance first, zero unnecessary dependencies.</div>
 </div>
 
-<div class="section">
-<h2>ℹ️ Hosting Environment</h2>
-<div class="info-box">Linux servers, Docker containers, automated CI/CD pipelines.</div>
+<div class="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:00c6ff,100:6a00ff&height=70&section=header&text=COMING%20SOON&fontSize=24&fontColor=ffffff">
 </div>
 
-<div class="section">
-<h2>ℹ️ Security Practices</h2>
-<div class="info-box">Token encryption, rate limiting, audit logs, anti-abuse systems.</div>
+<div class="glass center">
+<img src="https://media.giphy.com/media/l0HlQ7LRalZbQJx5S/giphy.gif" width="85%">
+
+<ul>
+<li>Public plugin releases</li>
+<li>Bot preject</li>
+<li>Quality of life needs</li>
+<li>Open-source tools</li>
+<li>Real chanell for help</li>
+<li>and more plugin for sure</li>
+</ul>
 </div>
 
-<div class="section">
-<h2>ℹ️ Project Workflow</h2>
-<div class="info-box">Design → Prototype → Test → Optimize → Release → Maintain.</div>
+<h2 class="center">🚧 Coming soon...</h2>
+
+<div class="center">
+<img src="https://media.tenor.com/himbGmuY4cgAAAAM/turtle-friends.gif" width="40%">
 </div>
 
-<div class="section">
-<h2>ℹ️ Future Vision</h2>
-<div class="info-box">Public plugin marketplace, AI powered bots, developer tools platform.</div>
-</div>
-
-<p>
+<div class="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6a00ff,30:ff0055,60:00c6ff,100:000000&height=260&section=footer&text=THANKS%20FOR%20ENTERING%20MY%20WORLD&fontSize=30&fontColor=ffffff&animation=twinkling">
-</p>
+</div>
 
 </div>
 
 <script>
-/* ===== RAIN ===== */
 const rain=document.getElementById("rain");
+const sakura=document.getElementById("sakura");
 const rctx=rain.getContext("2d");
+const sctx=sakura.getContext("2d");
 
-function resizeCanvas(){
-  rain.width=window.innerWidth;
-  rain.height=window.innerHeight;
-  sakura.width=window.innerWidth;
-  sakura.height=window.innerHeight;
+function resize(){
+  rain.width=sakura.width=window.innerWidth;
+  rain.height=sakura.height=window.innerHeight;
 }
-resizeCanvas();
-window.onresize=resizeCanvas;
+resize(); window.onresize=resize;
 
-let drops=[];
-for(let i=0;i<500;i++){
-  drops.push({
-    x:Math.random()*rain.width,
-    y:Math.random()*rain.height,
-    l:10+Math.random()*20,
-    s:8+Math.random()*12
-  });
-}
+let drops=[...Array(500)].map(()=>({x:Math.random()*rain.width,y:Math.random()*rain.height,s:8+Math.random()*12,l:10+Math.random()*20}));
+let petals=[...Array(120)].map(()=>({x:Math.random()*sakura.width,y:Math.random()*sakura.height,r:2+Math.random()*3,s:0.5+Math.random()*1.5}));
 
-function drawRain(){
+function draw(){
   rctx.clearRect(0,0,rain.width,rain.height);
-  rctx.strokeStyle="rgba(255,80,80,0.7)";
-  rctx.lineWidth=1;
-  for(let d of drops){
+  rctx.strokeStyle="rgba(255,80,80,0.8)";
+  drops.forEach(d=>{
     rctx.beginPath();
     rctx.moveTo(d.x,d.y);
     rctx.lineTo(d.x,d.y+d.l);
     rctx.stroke();
     d.y+=d.s;
-    if(d.y>rain.height){
-      d.y=-20;
-      d.x=Math.random()*rain.width;
-    }
-  }
-  requestAnimationFrame(drawRain);
-}
-drawRain();
-
-/* ===== SAKURA ===== */
-const sakura=document.getElementById("sakura");
-const sctx=sakura.getContext("2d");
-
-let petals=[];
-for(let i=0;i<100;i++){
-  petals.push({
-    x:Math.random()*sakura.width,
-    y:Math.random()*sakura.height,
-    r:2+Math.random()*3,
-    s:0.5+Math.random()*1.5
+    if(d.y>rain.height){d.y=-20;d.x=Math.random()*rain.width;}
   });
-}
 
-function drawSakura(){
   sctx.clearRect(0,0,sakura.width,sakura.height);
-  for(let p of petals){
-    sctx.beginPath();
+  petals.forEach(p=>{
     sctx.fillStyle="rgba(255,180,200,0.9)";
+    sctx.beginPath();
     sctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     sctx.fill();
     p.y+=p.s;
     p.x+=Math.sin(p.y*0.01)*0.5;
-    if(p.y>sakura.height){
-      p.y=-10;
-      p.x=Math.random()*sakura.width;
-    }
-  }
-  requestAnimationFrame(drawSakura);
+    if(p.y>sakura.height){p.y=-10;p.x=Math.random()*sakura.width;}
+  });
+
+  requestAnimationFrame(draw);
 }
-drawSakura();
+draw();
 </script>
 
 </body>
