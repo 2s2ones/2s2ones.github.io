@@ -2,153 +2,214 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Snake Game</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snake – 2s2ones</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-html,body{margin:0;height:100%;background:black;font-family:Arial;color:white;overflow:hidden}
+html,body{
+margin:0;
+height:100%;
+background:#000;
+font-family:Arial;
+color:white;
+overflow:hidden;
+}
 
 canvas{position:fixed;top:0;left:0}
 
-#game{z-index:2}
+#game{z-index:2;image-rendering:pixelated}
 
 .glass{
 position:fixed;
-top:20px;left:50%;
+left:50%;
 transform:translateX(-50%);
 background:rgba(255,255,255,0.08);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.25);
-border-radius:16px;
-padding:15px 25px;
-box-shadow:0 0 25px rgba(255,0,0,.4);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,0.25);
+border-radius:18px;
+box-shadow:0 0 30px rgba(255,0,0,0.4);
+padding:12px 18px;
 z-index:5;
-display:flex;
-gap:10px;
-align-items:center;
 }
 
-button{
-background:rgba(255,0,0,.2);
-border:1px solid red;
+#topbar{top:15px;display:flex;gap:10px;align-items:center}
+#bottombar{bottom:15px;text-align:center}
+
+select,button{
+background:rgba(255,0,0,0.25);
+border:1px solid #ff3b3b;
 color:white;
-padding:8px 14px;
+padding:6px 12px;
 border-radius:10px;
 cursor:pointer;
 }
 
-#info{
-position:fixed;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,.25);
-border-radius:16px;
-padding:12px 20px;
-box-shadow:0 0 20px rgba(255,0,0,.4);
-z-index:5;
+button:hover{background:rgba(255,0,0,0.4)}
+
+.badge{
+background:rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.3);
+padding:4px 10px;
+border-radius:10px;
 }
+
 </style>
 </head>
 <body>
 
 <canvas id="rain"></canvas>
-<canvas id="game" width="600" height="600"></canvas>
+<canvas id="game" width="640" height="640"></canvas>
 
-<div class="glass">
-<b>Snake Game</b>
+<div id="topbar" class="glass">
+<b>🐍 Snake</b>
 <select id="mode">
 <option value="classic">Classic</option>
 <option value="speed">Speed</option>
-<option value="multi">Multiplayer</option>
+<option value="walls">Walls</option>
+<option value="local">Multiplayer (Local)</option>
+<option value="online">Multiplayer (Online)</option>
 </select>
 <button onclick="startGame()">Start</button>
 <button onclick="fullscreen()">Fullscreen</button>
+<span class="badge" id="status">Idle</span>
 </div>
 
-<div id="info">
-Player 1: Arrow keys<br>
-Player 2: WASD (multiplayer)
+<div id="bottombar" class="glass">
+Player 1: Arrow Keys<br>
+Player 2: WASD (local multiplayer)<br>
+Online mode uses WebSocket server
 </div>
 
 <script>
-/* ---------- Rain ---------- */
-const rain=document.getElementById("rain"),rctx=rain.getContext("2d");
-function resize(){rain.width=innerWidth;rain.height=innerHeight}
-resize();onresize=resize;
-let drops=[...Array(400)].map(()=>({x:Math.random()*rain.width,y:Math.random()*rain.height,s:6+Math.random()*8}));
-function rainDraw(){
+/* ================= RAIN ================= */
+const rain=document.getElementById("rain");
+const rctx=rain.getContext("2d");
+function resize(){
+rain.width=innerWidth;
+rain.height=innerHeight;
+}
+resize();window.onresize=resize;
+
+let drops=[...Array(500)].map(()=>({
+x:Math.random()*rain.width,
+y:Math.random()*rain.height,
+s:6+Math.random()*10
+}));
+
+function drawRain(){
 rctx.clearRect(0,0,rain.width,rain.height);
-rctx.strokeStyle="rgba(255,0,0,.5)";
+rctx.strokeStyle="rgba(255,0,0,0.6)";
 drops.forEach(d=>{
 rctx.beginPath();
 rctx.moveTo(d.x,d.y);
-rctx.lineTo(d.x,d.y+12);
+rctx.lineTo(d.x,d.y+14);
 rctx.stroke();
 d.y+=d.s;
-if(d.y>rain.height)d.y=-10;
+if(d.y>rain.height){d.y=-20;d.x=Math.random()*rain.width;}
 });
-requestAnimationFrame(rainDraw);
+requestAnimationFrame(drawRain);
 }
-rainDraw();
+drawRain();
 
-/* ---------- Game ---------- */
-const c=document.getElementById("game"),ctx=c.getContext("2d");
+/* ================= GAME ================= */
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 const size=20;
-let snakes,food,dx1,dy1,dx2,dy2,mode,speed,run=false;
+const cells=canvas.width/size;
 
-function reset(){
+let snakes,food,dx1,dy1,dx2,dy2,mode,speed,run=false;
+let socket=null;
+
+function resetGame(){
 snakes=[
-[{x:200,y:200}],
-[{x:380,y:380}]
+[{x:10,y:10}],
+[{x:22,y:22}]
 ];
-dx1=1;dy1=0;dx2=-1;dy2=0;
-food={x:300,y:300};
+dx1=1;dy1=0;
+dx2=-1;dy2=0;
+spawnFood();
+}
+
+function spawnFood(){
+food={
+x:Math.floor(Math.random()*cells),
+y:Math.floor(Math.random()*cells)
+};
 }
 
 function startGame(){
 mode=document.getElementById("mode").value;
-speed=mode==="speed"?50:100;
-reset();
+speed = mode==="speed" ? 50 : 110;
+
+resetGame();
 run=true;
+document.getElementById("status").innerText="Running";
+
+if(mode==="online"){
+connectWS();
+}
+
 loop();
+}
+
+function drawCell(x,y,color){
+ctx.fillStyle=color;
+ctx.fillRect(x*size,y*size,size,size);
 }
 
 function draw(){
 ctx.fillStyle="black";
-ctx.fillRect(0,0,600,600);
+ctx.fillRect(0,0,canvas.width,canvas.height);
 
-ctx.fillStyle="lime";
-ctx.fillRect(food.x,food.y,size,size);
+drawCell(food.x,food.y,"#00ff88");
 
-snakes.forEach((s,i)=>{
-ctx.fillStyle=i? "cyan":"red";
-s.forEach(p=>ctx.fillRect(p.x,p.y,size,size));
+snakes.forEach((snake,i)=>{
+snake.forEach(p=>{
+drawCell(p.x,p.y,i===0?"#ff3333":"#33ccff");
 });
-}
-
-function move(){
-if(!run)return;
-moveSnake(0,dx1,dy1);
-if(mode==="multi")moveSnake(1,dx2,dy2);
+});
 }
 
 function moveSnake(id,dx,dy){
 let s=snakes[id];
-let head={x:s[0].x+dx*size,y:s[0].y+dy*size};
+let head={x:s[0].x+dx,y:s[0].y+dy};
+
+if(mode==="walls"){
+if(head.x<0||head.y<0||head.x>=cells||head.y>=cells){run=false;return;}
+}else{
+head.x=(head.x+cells)%cells;
+head.y=(head.y+cells)%cells;
+}
+
 s.unshift(head);
-if(head.x===food.x&&head.y===food.y){
-food={x:Math.floor(Math.random()*30)*20,y:Math.floor(Math.random()*30)*20};
-}else s.pop();
+
+if(head.x===food.x && head.y===food.y){
+spawnFood();
+}else{
+s.pop();
+}
+}
+
+function gameStep(){
+if(!run)return;
+
+moveSnake(0,dx1,dy1);
+if(mode==="local"||mode==="online") moveSnake(1,dx2,dy2);
+
+if(mode==="online" && socket){
+socket.send(JSON.stringify(snakes));
+}
+
+draw();
 }
 
 function loop(){
 if(!run)return;
-move();
-draw();
+gameStep();
 setTimeout(loop,speed);
 }
+
+/* ================= INPUT ================= */
 
 document.addEventListener("keydown",e=>{
 if(e.key==="ArrowUp"){dx1=0;dy1=-1}
@@ -162,8 +223,30 @@ if(e.key==="a"){dx2=-1;dy2=0}
 if(e.key==="d"){dx2=1;dy2=0}
 });
 
+/* ================= FULLSCREEN ================= */
+
 function fullscreen(){
 document.documentElement.requestFullscreen();
+}
+
+/* ================= WEBSOCKET ================= */
+
+function connectWS(){
+document.getElementById("status").innerText="Connecting...";
+socket=new WebSocket("ws://localhost:8080");
+
+socket.onopen=()=>{
+document.getElementById("status").innerText="Online";
+};
+
+socket.onmessage=e=>{
+let data=JSON.parse(e.data);
+snakes=data;
+};
+
+socket.onclose=()=>{
+document.getElementById("status").innerText="Disconnected";
+};
 }
 </script>
 </body>
