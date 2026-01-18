@@ -2,139 +2,277 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Snake Mobile</title>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>Snake Mobile – 2s2ones</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
 <style>
-html,body{margin:0;height:100%;background:black;font-family:Arial;color:white;overflow:hidden}
+html,body{
+margin:0;
+height:100%;
+background:#000;
+font-family:Arial;
+color:white;
+overflow:hidden;
+touch-action:none;
+}
 
 canvas{position:fixed;top:0;left:0}
 
+#game{z-index:2;image-rendering:pixelated}
+
 .glass{
 position:fixed;
-top:15px;left:50%;
+left:50%;
 transform:translateX(-50%);
-background:rgba(255,255,255,.1);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.3);
-border-radius:16px;
-padding:12px 20px;
-box-shadow:0 0 25px rgba(255,0,0,.4);
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,0.25);
+border-radius:18px;
+box-shadow:0 0 30px rgba(255,0,0,0.45);
+padding:12px 18px;
 z-index:5;
-display:flex;
-gap:10px;
 }
 
-button{padding:8px 14px;border-radius:10px;border:1px solid red;background:rgba(255,0,0,.3);color:white}
+#topbar{
+top:10px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+justify-content:center;
+}
+
+#bottombar{
+bottom:120px;
+text-align:center;
+width:90%;
+}
 
 #controls{
 position:fixed;
-bottom:100px;
+bottom:10px;
 left:50%;
 transform:translateX(-50%);
 display:grid;
-grid-template-columns:60px 60px 60px;
+grid-template-columns:70px 70px 70px;
+grid-template-rows:70px 70px;
 gap:10px;
+z-index:6;
 }
 
-.ctrl{width:60px;height:60px;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid white;border-radius:12px;color:white;font-size:24px}
+.ctrl{
+background:rgba(255,0,0,0.25);
+border:1px solid #ff3b3b;
+border-radius:15px;
+font-size:26px;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+backdrop-filter:blur(10px);
+}
 
-#howto{
-position:fixed;
-bottom:15px;
-left:50%;
-transform:translateX(-50%);
-background:rgba(255,255,255,.1);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,.3);
-border-radius:16px;
-padding:10px 18px;
-text-align:center;
-box-shadow:0 0 20px rgba(255,0,0,.4);
+select,button{
+background:rgba(255,0,0,0.25);
+border:1px solid #ff3b3b;
+color:white;
+padding:6px 12px;
+border-radius:10px;
+}
+
+.badge{
+background:rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.3);
+padding:4px 10px;
+border-radius:10px;
 }
 </style>
 </head>
 <body>
 
 <canvas id="rain"></canvas>
-<canvas id="game" width="360" height="360"></canvas>
+<canvas id="game" width="640" height="640"></canvas>
 
-<div class="glass">
+<div id="topbar" class="glass">
+<b>🐍 Snake</b>
 <select id="mode">
 <option value="classic">Classic</option>
 <option value="speed">Speed</option>
-<option value="multi">Multiplayer</option>
+<option value="walls">Walls</option>
+<option value="local">Multiplayer (Local)</option>
+<option value="online">Multiplayer (Online)</option>
 </select>
-<button onclick="startGame()">Play</button>
+<button onclick="startGame()">Start</button>
 <button onclick="fullscreen()">⛶</button>
+<span class="badge" id="status">Idle</span>
+</div>
+
+<div id="bottombar" class="glass">
+Swipe or use buttons to move.<br>
+Multiplayer local: share screen.<br>
+Online mode uses WebSocket server.
 </div>
 
 <div id="controls">
-<div></div><button class="ctrl" onclick="dir(0,-1)">▲</button><div></div>
-<button class="ctrl" onclick="dir(-1,0)">◄</button>
-<button class="ctrl" onclick="dir(0,1)">▼</button>
-<button class="ctrl" onclick="dir(1,0)">►</button>
-</div>
+<div></div>
+<div class="ctrl" onclick="setDir(0,-1)">▲</div>
+<div></div>
 
-<div id="howto">
-Swipe or use buttons to move 🐍<br>
-Multiplayer uses same screen (PC better)
+<div class="ctrl" onclick="setDir(-1,0)">◀</div>
+<div class="ctrl" onclick="setDir(0,1)">▼</div>
+<div class="ctrl" onclick="setDir(1,0)">▶</div>
 </div>
 
 <script>
-/* rain same as pc */
-const rain=document.getElementById("rain"),rctx=rain.getContext("2d");
-function resize(){rain.width=innerWidth;rain.height=innerHeight}
-resize();onresize=resize;
-let drops=[...Array(300)].map(()=>({x:Math.random()*rain.width,y:Math.random()*rain.height,s:6+Math.random()*8}));
-function rainDraw(){
-rctx.clearRect(0,0,rain.width,rain.height);
-rctx.strokeStyle="rgba(255,0,0,.5)";
-drops.forEach(d=>{
-rctx.beginPath();rctx.moveTo(d.x,d.y);rctx.lineTo(d.x,d.y+12);rctx.stroke();
-d.y+=d.s;if(d.y>rain.height)d.y=-10;
-});
-requestAnimationFrame(rainDraw);
+/* ===== Rain ===== */
+const rain=document.getElementById("rain");
+const rctx=rain.getContext("2d");
+
+function resize(){
+rain.width=innerWidth;
+rain.height=innerHeight;
 }
-rainDraw();
+resize();window.onresize=resize;
 
-/* game simplified */
-const c=document.getElementById("game"),ctx=c.getContext("2d");
-let snake,food,dx,dy,speed=120,run=false;
+let drops=[...Array(400)].map(()=>({
+x:Math.random()*rain.width,
+y:Math.random()*rain.height,
+s:5+Math.random()*8
+}));
 
-function reset(){
-snake=[{x:160,y:160}];
-dx=1;dy=0;
-food={x:80,y:80};
+function drawRain(){
+rctx.clearRect(0,0,rain.width,rain.height);
+rctx.strokeStyle="rgba(255,0,0,0.6)";
+drops.forEach(d=>{
+rctx.beginPath();
+rctx.moveTo(d.x,d.y);
+rctx.lineTo(d.x,d.y+12);
+rctx.stroke();
+d.y+=d.s;
+if(d.y>rain.height){d.y=-20;d.x=Math.random()*rain.width;}
+});
+requestAnimationFrame(drawRain);
+}
+drawRain();
+
+/* ===== Game ===== */
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+const size=20;
+const cells=canvas.width/size;
+
+let snakes,food,dx1,dy1,dx2,dy2,mode,speed,run=false;
+let socket=null;
+
+function resetGame(){
+snakes=[
+[{x:10,y:10}],
+[{x:22,y:22}]
+];
+dx1=1;dy1=0;
+dx2=-1;dy2=0;
+spawnFood();
+}
+
+function spawnFood(){
+food={x:Math.floor(Math.random()*cells),y:Math.floor(Math.random()*cells)};
 }
 
 function startGame(){
-reset();run=true;loop();
+mode=document.getElementById("mode").value;
+speed=mode==="speed"?50:110;
+resetGame();
+run=true;
+document.getElementById("status").innerText="Running";
+if(mode==="online") connectWS();
+loop();
+}
+
+function drawCell(x,y,color){
+ctx.fillStyle=color;
+ctx.fillRect(x*size,y*size,size,size);
 }
 
 function draw(){
-ctx.fillStyle="black";ctx.fillRect(0,0,360,360);
-ctx.fillStyle="lime";ctx.fillRect(food.x,food.y,20,20);
-ctx.fillStyle="red";
-snake.forEach(p=>ctx.fillRect(p.x,p.y,20,20));
+ctx.fillStyle="#000";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+drawCell(food.x,food.y,"#00ff88");
+snakes.forEach((s,i)=>{
+s.forEach(p=>{
+drawCell(p.x,p.y,i===0?"#ff3333":"#33ccff");
+});
+});
 }
 
-function move(){
-let h={x:snake[0].x+dx*20,y:snake[0].y+dy*20};
-snake.unshift(h);
-if(h.x===food.x&&h.y===food.y){
-food={x:Math.floor(Math.random()*18)*20,y:Math.floor(Math.random()*18)*20};
-}else snake.pop();
+function moveSnake(id,dx,dy){
+let s=snakes[id];
+let head={x:s[0].x+dx,y:s[0].y+dy};
+
+if(mode==="walls"){
+if(head.x<0||head.y<0||head.x>=cells||head.y>=cells){run=false;return;}
+}else{
+head.x=(head.x+cells)%cells;
+head.y=(head.y+cells)%cells;
+}
+
+s.unshift(head);
+
+if(head.x===food.x && head.y===food.y) spawnFood();
+else s.pop();
+}
+
+function step(){
+if(!run) return;
+moveSnake(0,dx1,dy1);
+if(mode==="local"||mode==="online") moveSnake(1,dx2,dy2);
+if(mode==="online" && socket) socket.send(JSON.stringify(snakes));
+draw();
 }
 
 function loop(){
-if(!run)return;
-move();draw();
+if(!run) return;
+step();
 setTimeout(loop,speed);
 }
 
-function dir(x,y){dx=x;dy=y}
+/* ===== Touch Controls ===== */
 
-function fullscreen(){document.documentElement.requestFullscreen()}
+function setDir(x,y){
+dx1=x;dy1=y;
+}
+
+let sx,sy;
+canvas.addEventListener("touchstart",e=>{
+sx=e.touches[0].clientX;
+sy=e.touches[0].clientY;
+});
+
+canvas.addEventListener("touchend",e=>{
+let dx=e.changedTouches[0].clientX-sx;
+let dy=e.changedTouches[0].clientY-sy;
+if(Math.abs(dx)>Math.abs(dy)){
+setDir(dx>0?1:-1,0);
+}else{
+setDir(0,dy>0?1:-1);
+}
+});
+
+/* ===== Fullscreen ===== */
+function fullscreen(){
+document.documentElement.requestFullscreen();
+}
+
+/* ===== WebSocket ===== */
+function connectWS(){
+document.getElementById("status").innerText="Connecting...";
+socket=new WebSocket("ws://localhost:8080");
+
+socket.onopen=()=>document.getElementById("status").innerText="Online";
+socket.onmessage=e=>snakes=JSON.parse(e.data);
+socket.onclose=()=>document.getElementById("status").innerText="Offline";
+}
 </script>
+
 </body>
 </html>
