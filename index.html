@@ -14,43 +14,34 @@ body{
   overflow-x:hidden;
 }
 
-/* ========== RAIN CANVAS ========== */
 canvas{
   position:fixed;
   inset:0;
-  z-index:-1;
+  z-index:0;
 }
 
-/* ========== GLASS UI ========== */
+#content{
+  position:relative;
+  z-index:2;
+  padding:30px 15px;
+}
+
+/* Glass UI */
 .glass{
-  background:rgba(20,20,20,0.65);
-  backdrop-filter: blur(12px);
-  border:1px solid rgba(255,0,0,0.35);
+  background:rgba(10,10,10,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,0,0,0.45);
   border-radius:16px;
-  box-shadow:0 0 25px rgba(255,0,0,0.2);
-}
-
-/* ========== LAYOUT ========== */
-.section{
+  box-shadow:0 0 35px rgba(255,0,0,0.25);
+  padding:25px;
+  margin:30px auto;
   max-width:1100px;
-  margin:50px auto;
-  padding:30px;
 }
 
 .center{text-align:center}
 
-h1,h2,h3{
-  color:#ff2a2a;
-  margin-bottom:10px;
-}
-
-.banner{
-  border:2px solid #ff2a2a;
-  padding:18px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#120000,#000);
-  box-shadow:0 0 25px rgba(255,0,0,0.25);
-}
+h1,h2,h3{color:#ff3333;margin-bottom:10px}
 
 .badges img{margin:5px}
 
@@ -61,44 +52,17 @@ table{
 }
 td,th{
   border:1px solid #333;
-  padding:10px;
+  padding:8px;
 }
 
-ul{margin-left:20px}
-
-/* ========== BUTTONS ========== */
 .btn{
-  background:linear-gradient(135deg,#ff0000,#330000);
-  color:#fff;
+  background:linear-gradient(135deg,#ff0000,#400000);
   border:none;
-  padding:12px 22px;
+  color:white;
+  padding:12px 20px;
   border-radius:10px;
   cursor:pointer;
-  margin-top:12px;
-}
-
-/* ========== MODAL ========== */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
-  z-index:9999;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-box{
-  padding:30px;
-  max-width:360px;
-  text-align:center;
-}
-
-.modal button{margin:8px}
-
-body.locked{
-  overflow:hidden;
-  height:100vh;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -106,99 +70,74 @@ body.locked{
 
 <canvas id="rain"></canvas>
 
-<!-- ========== DEVICE MODAL ========== -->
-<div id="deviceModal" class="modal">
-  <div class="modal-box glass">
-    <h2>Mobile version available</h2>
-    <p>You are using a different layout.</p>
-    <p>Switch version?</p>
-    <button id="goBtn" class="btn">Go to Mobile</button>
-    <button id="stayBtn" class="btn">No thanks</button>
-  </div>
-</div>
+<div id="content">
 
-<!-- ========== HEADER ========== -->
-<div class="section glass center banner">
+<div class="glass center">
   <h1>2s2ones Developer</h1>
   <p><b>Node.js & Java Developer</b></p>
   <p>🤖 Bot Builder • 🧩 Minecraft Plugin Engineer</p>
 </div>
 
-<!-- ========== INTRO TABLE ========== -->
-<div class="section glass">
-<table>
-<tr>
-<td width="55%">
-<h2>👋 Hi, I'm 2s2ones</h2>
-<p><b>Node.js & Java Developer</b></p>
-<p>I build automation systems, Discord bots,<br>and powerful Minecraft plugins that keep servers alive.</p>
-</td>
-<td width="45%" class="center">
-<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="240"><br><br>
-<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="220">
-</td>
-</tr>
-</table>
+<div class="glass center">
+  <h2>WELCOME</h2>
+  <p>Welcome to my profile.</p>
+  <p>Bots • Plugins • Mods • Experiments</p>
 </div>
 
-<!-- ========== WELCOME ========== -->
-<div class="section glass banner center">
-<h2>WELCOME</h2>
-<p>Welcome to my profile</p>
-<p>Bots • Plugins • Mods • Experiments</p>
-</div>
-
-<div class="section glass center">
-<p>🚀 Explore my repositories</p>
-<p>🧩 Discover plugins</p>
-<p>🤖 See what my bots do</p>
-</div>
-
-<!-- ========== PROFILE ========== -->
-<div class="section glass banner">
-<h2>PROFILE</h2>
+<div class="glass">
 <pre>
 Username: 2s2ones
 Role: Developer
 Languages: Java and Node.js
-Node.js Specialty: Minecraft and Discord bots
+Node.js Specialty: Minecraft & Discord bots
 Java Specialty: Minecraft server plugins
 </pre>
 </div>
 
-<!-- ========== TECH STACK ========== -->
-<div class="section glass banner center">
+<div class="glass center">
 <h2>TECH STACK</h2>
 <div class="badges">
 <img src="https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=node.js">
 <img src="https://img.shields.io/badge/Java-black?style=for-the-badge&logo=openjdk">
 <img src="https://img.shields.io/badge/Discord.js-black?style=for-the-badge&logo=discord">
-<img src="https://img.shields.io/badge/Bukkit%20%7C%20Paper%20%7C%20Velocity-black?style=for-the-badge&logo=minecraft">
-<img src="https://img.shields.io/badge/Git-black?style=for-the-badge&logo=git">
 <img src="https://img.shields.io/badge/Linux-black?style=for-the-badge&logo=linux">
 </div>
 </div>
 
-<!-- ========== ORGANIZATIONS ========== -->
-<div class="section glass banner">
-<h2>ORGANIZATIONS</h2>
-<p>I run and maintain multiple development organizations:</p>
-
-<h3>🧩 2sPlugins — Minecraft Plugins</h3>
-<p>High-performance plugins, server utilities, and mechanics.</p>
-
-<h3>🤖 2sBots — Discord & Minecraft Bots</h3>
-<p>Bots, automation, AI systems.</p>
-
-<h3>🛠️ 2sDevelopments — Main Studio</h3>
-<p>Large projects & long-term systems.</p>
+<div class="glass">
+<h2>Organizations</h2>
+<ul>
+<li>2sPlugins — Minecraft Plugins</li>
+<li>2sBots — Discord & Minecraft Bots</li>
+<li>2sDevelopments — Main Studio</li>
+</ul>
 </div>
 
-<!-- ========== WHAT I BUILD ========== -->
-<div class="section glass banner">
-<h2>WHAT I BUILD</h2>
+<div class="glass">
+<h2>Projects</h2>
 
-<h3>🤖 Bots</h3>
+<h3>Minecraft Bots</h3>
+<table>
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
+<tr><td>Chat Bot</td><td>Custom command bot</td></tr>
+<tr><td>Custom Bot</td><td>Server logic</td></tr>
+</table>
+
+<h3>Discord Bots</h3>
+<table>
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>Premium Bot</td><td>MEE6 style system</td></tr>
+<tr><td>AI Bot</td><td>Assistant</td></tr>
+<tr><td>MC Bridge</td><td>Realtime sync</td></tr>
+<tr><td>Test Bot</td><td>Testing</td></tr>
+</table>
+</div>
+
+<div class="glass">
+<h2>What I Build</h2>
+
+<h3>Bots</h3>
 <ul>
 <li>Discord moderation bots</li>
 <li>AI chat bots</li>
@@ -207,7 +146,7 @@ Java Specialty: Minecraft server plugins
 <li>Minecraft ↔ Discord bridges</li>
 </ul>
 
-<h3>🧩 Minecraft Plugins</h3>
+<h3>Minecraft Plugins</h3>
 <ul>
 <li>Bukkit & Paper plugins</li>
 <li>Velocity plugins</li>
@@ -219,117 +158,71 @@ Java Specialty: Minecraft server plugins
 </ul>
 </div>
 
-<!-- ========== PROJECTS ========== -->
-<div class="section glass banner">
-<h2>PROJECTS</h2>
-
-<h3>Minecraft Bots</h3>
-<table>
-<tr><th>Name</th><th>Description</th></tr>
-<tr><td>Kit Bot</td><td>Automatic kit delivery</td></tr>
-<tr><td>Chat Bot</td><td>Custom command bot</td></tr>
-<tr><td>Custom Bot</td><td>Server specific logic</td></tr>
-</table>
-
-<h3>Discord Bots</h3>
-<table>
-<tr><th>Name</th><th>Description</th></tr>
-<tr><td>Premium Bot</td><td>MEE6 style system</td></tr>
-<tr><td>AI Bot</td><td>Assistant</td></tr>
-<tr><td>MC Bridge</td><td>Realtime sync</td></tr>
-<tr><td>Custom Bot</td><td>Public use bot</td></tr>
-<tr><td>Test Bot</td><td>Testing</td></tr>
-</table>
-</div>
-
-<!-- ========== DEBUG FACTS ========== -->
-<div class="section glass banner">
-<h2>DEBUG FACTS</h2>
+<div class="glass">
+<h2>Debug Facts</h2>
 <ul>
 <li>Everyone hates Java because it's hard</li>
 <li>Coffee always needed</li>
 <li>If it works in production → panic</li>
 <li>Logs > emotions</li>
-<li>Sleep is always an option</li>
+<li>Sleep is optional</li>
 </ul>
 </div>
 
-<!-- ========== COMING SOON ========== -->
-<div class="section glass banner">
-<h2>COMING SOON</h2>
+<div class="glass center">
+<h2>Mini Games</h2>
+<p>Play secret mini games</p>
+<button class="btn" onclick="location.href='game.html'">Open Game Menu</button>
+</div>
+
+<div class="glass">
+<h2>Coming Soon</h2>
 <ul>
 <li>Public plugin releases</li>
-<li>Bot project</li>
-<li>Quality of life tools</li>
+<li>Bot projects</li>
 <li>Open-source tools</li>
-<li>Real support channel</li>
+<li>Community help channel</li>
 <li>More plugins</li>
 </ul>
 </div>
 
-<!-- ========== MINI GAME ========== -->
-<div class="section glass banner center">
-<h2>SECRET MINI GAME</h2>
-<button class="btn" onclick="location.href='game.html'">Play Game</button>
-</div>
-
-<!-- ========== FOOTER ========== -->
-<div class="section glass banner center">
+<div class="glass center">
 <h2>THANKS FOR ENTERING MY WORLD</h2>
 </div>
 
-<!-- ========== MODAL LOGIC ========== -->
-<script>
-const isMobile=/Mobi|Android/i.test(navigator.userAgent);
-const modal=document.getElementById("deviceModal");
-const goBtn=document.getElementById("goBtn");
-const stayBtn=document.getElementById("stayBtn");
+</div>
 
-document.body.classList.add("locked");
-
-if(isMobile){
-  modal.style.display="flex";
-}else{
-  modal.style.display="flex";
-}
-
-goBtn.onclick=()=>location.href="index-mobile.html";
-stayBtn.onclick=()=>{
-  modal.style.display="none";
-  document.body.classList.remove("locked");
-};
-</script>
-
-<!-- ========== RAIN EFFECT ========== -->
 <script>
 const canvas=document.getElementById("rain");
 const ctx=canvas.getContext("2d");
-let w,h,drops;
 
 function resize(){
-  w=canvas.width=window.innerWidth;
-  h=canvas.height=window.innerHeight;
-  drops=Array.from({length:260},()=>({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    l:Math.random()*20+10,
-    s:Math.random()*4+5
-  }));
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
 }
-window.onresize=resize;
 resize();
+addEventListener("resize",resize);
+
+let drops=Array.from({length:260},()=>({
+  x:Math.random()*innerWidth,
+  y:Math.random()*innerHeight,
+  l:10+Math.random()*20,
+  s:4+Math.random()*4
+}));
 
 function draw(){
-  ctx.clearRect(0,0,w,h);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.strokeStyle="rgba(255,0,0,0.45)";
-  ctx.lineWidth=1;
   drops.forEach(d=>{
     ctx.beginPath();
     ctx.moveTo(d.x,d.y);
     ctx.lineTo(d.x,d.y+d.l);
     ctx.stroke();
     d.y+=d.s;
-    if(d.y>h){d.y=-20;d.x=Math.random()*w;}
+    if(d.y>canvas.height){
+      d.y=-20;
+      d.x=Math.random()*canvas.width;
+    }
   });
   requestAnimationFrame(draw);
 }
