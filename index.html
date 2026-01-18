@@ -275,6 +275,70 @@ p {
     <p>Coffee required. Java feared. Bugs respected.</p>
   </div>
 
+<!-- REALTIME DASHBOARD -->
+<div class="section">
+<h2>Live System Status</h2>
+<div class="grid">
+<div class="card">Time: <span id="time"></span></div>
+<div class="card">Session: <span id="session"></span>s</div>
+<div class="card">Device: <span id="device"></span></div>
+<div class="card">Resolution: <span id="res"></span></div>
+<div class="card">Battery: <span id="battery"></span></div>
+<div class="card">Network: <span id="network"></span></div>
+</div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section"><h2>Experience</h2><p>Years of building production bots and plugins.</p></div>
+<div class="section"><h2>Infrastructure</h2><p>Self-hosted systems, Linux servers, monitoring.</p></div>
+<div class="section"><h2>Databases</h2><p>MongoDB, MySQL, Redis.</p></div>
+<div class="section"><h2>Networking</h2><p>Packet analysis, proxy chains, velocity setups.</p></div>
+<div class="section"><h2>APIs</h2><p>REST systems, webhooks, rate-limiting.</p></div>
+<div class="section"><h2>Monitoring</h2><p>Metrics, alerts, crash reports.</p></div>
+<div class="section"><h2>Scaling</h2><p>Load balancing, shard systems.</p></div>
+<div class="section"><h2>Optimization</h2><p>Memory tuning, async processing.</p></div>
+<div class="section"><h2>Error Handling</h2><p>Fail-safe logic layers.</p></div>
+<div class="section"><h2>Permissions</h2><p>Role-based security.</p></div>
+<div class="section"><h2>Bot Economy</h2><p>Virtual currency engines.</p></div>
+<div class="section"><h2>AI Bots</h2><p>Context aware chat systems.</p></div>
+<div class="section"><h2>MC Bridges</h2><p>Discord ↔ Minecraft sync.</p></div>
+<div class="section"><h2>Custom Engines</h2><p>Event-driven systems.</p></div>
+<div class="section"><h2>Code Quality</h2><p>Linting, testing, modular design.</p></div>
+<div class="section"><h2>Release Pipeline</h2><p>CI/CD automation.</p></div>
+<div class="section"><h2>Security Logs</h2><p>Audit tracking.</p></div>
+<div class="section"><h2>Admin Panels</h2><p>Custom dashboards.</p></div>
+<div class="section"><h2>Memory Profiling</h2><p>Heap analysis.</p></div>
+<div class="section"><h2>Thread Control</h2><p>Async pools.</p></div>
+<div class="section"><h2>Latency</h2><p>Ping monitoring.</p></div>
+<div class="section"><h2>Packet Systems</h2><p>Protocol analysis.</p></div>
+<div class="section"><h2>Crash Recovery</h2><p>Auto restart logic.</p></div>
+<div class="section"><h2>Anti-Abuse</h2><p>Flood protection.</p></div>
+<div class="section"><h2>Command Engines</h2><p>Dynamic parsers.</p></div>
+<div class="section"><h2>Permission Sync</h2><p>Cross-platform roles.</p></div>
+<div class="section"><h2>Dev Environments</h2><p>Docker builds.</p></div>
+<div class="section"><h2>Remote Console</h2><p>Live commands.</p></div>
+<div class="section"><h2>Bot Clustering</h2><p>Shard management.</p></div>
+<div class="section"><h2>Plugin APIs</h2><p>Extensible systems.</p></div>
+<div class="section"><h2>Custom Launchers</h2><p>Auto update.</p></div>
+<div class="section"><h2>Encryption</h2><p>Token protection.</p></div>
+<div class="section"><h2>Webhook Systems</h2><p>Event broadcasting.</p></div>
+<div class="section"><h2>Telemetry</h2><p>Usage data.</p></div>
+<div class="section"><h2>Sandboxing</h2><p>Isolation layers.</p></div>
+<div class="section"><h2>Stress Testing</h2><p>Load generators.</p></div>
+<div class="section"><h2>Automation Scripts</h2><p>Bash + Node.js tools.</p></div>
+
+<!-- PHONE FEATURES -->
+<div class="section">
+<h2>Mobile Device Mode</h2>
+<p id="mobileStatus">Detecting...</p>
+</div>
+
+<!-- SYSTEM MESSAGE -->
+<div class="section">
+<h2>System Message</h2>
+<p>End of information layer. Mini-games will load below in Part 3.</p>
+</div>
+
   <div class="footer">
     More systems loading soon...
   </div>
@@ -328,6 +392,85 @@ function drawRain() {
 }
 
 setInterval(drawRain, 50);
+
+/* =====================
+   REAL TIME SYSTEMS
+===================== */
+
+let startTime = Date.now();
+
+setInterval(() => {
+  document.getElementById("time").innerText = new Date().toLocaleTimeString();
+  document.getElementById("session").innerText = Math.floor((Date.now() - startTime)/1000);
+  document.getElementById("res").innerText = window.innerWidth + "x" + window.innerHeight;
+}, 500);
+
+document.getElementById("device").innerText =
+  /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
+
+document.getElementById("network").innerText =
+  navigator.connection ? navigator.connection.effectiveType : "Unknown";
+
+/* Battery */
+if(navigator.getBattery){
+  navigator.getBattery().then(b => {
+    function update(){
+      document.getElementById("battery").innerText = Math.round(b.level*100) + "%";
+    }
+    update();
+    b.addEventListener("levelchange", update);
+  });
+}else{
+  document.getElementById("battery").innerText = "N/A";
+}
+
+/* =====================
+   PHONE FEATURES
+===================== */
+
+const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+document.getElementById("mobileStatus").innerText = isMobile ? "Mobile features enabled" : "Desktop mode";
+
+if(isMobile && window.DeviceOrientationEvent){
+  window.addEventListener("deviceorientation", e=>{
+    const tiltX = e.gamma/10;
+    const tiltY = e.beta/10;
+    document.querySelector(".container").style.transform =
+      `rotateX(${tiltY}deg) rotateY(${tiltX}deg)`;
+  });
+}
+
+/* =====================
+   SCROLL ANIMATION
+===================== */
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity = 1;
+      e.target.style.transform = "translateY(0)";
+    }
+  });
+},{threshold:0.2});
+
+document.querySelectorAll(".section").forEach(sec=>{
+  sec.style.opacity = 0;
+  sec.style.transform = "translateY(40px)";
+  observer.observe(sec);
+});
+
+/* =====================
+   RANDOM GLITCH IMPROVE
+===================== */
+
+function glitchTitle(){
+  const hero = document.querySelector(".hero h1");
+  hero.style.transform = "translateX(-2px)";
+  setTimeout(()=>hero.style.transform="translateX(2px)",80);
+  setTimeout(()=>hero.style.transform="translateX(0)",160);
+}
+
+setInterval(glitchTitle, Math.random()*6000+4000);
 
 /* =====================
    RANDOM GLITCH
